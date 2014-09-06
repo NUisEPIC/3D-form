@@ -134,8 +134,7 @@ hr {
 
       &.valid~.glance::after {
         color: rgb(10, 225, 10);
-        text-shadow: 0 0 7px rgb(255,255,255),
-                     1px 0 0 rgb(10, 200, 10);
+        text-shadow: 0 0 7px rgb(255,255,255);
       }
     }
    
