@@ -26,19 +26,36 @@ html
         .forcefield
           form
             .input-group
-              input(type="text")
+              input(type="text", required)
               label Name
               .glance
             .input-group
-              input(type="email")
+              input(type="email", required)
               label School Email
               .glance
               .pill-right 
                 span .edu
             .input-group
-              input(type="password")
-              label Password
+              input(type="text", required)
+              label Major
               .glance
+            .input-group
+              input(type="text", required)
+              label Github Account
+              .glance
+              .pill-left
+                span @
+            .input-group
+              input(type="text", required)
+              label Home State
+              .glance
+            .input-group
+              input(type="text", required)
+              label How did you hear about WildHacks?
+              .glance
+            .input-group
+              input(type="text")
+              label Team Name (if any)
       .submit-btn Punch it!
     
     // Google Analytics: change UA-XXXXX-X to be your site's ID. 
