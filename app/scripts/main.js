@@ -29,15 +29,20 @@ var formula_labels = qq('.formula label');
 var formula_inputs = qq('.formula input');
 var formula         = extend(qq('.formula')[0]);
 
+[].forEach.call(formula_inputs, extend);
+
 [].forEach.call(formula_inputs, function(input) {
   console.log(input.value);
+  if (input.value.length > 0) {
+    input.addClass('focus');
+  }
   input.onchange = input.onblur = function() {
     if(input.value.length === 0) {
       input.removeClass('focus');
     } else { input.addClass('focus'); }
   }
   input.onkeyup = function() { 
-    if ([].map.call(formula_inputs, validateInput).every(isTrue)) {
+    if ([].map.call(formula_inputs, validateInput).every(isValid)) {
       formIsValid();
     } else {
       formIsInvalid();
@@ -45,26 +50,26 @@ var formula         = extend(qq('.formula')[0]);
   }
 });
 
+if ([].map.call(formula_inputs, validateInput).every(isValid)) {
+  formIsValid();
+}
+
 [].forEach.call(formula_labels, function(label) {
-  console.log(label.textContent);
   label.onclick = function(e) {
     label.previousElementSibling.addClass('focus');
     label.previousElementSibling.focus();
-    label.parentElement.focus();
   }
 });
 
-[].forEach.call(formula_inputs, extend);
-
-function isTrue(i) {
+function isValid(i) {
   return i === true;
 }
 
 var inputIsValid;
 
 function validateInput(i) {
-  console.log(i.type);
   inputIsValid = false;
+  if (!i.required) return true;
   switch(i.type) {
       case "email": 
         inputIsValid = /\w+@[A-z0-9.]+/.test(i.value);
@@ -74,14 +79,11 @@ function validateInput(i) {
         inputIsValid = v.length > 8 && 
                        /\d+/.test(v) &&
                        /[_\-!@#$%^&* `~]/.test(v);
-        console.log(v.length > 8);
-        console.log(/\d+/.test(v));
-        console.log(/[_\-!@#$%^&* `~]/.test(v));
         break;
       default: 
         inputIsValid = i.value.length > 0;
   }
-  console.log(i.nextElementSibling.textContent + " isvalid? " + inputIsValid);
+  console.log(i.nextElementSibling.textContent + " valid? " + inputIsValid);
   inputIsValid ? i.addClass("valid") : i.removeClass("valid");
   return inputIsValid;
 }
