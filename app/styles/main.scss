@@ -1,0 +1,235 @@
+html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: marvel, "Helvetica Neue", helvetica, serif;
+  font-size: 25px;
+}
+
+body {
+  background: linear-gradient(#105d7f 1%,#305778 2%,#63b5ce 55%,#63b5ce 99%,#70caff 100%)
+}
+
+// tyopography
+
+h1, h2, h3, h4, h5, h6 {
+  padding: 0 15px;
+}
+
+h1 { font-size: 225%; }
+h2 { font-size: 200%; }
+h3 { font-size: 175%; }
+h4 { font-size: 150%; }
+h5 { font-size: 125%; }
+h6 { font-size: 100%; }
+
+// horizontal rules
+
+hr { 
+  margin: 0 15px;
+  border-color: #eee;
+  border-width: 1px 0;
+  border-style: solid;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+// formula
+
+.formula {
+  display: block;
+  margin: 0 auto;
+  width: 85%;
+  position: relative;
+  max-width: 700px;
+  //background: radial-gradient(circle at 20% 25%, #5d5d5d 0%, #333 25%, #222 90%);
+  //background-image: url('/images/leather.jpg');
+
+  .header-img {
+    background-image: url('/images/epic-logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    display: block;
+    margin: 0 auto;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .primary-window {
+    border-radius: 4px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
+    background: radial-gradient(circle, #f2f2f2 0%, #ebebeb 100%);
+    transition: all ease 0.5s;
+    
+    margin-top: -230px;
+    
+    tansform-origin: 50% 0;
+  }
+  
+  &:focus {
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    outline: none;
+  }
+  
+  .forcefield {
+    margin-top: 100px;
+    padding: 100px 30px;
+  }
+  
+  form {
+    
+    .input-group:first-child {
+      margin-top: 50px;
+    }
+    
+    .input-group {
+      margin-top: 70px;
+      position: relative;
+    }
+    
+    input {
+      width: 100%;
+      max-height: 50px;
+      padding: 10px 0;
+      font-size: 25px;
+      text-align: center;
+      font-family: inherit;
+      border-style: none;
+      border-radius: 2px;
+      box-shadow: 2px 0 1px rgba(50,50,50,0.05),
+                  -2px 0 1px rgba(50,50,50,0.05);
+      transition: box-shadow ease 0.3s,
+                  all ease 0.3s;
+      
+      &:focus {
+        outline: none;
+        box-shadow: -1px 1px 3px rgba(0,0,0,0.07),
+                     1px 1px 3px rgba(0,0,0,0.07);
+        margin-bottom: 1px;
+        margin-top: -1px;
+        &~label {
+          top: -55px;
+          color: black;
+          text-shadow: 0 0 1px 0px rgb(100,100,250);
+        }
+        &~* {
+          top: -1px;
+        }
+      }
+      
+      &~* { transition: top ease 0.3s; }
+      
+      &.focus~label {
+        top: -55px;
+        //color: white;
+      }
+
+      &.valid~.glance::after {
+        color: rgb(10, 225, 10);
+        text-shadow: 0 0 7px rgb(255,255,255),
+                     1px 0 0 rgb(10, 200, 10);
+      }
+    }
+   
+    .glance {
+      height: 50px;
+      width: 30px;
+      background: #f4f4f4;
+      box-shadow: 1px 0 1px rgba(0,0,0,0.1);
+      padding: 0;
+      margin: 0;
+      top: 0;
+      position: absolute;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      transition: all ease 0.5s;
+      
+      &::after {
+        content: "\2713";
+        padding: 3px;
+        position: relative;
+        top: 7px;
+        font-size: 130%;
+        color: transparent;
+        
+        transition: all ease 0.5s;
+      }
+      
+    }
+    
+    .pill-right {
+      height: 49px;
+      width: 100px;
+      text-align: center;
+      right: 0;
+      top: 0;
+      background: #fafafa;
+      box-shadow: -1px 0 1px rgba(0,0,0,0.1);
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      
+      span {
+        display: inline-block;
+        padding-top: 8px;
+      }
+    }
+    
+    label {
+      display: block;
+      padding: 10px 0;
+      margin-top: -50px;
+      text-align: center;
+      position: relative;
+      top: 0px;
+      cursor: text;
+      transition: top ease 0.8s,
+                  color ease 0.5s 0.25s,
+                  all ease 0.8s;
+      color: #aaa;
+    }
+  }
+  
+  .submit-btn {
+    position: absolute;
+    bottom: 7px;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background: white;
+    z-index: -1;
+    transform-origin: 50% 100%;
+    transform: rotateX(-90deg);
+    transition: all ease 0.3s;
+  }
+  
+  &.persp {
+    .primary-window {
+      transform: rotateX(37deg);
+      margin-top: -270px;
+      box-shadow: inset 0 30px rgba(0,0,0,0.015),
+                  inset 0 25px rgba(0,0,0,0.02),
+                  inset 0 10px rgba(0,0,0,0.025);
+    }
+    
+    .submit-btn {
+      transform: rotateX(0deg);
+      
+      box-shadow: 0 7px 15px rgba(0,0,0,0.2);
+      
+      cursor: pointer;
+      z-index: 2;
+      transition: all ease-in-out 0.5s;
+    }
+  }
+}
