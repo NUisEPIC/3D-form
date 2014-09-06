@@ -7,7 +7,8 @@ html {
 }
 
 body {
-  background: linear-gradient(#105d7f 1%,#305778 2%,#63b5ce 55%,#63b5ce 99%,#70caff 100%)
+  background: linear-gradient(#105d7f 1%,#305778 2%,#63b5ce 55%,#63b5ce 99%,#70caff 100%);
+  background-attachment: fixed;
 }
 
 // tyopography
@@ -71,7 +72,7 @@ hr {
     
     margin-top: -230px;
     
-    tansform-origin: 50% 0;
+    tansform-origin: 50% 100%;
   }
   
   &:focus {
@@ -80,7 +81,7 @@ hr {
   }
   
   .forcefield {
-    margin-top: 100px;
+    margin: 100px 0;
     padding: 100px 30px;
   }
   
@@ -164,24 +165,46 @@ hr {
       
     }
     
-    .pill-right {
+    *[class*='pill-'] {
       height: 49px;
       width: 100px;
       text-align: center;
-      right: 0;
       top: 0;
       background: #fafafa;
-      box-shadow: -1px 0 1px rgba(0,0,0,0.1);
       padding: 0;
       margin: 0;
       position: absolute;
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
       
       span {
         display: inline-block;
         padding-top: 8px;
       }
+    }
+    
+    .pill-right {
+      right: 0;
+      border-radius: 2px;
+      box-shadow: -1px 0 1px rgba(0,0,0,0.1);
+    }
+    
+    .pill-left {
+      left: 0;
+      border-radius: 2px;
+      box-shadow: 1px 0 1px rgba(0,0,0,0.1);
+    }
+    
+    .glance~.pill-left {
+      left: 30px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      box-shadow: 1px 0 1px rgba(0,0,0,0.1),
+                  inset 1px 0 1px rgba(0,0,0,0.1);
+    }
+    
+    .pill-left~.glance {
+      left: 100px;
     }
     
     label {
@@ -201,15 +224,19 @@ hr {
   
   .submit-btn {
     position: absolute;
-    bottom: 7px;
+    bottom: 0;
     width: 100%;
     padding: 10px 0;
     text-align: center;
     background: white;
+    transform-origin: 50% 0;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
     z-index: -1;
-    transform-origin: 50% 100%;
     transform: rotateX(-90deg);
-    transition: all ease 0.3s;
+    transition: transform ease 0.7s,
+                bottom linear 0.4s,
+                box-shadow ease 0.6s;
   }
   
   &.persp {
@@ -223,12 +250,13 @@ hr {
     
     .submit-btn {
       transform: rotateX(0deg);
+      bottom: 54px;
+      transform-origin: 50% 100%;
       
       box-shadow: 0 7px 15px rgba(0,0,0,0.2);
       
       cursor: pointer;
       z-index: 2;
-      transition: all ease-in-out 0.5s;
     }
   }
 }
