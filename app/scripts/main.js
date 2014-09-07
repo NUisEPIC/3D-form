@@ -1,7 +1,7 @@
 addClass = function(el, c) {
   var i = el.className.indexOf(c);
   if(i > -1) return el;
-  else return (el.className = (el.className + ' ' + c.trim()).trimLeft(), el); 
+  else return (el.className = (el.className + ' ' + c.trim()), el);
 }
 
 removeClass = function(el, c) {
@@ -33,9 +33,6 @@ var formula         = extend(qq('.formula')[0]);
 
 [].forEach.call(formula_inputs, function(input) {
   console.log(input.value);
-  if (input.value.length > 0) {
-    input.addClass('focus');
-  }
   input.onchange = input.onblur = function() {
     if(input.value.length === 0) {
       input.removeClass('focus');
@@ -47,17 +44,6 @@ var formula         = extend(qq('.formula')[0]);
     } else {
       formIsInvalid();
     }
-  }
-});
-
-if ([].map.call(formula_inputs, validateInput).every(isValid)) {
-  formIsValid();
-}
-
-[].forEach.call(formula_labels, function(label) {
-  label.onclick = function(e) {
-    label.previousElementSibling.addClass('focus');
-    label.previousElementSibling.focus();
   }
 });
 
@@ -132,8 +118,27 @@ var submitBtn = qq('.submit-btn')[0];
 
 submitBtn.onclick = function(e) {
   // FUCKING. FIREFOX. IS. A. BITCH.
-  var delay = /Firefox/g.test(navigator.userAgent) ? 3400 : 1950;
+  var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
   formula.removeClass('persp');
   setTimeout(function() { formula.addClass('punched'); }, 450);
   setTimeout(function() { formula.addClass('end'); }, delay);
+}
+
+window.onload = function() {
+  if ([].map.call(formula_inputs, validateInput).every(isValid)) {
+    formIsValid();
+  }
+
+  [].forEach.call(formula_labels, function(label) {
+    label.onclick = function(e) {
+      label.previousElementSibling.addClass('focus');
+      label.previousElementSibling.focus();
+    }
+  });
+
+  [].forEach.call(formula_inputs, function(input) {
+    if (input.value.length > 0) {
+      input.addClass('focus');
+    }
+  });
 }

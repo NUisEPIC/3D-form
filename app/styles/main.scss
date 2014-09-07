@@ -303,6 +303,8 @@ $fieldHeight: 47px;
     &.end {
       .primary-window {
         max-height: 620px;
+        // this one's for IE 10...
+        transition: none;
         transform: rotateY(180deg);
       }
     }
@@ -311,18 +313,23 @@ $fieldHeight: 47px;
 
 
 // FUKKKKKKiNG FIREFOX
-@-moz-keyframes punch-ticket {
-  0% { transform: rotateX(0deg) translateY(0); }
-  35% { transform: rotateX(180deg) translateY(0); }
-  50% { transform: rotateX(180deg) translateY(80px); max-height: 620px; }
-  65% { transform: rotateX(180deg) translateY(0); max-height: 620px; } 
-  100% { transform: rotateX(180deg) rotateZ(180deg); max-height: 620px; }
-}
+// NOTE: the build kills the moz keyframes because it's a bitch about this shit.
+// soooooo... ugh. copy this line every time it builds and you want to save.
+@-moz-keyframes punch-ticket{0%{transform:rotateX(0deg)translateY(0)}35%{transform:rotateX(180deg)translateY(0)}50%{transform:rotateX(180deg)translateY(80px);max-height:620px}65%{transform:rotateX(180deg)translateY(0);max-height:620px}100%{transform:rotateX(180deg)rotateZ(180deg);max-height:620px}}
 
 @-webkit-keyframes punch-ticket {
   0% { transform: rotateX(0deg) translateY(0); }
   35% { transform: rotateX(180deg) translateY(0); }
   50% { transform: rotateX(180deg) translateY(80px); }
-  65% { transform: rotateX(180deg) translateY(0); } 
+  65% { transform: rotateX(180deg) translateY(0); }
   100% { transform: rotateX(180deg) rotateZ(180deg); }
+}
+
+@-ms-keyframes punch-ticket {
+  0% { transform: rotateX(0deg) translateY(0); }
+  35% { transform: rotateX(180deg) translateY(0); }
+  50% { transform: rotateX(180deg) translateY(80px); max-height: 620px; }
+  65% { transform: rotateX(180deg) translateY(0); max-height: 620px; }
+  // for some reason, IE flips Z.
+  100% { transform: rotateX(-180deg) rotateZ(180deg); max-height: 620px; }
 }
