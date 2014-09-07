@@ -4,6 +4,7 @@ html {
   margin: 0;
   font-family: marvel, "Helvetica Neue", helvetica, serif;
   font-size: 25px;
+  overflow-x: hidden;
 }
 
 body {
@@ -50,6 +51,7 @@ hr {
   max-width: 700px;
   //background: radial-gradient(circle at 20% 25%, #5d5d5d 0%, #333 25%, #222 90%);
   //background-image: url('/images/leather.jpg');
+  transition: all ease 1s;
 
   .header-img {
     background-image: url('/images/epic-logo.png');
@@ -66,13 +68,27 @@ hr {
   .primary-window {
     border-radius: 4px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    position: relative;
 
     background: radial-gradient(circle, #f2f2f2 0%, #ebebeb 100%);
-    transition: all ease 0.5s;
+    transition: transform ease 0.5s,
+                margin-top ease 0.5s;
     
-    margin-top: -230px;
+    margin-top: -215px;
     
     tansform-origin: 50% 100%;
+    overflow: hidden;
+    top: 80px;
+    
+    .thanks {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      opacity: 0;
+      transition: all ease 1s 3s;
+      margin-left: -30px;
+      //transform: rotateY(180deg);
+    }
   }
   
   &:focus {
@@ -81,7 +97,6 @@ hr {
   }
   
   .forcefield {
-    margin: 100px 0;
     padding: 100px 30px;
   }
   
@@ -94,14 +109,15 @@ hr {
     .input-group {
       margin-top: 70px;
       position: relative;
+      transition: opacity ease 0.5s;
     }
     
     input {
-      width: 100%;
+      width: 90%; // will be overwritten.
       max-height: 50px;
-      padding: 10px 0;
+      padding: 10px 5%; // will be overwritten.
       font-size: 25px;
-      text-align: center;
+      text-align: left;
       font-family: inherit;
       border-style: none;
       border-radius: 2px;
@@ -109,6 +125,7 @@ hr {
                   -2px 0 1px rgba(50,50,50,0.05);
       transition: box-shadow ease 0.3s,
                   all ease 0.3s;
+      text-overflow: ellipsis;
       
       &:focus {
         outline: none;
@@ -167,11 +184,10 @@ hr {
     
     *[class*='pill-'] {
       height: 50px;
-      width: 100px;
       text-align: center;
       top: 0;
       background: #fafafa;
-      padding: 0;
+      padding: 0 15px;
       margin: 0;
       position: absolute;
       
@@ -224,7 +240,6 @@ hr {
   
   .submit-btn {
     position: absolute;
-    bottom: 0;
     width: 100%;
     padding: 10px 0;
     text-align: center;
@@ -234,9 +249,9 @@ hr {
     border-bottom-right-radius: 2px;
     z-index: -1;
     transform: rotateX(-90deg);
-    transition: transform ease 0.7s,
-                bottom linear 0.4s,
-                box-shadow ease 0.6s;
+    transition: transform ease-in 0.3s 0.1s,
+                box-shadow ease 0.6s,
+                opacity ease 0.1s;
   }
   
   &.persp {
@@ -250,7 +265,6 @@ hr {
     
     .submit-btn {
       transform: rotateX(0deg);
-      bottom: 54px;
       transform-origin: 50% 100%;
       
       box-shadow: 0 7px 15px rgba(0,0,0,0.2);
@@ -259,4 +273,35 @@ hr {
       z-index: 2;
     }
   }
+  
+  &.punched {
+    
+    .primary-window {
+      transform-origin: 50% 0%;
+      animation: punch-ticket 3s;
+    }
+      
+    .input-group {
+      opacity: 0;
+    }
+
+    .thanks {
+      display: block;
+      opacity: 1;
+      top: 100px;
+      font-size: 25px;
+    }
+    
+    .submit-btn {
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes punch-ticket {
+  0% { transform: rotateX(0deg) translateY(0); }
+  35% { transform: rotateX(180deg) translateY(0); }
+  50% { transform: rotateX(180deg) translateY(80px); }
+  65% { transform: rotateX(180deg) translateY(0); } 
+  100% { transform: rotateX(180deg) rotateZ(180deg); }
 }

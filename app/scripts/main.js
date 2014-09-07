@@ -96,3 +96,41 @@ function formIsValid() {
 function formIsInvalid() {
   setTimeout(function() { formula.removeClass('persp') }, 500);
 }
+
+// I wish I didn't have to do this in JS
+
+var inputGroupElements = qq('.input-group input~*');
+
+var nearestInput = inputGroupElements[0].previousElementSibling, padLeft, padRight;
+
+var basePad = 15;
+
+[].forEach.call(inputGroupElements, function(p) {
+  
+  console.log(nearestInput);
+  
+  if (p.nodeName === "LABEL") {
+    console.log("STOP");
+    nearestInput.style.paddingLeft = padLeft + "px";
+    nearestInput.style.paddingRight = padRight + "px";
+    nearestInput.style.width   = nearestInput.offsetWidth - (padLeft + padRight) + "px";
+    nearestInput = p.previousElementSibling;
+    padLeft = padRight = basePad;
+  }
+  
+  if (/pill-left|glance/g.test(p.classList)) {
+    padLeft += p.offsetWidth;
+  }
+  
+  if (/pill-right/g.test(p.classList)) {
+    padRight += p.offsetWidth;
+  }
+  
+});
+
+var submitBtn = qq('.submit-btn')[0];
+
+submitBtn.onclick = function(e) {
+  formula.removeClass('persp');
+  setTimeout(function() { formula.addClass('punched'); }, 450);
+}
