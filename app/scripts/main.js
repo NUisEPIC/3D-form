@@ -133,5 +133,5 @@ var submitBtn = qq('.submit-btn')[0];
 submitBtn.onclick = function(e) {
   formula.removeClass('persp');
   setTimeout(function() { formula.addClass('punched'); }, 450);
-  setTimeout(function() { formula.addClass('end'); }, 500);
+  setTimeout(function() { formula.addClass('end'); }, 3400);
 }

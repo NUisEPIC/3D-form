@@ -72,10 +72,10 @@ $fieldHeight: 47px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
     position: relative;
 
+    max-height: 100%;
     background: radial-gradient(circle, #f2f2f2 0%, #ebebeb 100%);
     transition: transform ease 0.5s,
-                margin-top ease 0.5s,
-                max-height ease 0.5s 1.5s;
+                margin-top ease 0.5s;
     
     margin-top: -215px;
     
@@ -90,7 +90,8 @@ $fieldHeight: 47px;
       opacity: 0;
       transition: all ease 1s 3s;
       margin-left: -30px;
-      //transform: rotateY(180deg);
+      // firefox, you are a bitch.
+      transform: rotateY(180deg);
     }
   }
   
@@ -190,6 +191,7 @@ $fieldHeight: 47px;
       text-align: center;
       top: 0;
       background: #fafafa;
+      border-radius: 2px;
       padding: 0 15px;
       margin: 0;
       position: absolute;
@@ -202,13 +204,11 @@ $fieldHeight: 47px;
     
     .pill-right {
       right: 0;
-      border-radius: 2px;
       box-shadow: -1px 0 1px rgba(0,0,0,0.1);
     }
     
     .pill-left {
       left: 0;
-      border-radius: 2px;
       box-shadow: 1px 0 1px rgba(0,0,0,0.1);
     }
     
@@ -298,9 +298,11 @@ $fieldHeight: 47px;
       opacity: 0;
     }
     
+    // because firefox is a bitch.
     &.end {
       .primary-window {
         max-height: 620px;
+        transform: rotateY(180deg);
       }
     }
   }
@@ -309,7 +311,7 @@ $fieldHeight: 47px;
 @keyframes punch-ticket {
   0% { transform: rotateX(0deg) translateY(0); }
   35% { transform: rotateX(180deg) translateY(0); }
-  50% { transform: rotateX(180deg) translateY(80px); }
-  65% { transform: rotateX(180deg) translateY(0); } 
+  50% { transform: rotateX(180deg) translateY(80px); max-height: 620px; }
+  65% { transform: rotateX(180deg) translateY(0); max-height: 620px; } 
   100% { transform: rotateX(180deg) rotateZ(180deg); max-height: 620px; }
 }
