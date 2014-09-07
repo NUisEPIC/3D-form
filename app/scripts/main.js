@@ -109,21 +109,21 @@ var basePad = 15;
   
   console.log(nearestInput);
   
-  if (p.nodeName === "LABEL") {
-    console.log("STOP");
-    nearestInput.style.paddingLeft = padLeft + "px";
-    nearestInput.style.paddingRight = padRight + "px";
-    nearestInput.style.width   = nearestInput.offsetWidth - (padLeft + padRight) + "px";
-    nearestInput = p.previousElementSibling;
-    padLeft = padRight = basePad;
-  }
-  
   if (/pill-left|glance/g.test(p.classList)) {
     padLeft += p.offsetWidth;
   }
   
   if (/pill-right/g.test(p.classList)) {
     padRight += p.offsetWidth;
+  }
+  
+  if (p.nodeName === "LABEL" || [].indexOf.call(inputGroupElements, p) === inputGroupElements.length - 1) {
+    console.log("STOP");
+    nearestInput.style.paddingLeft = padLeft + "px";
+    nearestInput.style.paddingRight = padRight + "px";
+    nearestInput.style.width   = nearestInput.offsetWidth - (padLeft + padRight) + "px";
+    nearestInput = p.previousElementSibling;
+    padLeft = padRight = basePad;
   }
   
 });
@@ -133,4 +133,5 @@ var submitBtn = qq('.submit-btn')[0];
 submitBtn.onclick = function(e) {
   formula.removeClass('persp');
   setTimeout(function() { formula.addClass('punched'); }, 450);
+  setTimeout(function() { formula.addClass('end'); }, 500);
 }
