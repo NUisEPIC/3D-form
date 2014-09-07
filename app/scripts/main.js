@@ -131,7 +131,9 @@ var basePad = 15;
 var submitBtn = qq('.submit-btn')[0];
 
 submitBtn.onclick = function(e) {
+  // FUCKING. FIREFOX. IS. A. BITCH.
+  var delay = /Firefox/g.test(navigator.userAgent) ? 3400 : 1950;
   formula.removeClass('persp');
   setTimeout(function() { formula.addClass('punched'); }, 450);
-  setTimeout(function() { formula.addClass('end'); }, 3400);
+  setTimeout(function() { formula.addClass('end'); }, delay);
 }
