@@ -116,12 +116,19 @@ var basePad = 15;
 
 var submitBtn = qq('.submit-btn')[0];
 
-submitBtn.onclick = function(e) {
-  // FUCKING. FIREFOX. IS. A. BITCH.
-  var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
+submitBtn.onmousedown = function(e) {
   formula.removeClass('persp');
-  setTimeout(function() { formula.addClass('punched'); }, 450);
-  setTimeout(function() { formula.addClass('end'); }, delay);
+  
+  formula.onmouseup = function(e) {
+    // FUCKING. FIREFOX. IS. A. BITCH.
+    var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
+    setTimeout(function() { formula.addClass('punched'); }, 450);
+    setTimeout(function() { formula.addClass('end'); }, delay);
+  }
+  
+  document.onmouseup = function(e) {
+    formula.onmouseup = "";
+  }
 }
 
 window.onload = function() {
