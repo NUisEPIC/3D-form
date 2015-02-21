@@ -9,7 +9,7 @@ var $ = require('gulp-load-plugins')();
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.scss')
         .pipe($.sass())
-        .pipe($.autoprefixer('last 1 version'))
+        .pipe($.autoprefixer('last 4 versions'))
         .pipe(gulp.dest('.tmp/styles'))
         .pipe($.size());
 });

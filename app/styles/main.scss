@@ -27,7 +27,7 @@ h6 { font-size: 100%; }
 
 // horizontal rules
 
-hr { 
+hr {
   margin: 0 15px;
   border-color: #eee;
   border-width: 1px 0;
@@ -43,7 +43,7 @@ hr {
 
 // formula
 
-$fieldHeight: 47px;
+$fieldHeight: 45px;
 
 .formula {
   display: block;
@@ -51,8 +51,6 @@ $fieldHeight: 47px;
   width: 85%;
   position: relative;
   max-width: 700px;
-  //background: radial-gradient(circle at 20% 25%, #5d5d5d 0%, #333 25%, #222 90%);
-  //background-image: url('/images/leather.jpg');
   transition: all ease 1s;
 
   .header-img {
@@ -66,7 +64,7 @@ $fieldHeight: 47px;
     z-index: 2;
     position: relative;
   }
-  
+
   .primary-window {
     border-radius: 4px;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
@@ -75,15 +73,15 @@ $fieldHeight: 47px;
     max-height: 100%;
     background: radial-gradient(circle, #f2f2f2 0%, #ebebeb 100%);
     transition: transform ease 0.5s,
-                margin-top ease 0.5s,
+                top ease-out 0.5s,
                 max-height ease 0.5s;
-    
+
     margin-top: -215px;
-    
-    tansform-origin: 50% 100%;
+
+    transform-origin: 50% 50%;
     overflow: hidden;
     top: 80px;
-    
+
     .thanks {
       position: absolute;
       text-align: center;
@@ -95,28 +93,28 @@ $fieldHeight: 47px;
       transform: rotateY(180deg);
     }
   }
-  
+
   &:focus {
     box-shadow: 0 0 5px rgba(0,0,0,0.25);
     outline: none;
   }
-  
+
   .forcefield {
     padding: 100px 30px 60px 30px;
   }
-  
+
   form {
-    
+
     .input-group:first-child {
       margin-top: 50px;
     }
-    
+
     .input-group {
       margin-top: 70px;
       position: relative;
       transition: opacity ease 0.1s 0.325s;
     }
-    
+
     input {
       width: 90%; // will be overwritten.
       max-height: $fieldHeight;
@@ -132,7 +130,7 @@ $fieldHeight: 47px;
       transition: box-shadow ease 0.3s,
                   all ease 0.3s;
       text-overflow: ellipsis;
-      
+
       &:focus {
         outline: none;
         box-shadow: -1px 1px 3px rgba(0,0,0,0.07),
@@ -148,9 +146,9 @@ $fieldHeight: 47px;
           top: -1px;
         }
       }
-      
+
       &~* { transition: top ease 0.3s; }
-      
+
       &.focus~label {
         top: -55px;
         //color: white;
@@ -161,9 +159,9 @@ $fieldHeight: 47px;
         text-shadow: 0 0 7px rgb(255,255,255);
       }
     }
-   
+
     .glance {
-      height: $fieldHeight;
+      height: $fieldHeight + 2px;
       width: 30px;
       background: #f4f4f4;
       box-shadow: 1px 0 1px rgba(0,0,0,0.1);
@@ -174,22 +172,22 @@ $fieldHeight: 47px;
       border-top-left-radius: 2px;
       border-bottom-left-radius: 2px;
       transition: all ease 0.5s;
-      
+
       &::after {
         content: "\2713";
         padding: 3px;
         position: relative;
         top: 7px;
-        font-size: 130%;
+        font-size: 28px;
         color: transparent;
-        
+
         transition: all ease 0.5s;
       }
-      
+
     }
-    
+
     *[class*='pill-'] {
-      height: $fieldHeight;
+      height: $fieldHeight + 2px;
       text-align: center;
       top: 0;
       background: #fafafa;
@@ -197,23 +195,23 @@ $fieldHeight: 47px;
       padding: 0 15px;
       margin: 0;
       position: absolute;
-      
+
       span {
         display: inline-block;
         padding-top: 8px;
       }
     }
-    
+
     .pill-right {
       right: 0;
       box-shadow: -1px 0 1px rgba(0,0,0,0.1);
     }
-    
+
     .pill-left {
       left: 0;
       box-shadow: 1px 0 1px rgba(0,0,0,0.1);
     }
-    
+
     .glance~.pill-left {
       left: 30px;
       border-top-left-radius: 0;
@@ -223,11 +221,11 @@ $fieldHeight: 47px;
       box-shadow: 1px 0 1px rgba(0,0,0,0.1),
                   inset 1px 0 1px rgba(0,0,0,0.1);
     }
-    
+
     .pill-left~.glance {
       left: 100px;
     }
-    
+
     label {
       display: block;
       padding: 10px 0;
@@ -242,7 +240,7 @@ $fieldHeight: 47px;
       color: #aaa;
     }
   }
-  
+
   .submit-btn {
     position: absolute;
     width: 100%;
@@ -258,34 +256,33 @@ $fieldHeight: 47px;
                 box-shadow ease 0.6s,
                 opacity ease 0.1s;
   }
-  
+
   &.persp {
     .primary-window {
       transform: rotateX(37deg);
-      margin-top: -270px;
       box-shadow: inset 0 30px rgba(0,0,0,0.015),
                   inset 0 25px rgba(0,0,0,0.02),
                   inset 0 10px rgba(0,0,0,0.025);
     }
-    
+
     .submit-btn {
       transform: rotateX(0deg);
       transform-origin: 50% 100%;
-      
+
       box-shadow: 0 7px 15px rgba(0,0,0,0.2);
-      
+
       cursor: pointer;
       z-index: 2;
     }
   }
-  
+
   &.punched {
-    
+
     .primary-window {
       transform-origin: 50% 0%;
-      animation: punch-ticket 3s;
+      animation: 3s punch-ticket;
     }
-      
+
     .input-group {
       opacity: 0;
     }
@@ -295,11 +292,11 @@ $fieldHeight: 47px;
       opacity: 1;
       top: 95px;
     }
-    
+
     .submit-btn {
       opacity: 0;
     }
-    
+
     // because firefox is a bitch.
     &.end {
       .primary-window {
@@ -317,6 +314,8 @@ $fieldHeight: 47px;
 // NOTE: the build kills the moz keyframes because it's a bitch about this shit.
 // soooooo... ugh. copy this line every time it builds and you want to save.
 @-moz-keyframes punch-ticket{0%{transform:rotateX(0deg)translateY(0)}35%{transform:rotateX(180deg)translateY(0)}50%{transform:rotateX(180deg)translateY(80px);max-height:620px}65%{transform:rotateX(180deg)translateY(0);max-height:620px}100%{transform:rotateX(180deg)rotateZ(180deg);max-height:620px}}
+
+@keyframes punch-ticket{0%{transform:rotateX(0deg)translateY(0)}35%{transform:rotateX(180deg)translateY(0)}50%{transform:rotateX(180deg)translateY(80px);max-height:620px}65%{transform:rotateX(180deg)translateY(0);max-height:620px}100%{transform:rotateX(180deg)rotateZ(180deg);max-height:620px}}
 
 @-webkit-keyframes punch-ticket {
   0% { transform: rotateX(0deg) translateY(0); }
