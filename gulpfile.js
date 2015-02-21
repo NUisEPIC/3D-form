@@ -23,8 +23,8 @@ gulp.task('jade', function () {
 
 gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
-        .pipe($.jshint())
-        .pipe($.jshint.reporter(require('jshint-stylish')))
+        //.pipe($.jshint())
+        //.pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe($.size());
 });
 
@@ -74,7 +74,7 @@ gulp.task('clean', function () {
     return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
 });
 
-gulp.task('build', ['html', 'images', /*'fonts', no fonts in bowerfiles*/ 'extras']);
+gulp.task('build', ['html', 'images', 'extras']);
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
