@@ -5,56 +5,40 @@ html
     title 3d Form -- Jordan T
     meta(name='description', content='3d Form Test Concept')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    
+
     // vendor.css is currently empty
-    // build:css styles/vendor.css 
-    // bower:css 
-    // endbower 
-    // endbuild 
-    
-    // build:css styles/main.css 
+    // build:css styles/vendor.css
+    // bower:css
+    // endbower
+    // endbuild
+
+    // build:css styles/main.css
     link(rel='stylesheet', href='styles/main.css')
-    // endbuild 
-    
+    // endbuild
+
     script(src="http://use.edgefonts.net/marvel:i4,n7,n4,i7:all.js")
-    
+
   body
-    
-    .formula.login
+
+    .formula
       .header-img
       .primary-window
         .forcefield
           form
             .input-group
               input(type="text", required)
-              label Name
+              label Username
               .glance
             .input-group
-              input(type="email", required)
-              label School Email
-              .glance
-              .pill-right 
-                span .edu
-            .input-group
-              input(type="text", required)
-              label Github
-              .glance
-              .pill-left
-                span @
-            .input-group
-              input(type="text")
-              label Team Name (if any)
-            .input-group
-              input(type="text", required)
-              label How did you hear about us?
+              input(type="password", required)
+              label Password
               .glance
           .thanks
-            h2 That just happened.
-            img(src="images/fyeah.png", style="max-height: 250px")
-            h2 (You are welcome.)
+            h2 Yo, you just got logged in!
+            img(src="images/fyeah.png", style="max-height: 165px")
       .submit-btn Punch it!
-    
-    // Google Analytics: change UA-XXXXX-X to be your site's ID. 
+
+    // Google Analytics: change UA-XXXXX-X to be your site's ID.
     //script.
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
@@ -62,13 +46,13 @@ html
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
-    
+
     // vendor.js is currently empty
-    // build:js scripts/vendor.js 
-    // bower:js 
-    // endbower 
-    // endbuild 
-    
-    // build:js scripts/main.js 
+    // build:js scripts/vendor.js
+    // bower:js
+    // endbower
+    // endbuild
+
+    // build:js scripts/main.js
     script(src='scripts/main.js')
-    // endbuild 
+    // endbuild
