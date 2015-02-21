@@ -1,45 +1,6 @@
-html {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  font-family: marvel, "Helvetica Neue", helvetica, serif;
-  font-size: 22px;
-  overflow-x: hidden;
-}
-
-body {
-  background: linear-gradient(#105d7f 1%,#305778 2%,#63b5ce 55%,#63b5ce 99%,#70caff 100%);
-  background-attachment: fixed;
-}
-
-// tyopography
-
-h1, h2, h3, h4, h5, h6 {
-  padding: 0 15px;
-}
-
-h1 { font-size: 225%; }
-h2 { font-size: 200%; }
-h3 { font-size: 175%; }
-h4 { font-size: 150%; }
-h5 { font-size: 125%; }
-h6 { font-size: 100%; }
-
-// horizontal rules
-
-hr {
-  margin: 0 15px;
-  border-color: #eee;
-  border-width: 1px 0;
-  border-style: solid;
-}
-
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
+@import 'vars';
+@import 'base';
+@import 'formula-inputs';
 
 // formula
 
@@ -103,151 +64,13 @@ $fieldHeight: 45px;
     padding: 100px 30px 60px 30px;
   }
 
-  form {
-
-    .input-group:first-child {
-      margin-top: 50px;
-    }
-
-    .input-group {
-      margin-top: 70px;
-      position: relative;
-      transition: opacity ease 0.1s 0.325s;
-    }
-
-    input {
-      width: 90%; // will be overwritten.
-      max-height: $fieldHeight;
-      padding: 10px 5%; // will be overwritten.
-      margin: 0;
-      font-size: inherit;
-      text-align: left;
-      font-family: inherit;
-      border-style: none;
-      border-radius: 2px;
-      box-shadow: 2px 0 1px rgba(50,50,50,0.05),
-                  -2px 0 1px rgba(50,50,50,0.05);
-      transition: box-shadow ease 0.3s,
-                  all ease 0.3s;
-      text-overflow: ellipsis;
-
-      &:focus {
-        outline: none;
-        box-shadow: -1px 1px 3px rgba(0,0,0,0.07),
-                     1px 1px 3px rgba(0,0,0,0.07);
-        margin-bottom: 1px;
-        margin-top: -1px;
-        &~label {
-          top: -55px;
-          color: black;
-          text-shadow: 0 0 1px 0px rgb(100,100,250);
-        }
-        &~* {
-          top: -1px;
-        }
-      }
-
-      &~* { transition: top ease 0.3s; }
-
-      &.focus~label {
-        top: -55px;
-        //color: white;
-      }
-
-      &.valid~.glance::after {
-        color: rgb(10, 225, 10);
-        text-shadow: 0 0 7px rgb(255,255,255);
-      }
-    }
-
-    .glance {
-      height: $fieldHeight + 2px;
-      width: 30px;
-      background: #f4f4f4;
-      box-shadow: 1px 0 1px rgba(0,0,0,0.1);
-      padding: 0;
-      margin: 0;
-      top: 0;
-      position: absolute;
-      border-top-left-radius: 2px;
-      border-bottom-left-radius: 2px;
-      transition: all ease 0.5s;
-
-      &::after {
-        content: "\2713";
-        padding: 3px;
-        position: relative;
-        top: 7px;
-        font-size: 28px;
-        color: transparent;
-
-        transition: all ease 0.5s;
-      }
-
-    }
-
-    *[class*='pill-'] {
-      height: $fieldHeight + 2px;
-      text-align: center;
-      top: 0;
-      background: #fafafa;
-      border-radius: 2px;
-      padding: 0 15px;
-      margin: 0;
-      position: absolute;
-
-      span {
-        display: inline-block;
-        padding-top: 8px;
-      }
-    }
-
-    .pill-right {
-      right: 0;
-      box-shadow: -1px 0 1px rgba(0,0,0,0.1);
-    }
-
-    .pill-left {
-      left: 0;
-      box-shadow: 1px 0 1px rgba(0,0,0,0.1);
-    }
-
-    .glance~.pill-left {
-      left: 30px;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
-      box-shadow: 1px 0 1px rgba(0,0,0,0.1),
-                  inset 1px 0 1px rgba(0,0,0,0.1);
-    }
-
-    .pill-left~.glance {
-      left: 100px;
-    }
-
-    label {
-      display: block;
-      padding: 10px 0;
-      margin-top: -$fieldHeight;
-      text-align: center;
-      position: relative;
-      top: 0px;
-      cursor: text;
-      transition: top ease 0.8s,
-                  color ease 0.5s 0.25s,
-                  all ease 0.8s;
-      color: #aaa;
-    }
-  }
-
   .submit-btn {
     position: absolute;
     width: 100%;
     padding: 10px 0;
     text-align: center;
     background: white;
-    transform-origin: 50% 0;
+    transform-origin: bottom;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     z-index: -1;
@@ -260,6 +83,7 @@ $fieldHeight: 45px;
   &.persp {
     .primary-window {
       transform: rotateX(37deg);
+      top: 14px + 12*$numberInputs; // 3: 50; 4: 62; 5: 74
       box-shadow: inset 0 30px rgba(0,0,0,0.015),
                   inset 0 25px rgba(0,0,0,0.02),
                   inset 0 10px rgba(0,0,0,0.025);
@@ -267,12 +91,11 @@ $fieldHeight: 45px;
 
     .submit-btn {
       transform: rotateX(0deg);
-      transform-origin: 50% 100%;
+      transform-origin: bottom;
 
       box-shadow: 0 7px 15px rgba(0,0,0,0.2);
 
       cursor: pointer;
-      z-index: 2;
     }
   }
 

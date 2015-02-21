@@ -8,7 +8,7 @@ removeClass = function(el, c) {
   var i = el.className.indexOf(c);
   if(i < 0) return el;
   else return (el.className = el.className.replace(c.trim(), '')
-               .replace('  ', ' '), 
+               .replace('  ', ' '),
                el);
 }
 
@@ -38,7 +38,7 @@ var formula         = extend(qq('.formula')[0]);
       input.removeClass('focus');
     } else { input.addClass('focus'); }
   }
-  input.onkeyup = function() { 
+  input.onkeyup = function() {
     if ([].map.call(formula_inputs, validateInput).every(isValid)) {
       formIsValid();
     } else {
@@ -57,16 +57,16 @@ function validateInput(i) {
   inputIsValid = false;
   if (!i.required) return true;
   switch(i.type) {
-      case "email": 
+      case "email":
         inputIsValid = /\w+@[A-z0-9.]+/.test(i.value);
         break;
-      case "password": 
+      case "password":
         var v = i.value;
-        inputIsValid = v.length > 8 && 
+        inputIsValid = v.length > 8 &&
                        /\d+/.test(v) &&
                        /[_\-!@#$%^&* `~]/.test(v);
         break;
-      default: 
+      default:
         inputIsValid = i.value.length > 0;
   }
   console.log(i.nextElementSibling.textContent + " valid? " + inputIsValid);
@@ -92,17 +92,17 @@ var nearestInput = inputGroupElements[0].previousElementSibling, padLeft, padRig
 var basePad = 15;
 
 [].forEach.call(inputGroupElements, function(p) {
-  
+
   console.log(nearestInput);
-  
+
   if (/pill-left|glance/g.test(p.classList)) {
     padLeft += p.offsetWidth;
   }
-  
+
   if (/pill-right/g.test(p.classList)) {
     padRight += p.offsetWidth;
   }
-  
+
   if (p.nodeName === "LABEL" || [].indexOf.call(inputGroupElements, p) === inputGroupElements.length - 1) {
     console.log("STOP");
     nearestInput.style.paddingLeft = padLeft + "px";
@@ -111,21 +111,21 @@ var basePad = 15;
     nearestInput = p.previousElementSibling;
     padLeft = padRight = basePad;
   }
-  
+
 });
 
 var submitBtn = qq('.submit-btn')[0];
 
 submitBtn.onmousedown = function(e) {
   formula.removeClass('persp');
-  
+
   formula.onmouseup = function(e) {
     // FUCKING. FIREFOX. IS. A. BITCH.
     var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
     setTimeout(function() { formula.addClass('punched'); }, 450);
     setTimeout(function() { formula.addClass('end'); }, delay);
   }
-  
+
   document.onmouseup = function(e) {
     formula.onmouseup = "";
   }
