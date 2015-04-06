@@ -17,13 +17,14 @@
     font-size: inherit;
     text-align: left;
     font-family: inherit;
-    border-style: none;
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: 2px;
-    box-shadow: 2px 0 1px rgba(50,50,50,0.05),
-                -2px 0 1px rgba(50,50,50,0.05);
+    //box-shadow: 2px 0 1px rgba(50,50,50,0.05),
+    //            -2px 0 1px rgba(50,50,50,0.05);
     transition: box-shadow ease 0.3s,
                 all ease 0.3s;
     text-overflow: ellipsis;
+    box-sizing: padding-box;
 
     &:focus {
       outline: none;
@@ -31,22 +32,23 @@
                    1px 1px 3px rgba(0,0,0,0.07);
       margin-bottom: 1px;
       margin-top: -1px;
+      &~.glance {
+        border: none;
+      }
+      &~* {
+        top: 0;
+      }
+    }
+
+    &.focus {
       &~label {
         top: -55px;
         color: black;
         text-shadow: 0 0 1px 0px rgb(100,100,250);
       }
-      &~* {
-        top: -1px;
-      }
     }
 
     &~* { transition: top ease 0.3s; }
-
-    &.focus~label {
-      top: -55px;
-      //color: white;
-    }
 
     &.valid~.glance::after {
       color: rgb(10, 225, 10);
@@ -61,7 +63,8 @@
     box-shadow: 1px 0 1px rgba(0,0,0,0.1);
     padding: 0;
     margin: 0;
-    top: 0;
+    top: 1px;
+    left: 1px;
     position: absolute;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
@@ -77,7 +80,6 @@
 
       transition: all ease 0.5s;
     }
-
   }
 
   *[class*='pill-'] {
@@ -123,7 +125,7 @@
   label {
     display: block;
     padding: 10px 0;
-    margin-top: -$fieldHeight;
+    margin-top: -$fieldHeight - 3px;
     text-align: center;
     position: relative;
     top: 0px;
