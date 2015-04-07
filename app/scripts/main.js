@@ -26,7 +26,8 @@ function extend(el) {
 var qq = function(str) { return document.querySelectorAll(str) };
 
 var formula_labels = qq('.formula label');
-var formula_inputs = qq('.formula .page:last-child input');
+var formula_inputs = qq('.formula input');
+var current_page_inputs = qq('.formula .page.current input');
 var formula        = extend(qq('.formula')[0]);
 
 [].forEach.call(formula_inputs, extend);
@@ -39,7 +40,7 @@ var formula        = extend(qq('.formula')[0]);
     } else { input.addClass('focus'); }
   }
   input.onkeyup = function() {
-    if ([].map.call(formula_inputs, validateInput).every(isValid)) {
+    if ([].map.call(current_page_inputs, validateInput).every(isValid)) {
       formIsValid();
     } else {
       formIsInvalid();
@@ -56,16 +57,28 @@ var inputIsValid;
 function validateInput(i) {
   inputIsValid = false;
   if (!i.required) return true;
+  var v = i.value;
   switch(i.type) {
       case "email":
         inputIsValid = /\w+@[A-z0-9.]+/.test(i.value);
         break;
       case "password":
-        var v = i.value;
         inputIsValid = v.length > 8 &&
                        /\d+/.test(v) &&
                        /[_\-!@#$%^&* `~]/.test(v);
         break;
+      case "text":
+        var fallthrough;
+        switch(i.id) {
+          case "name":
+            inputIsValid = v.length > 0 &&
+                           v.split(' ').length == 2;
+            break;
+          default:
+            fallthrough = true;
+            break;
+        }
+        if (! fallthrough) break;
       default:
         inputIsValid = i.value.length > 0;
   }
@@ -150,7 +163,7 @@ nextBtn = qq('.next-btn')[0];
 //}
 
 window.onload = function() {
-  if ([].map.call(formula_inputs, validateInput).every(isValid)) {
+  if ([].map.call(current_page_inputs, validateInput).every(isValid)) {
     formIsValid();
   }
 

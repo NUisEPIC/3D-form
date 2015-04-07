@@ -22,12 +22,12 @@ html
       .header
       .next-btn
         span Next
-      .primary-window.page
-        .forcefield
-          form
+      form
+        .primary-window.page.current
+          .forcefield
             .input-group
-              input(type="text", required)
-              label Username
+              input#name(type="text", required)
+              label Name (First and Last)
               .glance
             .input-group
               input(type="email", required)
@@ -42,34 +42,33 @@ html
               .pill-left
                 span @
             .input-group
-              input(type="text")
-              label Team Name (if any)
-            .input-group
               input(type="text", required)
-              label How did you hear about us?
+              label LinkedIn
               .glance
-      .primary-window.page
-        .forcefield
-          form
+              .pill-left
+                span in/
             .input-group
               input(type="text", required)
-              label Username
+              label How did you hear about our application?
+              .glance
+        .primary-window.page
+          .forcefield
+            .input-group
+              input(type="text", required)
+              label Name
               .glance
             .input-group
               input(type="email", required)
               label School Email
               .glance
               .pill-right
-                span .edu
+                span @u.northwestern.edu
             .input-group
               input(type="text", required)
               label Github
               .glance
               .pill-left
                 span @
-            .input-group
-              input(type="text")
-              label Team Name (if any)
             .input-group
               input(type="text", required)
               label How did you hear about us?
