@@ -1,15 +1,21 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400);
+
 html {
   width: 100%;
   height: 100%;
-  margin: 0;
-  font-family: marvel, "Helvetica Neue", helvetica, serif;
+  font-family: Lato, "Helvetica Neue", helvetica, serif;
+  font-weight: 300;
   font-size: 22px;
   overflow-x: hidden;
 }
 
 body {
-  background: linear-gradient(#105d7f 1%,#305778 2%,#63b5ce 55%,#63b5ce 99%,#70caff 100%);
+  //background: linear-gradient(#105d7f 1%,#305778 2%,#63b5ce 55%,#63b5ce 99%,#70caff 100%);
+  background: radial-gradient(circle, #c03d43 0%, #902025 72%, #481013 100%);
   background-attachment: fixed;
+  margin: 0;
+  height: 100%;
+  max-height: 100%;
 }
 
 // tyopography

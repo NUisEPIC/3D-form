@@ -85,15 +85,19 @@ function formIsInvalid() {
 
 // I wish I didn't have to do this in JS
 
-var inputGroupElements = qq('.input-group input~*');
+var inputGroupElements = qq('.input-group input~*')
+  , nearestInput       = inputGroupElements[0].previousElementSibling;
 
-var nearestInput = inputGroupElements[0].previousElementSibling, padLeft, padRight;
+var basePad = 15, width = 0;
 
-var basePad = 15;
+var padLeft = padRight = basePad;
 
 [].forEach.call(inputGroupElements, function(p) {
 
-  console.log(nearestInput);
+  siblings  = p.parentElement.children;
+  groupSize = siblings.length;
+  lastChild = siblings[groupSize - 1];
+  nearestInput = siblings[0];
 
   if (/pill-left|glance/g.test(p.classList)) {
     padLeft += p.offsetWidth;
@@ -103,12 +107,18 @@ var basePad = 15;
     padRight += p.offsetWidth;
   }
 
-  if (p.nodeName === "LABEL" || [].indexOf.call(inputGroupElements, p) === inputGroupElements.length - 1) {
+  if (p.nodeName === 'LABEL') {
+    width = p.offsetWidth;
+  }
+
+  if (p === lastChild) {
     console.log("STOP");
-    nearestInput.style.paddingLeft = padLeft + "px";
+    console.log(nearestInput);
+
+    nearestInput.style.paddingLeft  = padLeft + "px";
     nearestInput.style.paddingRight = padRight + "px";
-    nearestInput.style.width   = nearestInput.offsetWidth - (padLeft + padRight) + "px";
-    nearestInput = p.previousElementSibling;
+    nearestInput.style.width        = width + "px";
+
     padLeft = padRight = basePad;
   }
 
