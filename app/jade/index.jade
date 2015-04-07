@@ -25,6 +25,7 @@ html
         a(href='#', do='close-warning') tap here
         | .
       h2 Otherwise, come back on your computer later, ok? ;)
+    iframe(name='dupe-frame')
     .formula
       .header
       .next-btn
@@ -34,17 +35,17 @@ html
         .primary-window.page.current
           .forcefield
             .input-group
-              input#name(type="text", required)
+              input#name(type="text", name='entry.2104495372', required)
               label Name (First and Last)
               .glance
             .input-group
-              input(type="email", required)
+              input#email(type="email", name='entry.1061169608', required)
               label School Email
               .glance
               .pill-right
                 span .edu
             .input-group
-              input#hearsay(type="text", required)
+              input#hearsay(type="text", name='entry.1597876375', required)
               label How did you hear about our application?
               .glance
           .thanks

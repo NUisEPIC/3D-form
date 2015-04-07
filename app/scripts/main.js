@@ -143,23 +143,6 @@ function adjustPadding() {
   });
 }
 
-//var submitBtn = qq('.submit-btn')[0];
-//
-//submitBtn.onmousedown = function(e) {
-//  formula.removeClass('persp');
-//
-//  formula.onmouseup = function(e) {
-//    // FUCKING. FIREFOX. IS. A. BITCH.
-//    var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
-//    setTimeout(function() { formula.addClass('punched'); }, 450);
-//    setTimeout(function() { formula.addClass('end'); }, delay);
-//  }
-//
-//  document.onmouseup = function(e) {
-//    formula.onmouseup = "";
-//  }
-//}
-
 closeWarningBtn = qq('a[do*="close-warning"]')[0];
 
 closeWarningBtn.onclick = function (e) {
@@ -169,12 +152,22 @@ closeWarningBtn.onclick = function (e) {
 }
 
 nextBtn = qq('.next-btn')[0];
-var formula_one = 'http://formula-one.herokuapp.com/recruitment';
+var formula_one = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/signup' : 'http://formula-one.herokuapp.com/recruitment/signup';
 
 function sendData(d) {
   var x = new XMLHttpRequest();
   x.open('POST', formula_one);
   x.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  x.onreadystatechange = function (x) {
+    if (x.status == 200) {
+      console.log('Awesomesauce');
+      console.log(x.responseText);
+    } else {
+      console.log('Not so awesomesauce. :(');
+      console.log(x.status);
+      console.log(x.responseText);
+    }
+  }
   x.send(JSON.stringify(d));
 }
 
@@ -183,7 +176,7 @@ nextBtn.onclick = function () {
   [].forEach.call(formula_form.elements,
                   function(i) {
                     var v = i.value;
-                    if (i.type == 'email') v = v.indexOf('.edu') === v.length - 4 ? v.substring(0, v.length - 4) : v;
+                    if (i.type == 'email') v = v.indexOf('.edu') > -1 && v.indexOf('.edu') === v.length - 4 ? v : v + '.edu';
                     data[(i.id || i.type)] = v.trim()
   });
 
@@ -191,17 +184,27 @@ nextBtn.onclick = function () {
   console.log(JSON.stringify(data));
 
   sendData(data);
+  var googleFormEndpoint = 'https://docs.google.com/forms/d/1-oSLlkRTzro4FN51bySlMfbGVWGhQrmxFnhU4r-HwA4/formResponse';
+  var googleFormMappings = {
+    name: 'entry_2104495372',
+    email: 'entry_1061169608',
+    hearsay: 'entry_1597876375'
+  }
+
+  formula_form.action = googleFormEndpoint;
+  formula_form.target = 'dupe-frame';
+  formula_form.onsubmit = function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+
+  formula_form.submit();
 
   formula.removeClass('persp');
   var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
   setTimeout(function () { formula.addClass('punched') }, 500);
   setTimeout(function () { formula.addClass('end') }, delay);
 }
-//nextBtn.onmousedown = function() {
-//  formula.removeClass('persp');
-//
-//
-//}
 
 window.onload = function() {
   if ([].map.call(current_page_inputs, validateInput).every(isValid)) {
