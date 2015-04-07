@@ -6,6 +6,27 @@
 
 next-btn-height = input-group-height * number-inputs + ff-padding-top + ff-padding-bottom
 
+.mobile-warning
+  position absolute
+  z-index 9999
+  margin 20px 10%
+  width 80%
+  background #fafafa
+  display none
+  border-radius 4px
+  box-shadow 0 0 10px 10px rgba(0,0,0,0.1)
+  h2
+    padding 0 30px
+
+@media all and (max-width: 700px)
+  .mobile-warning
+    display block
+    transition all ease 1s
+    overflow: hidden
+    max-height 100%
+    &.dismissed
+      max-height 0
+
 form
   position relative
   transition all ease 0.5s

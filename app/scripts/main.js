@@ -158,6 +158,14 @@ var padLeft = padRight = basePad;
 //  }
 //}
 
+closeWarningBtn = qq('a[do*="close-warning"]')[0];
+
+closeWarningBtn.onclick = function (e) {
+  var p = e.target.parentElement.parentElement;
+  extend(p);
+  p.addClass('dismissed');
+}
+
 nextBtn = qq('.next-btn')[0];
 var formula_one = 'http://formula-one.herokuapp.com/recruitment';
 
