@@ -27,8 +27,10 @@ var qq = function(str) { return document.querySelectorAll(str) };
 
 var formula_labels = qq('.formula label');
 var formula_inputs = qq('.formula input');
-var current_page_inputs = qq('.formula .page.current input');
 var formula        = extend(qq('.formula')[0]);
+var formula_form   = qq('.formula form')[0];
+
+var current_page_inputs = qq('.formula .page.current input');
 
 [].forEach.call(formula_inputs, extend);
 
@@ -157,8 +159,25 @@ var padLeft = padRight = basePad;
 //}
 
 nextBtn = qq('.next-btn')[0];
+var formula_one = 'http://formula-one.herokuapp.com/recruitment';
+
+function sendData(d) {
+  var x = new XMLHttpRequest();
+  x.open('POST', formula_one);
+  x.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  x.send(JSON.stringify(d));
+}
 
 nextBtn.onclick = function () {
+  var data = {};
+  [].forEach.call(formula_form.elements,
+                  function(i) { data[(i.id || i.type)] = i.value });
+
+  console.log(data);
+  console.log(JSON.stringify(data));
+
+  sendData(data);
+
   formula.removeClass('persp');
   var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
   setTimeout(function () { formula.addClass('punched') }, 500);
