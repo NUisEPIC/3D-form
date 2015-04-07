@@ -63,9 +63,9 @@
   btn-top = header-height / 2 + ff-padding-top + ff-padding-bottom + number-inputs * input-group-height - field-height
 
   .submit-btn
-    height $field-height
+    height field-height
     position absolute
-    top $btn-top
+    top btn-top
     width 100%
     padding 10px 0
     text-align center
@@ -93,7 +93,7 @@
     .submit-btn
       left -3.5%
       width 107%
-      top $btn-top + $field-height + 5px
+      top btn-top + field-height + 5px
       transform-origin top
       transform rotateX(-5deg)
       opacity 1

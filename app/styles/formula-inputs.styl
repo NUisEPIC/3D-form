@@ -6,7 +6,7 @@
     transition opacity ease 0.1s 0.325s
 
   input
-    width 90% // will be overwritten.
+    width 100% // will be overwritten.
     max-height field-height
     padding 10px 5% // will be overwritten.
     margin 0
@@ -40,9 +40,10 @@
     &.focus~label
       top -55px
 
-    &~*  transition top ease 0.3s
+    &~*
+      transition top ease 0.3s
 
-    &.valid~.glanceafter
+    &.valid~.glance:after
       color rgb(10, 225, 10)
       text-shadow 0 0 7px rgb(255,255,255)
 
