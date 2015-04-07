@@ -124,22 +124,30 @@ var padLeft = padRight = basePad;
 
 });
 
-var submitBtn = qq('.submit-btn')[0];
+//var submitBtn = qq('.submit-btn')[0];
+//
+//submitBtn.onmousedown = function(e) {
+//  formula.removeClass('persp');
+//
+//  formula.onmouseup = function(e) {
+//    // FUCKING. FIREFOX. IS. A. BITCH.
+//    var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
+//    setTimeout(function() { formula.addClass('punched'); }, 450);
+//    setTimeout(function() { formula.addClass('end'); }, delay);
+//  }
+//
+//  document.onmouseup = function(e) {
+//    formula.onmouseup = "";
+//  }
+//}
 
-submitBtn.onmousedown = function(e) {
-  formula.removeClass('persp');
+nextBtn = qq('.next-btn')[0];
 
-  formula.onmouseup = function(e) {
-    // FUCKING. FIREFOX. IS. A. BITCH.
-    var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
-    setTimeout(function() { formula.addClass('punched'); }, 450);
-    setTimeout(function() { formula.addClass('end'); }, delay);
-  }
-
-  document.onmouseup = function(e) {
-    formula.onmouseup = "";
-  }
-}
+//nextBtn.onmousedown = function() {
+//  formula.removeClass('persp');
+//
+//
+//}
 
 window.onload = function() {
   if ([].map.call(formula_inputs, validateInput).every(isValid)) {
