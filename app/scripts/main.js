@@ -41,9 +41,9 @@ var formula        = extend(qq('.formula')[0]);
   }
   input.onkeyup = function() {
     if ([].map.call(current_page_inputs, validateInput).every(isValid)) {
-      formIsValid();
+      pageIsValid();
     } else {
-      formIsInvalid();
+      pageIsInvalid();
     }
   }
 });
@@ -71,8 +71,10 @@ function validateInput(i) {
         var fallthrough;
         switch(i.id) {
           case "name":
+            ns = v.split(' ');
             inputIsValid = v.length > 0 &&
-                           v.split(' ').length == 2;
+                           ns.length == 2 &&
+                           ns[0].length > 0 && ns[1].length > 0;
             break;
           default:
             fallthrough = true;
@@ -87,12 +89,12 @@ function validateInput(i) {
   return inputIsValid;
 }
 
-function formIsValid() {
+function pageIsValid() {
   if(this.go) (clearTimeout(this.go), delete this.go);
   this.go = setTimeout(function() { formula.addClass('persp'); }, 500);
 }
 
-function formIsInvalid() {
+function pageIsInvalid() {
   setTimeout(function() { formula.removeClass('persp') }, 500);
 }
 
@@ -156,6 +158,12 @@ var padLeft = padRight = basePad;
 
 nextBtn = qq('.next-btn')[0];
 
+nextBtn.onclick = function () {
+  formula.removeClass('persp');
+  var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
+  setTimeout(function () { formula.addClass('punched') }, 500);
+  setTimeout(function () { formula.addClass('end') }, delay);
+}
 //nextBtn.onmousedown = function() {
 //  formula.removeClass('persp');
 //
@@ -164,7 +172,7 @@ nextBtn = qq('.next-btn')[0];
 
 window.onload = function() {
   if ([].map.call(current_page_inputs, validateInput).every(isValid)) {
-    formIsValid();
+    pageIsValid();
   }
 
   [].forEach.call(formula_labels, function(label) {
