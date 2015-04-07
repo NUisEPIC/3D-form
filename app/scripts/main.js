@@ -59,7 +59,7 @@ var inputIsValid;
 function validateInput(i) {
   inputIsValid = false;
   if (!i.required) return true;
-  var v = i.value;
+  var v = i.value.trim();
   switch(i.type) {
       case "email":
         inputIsValid = /\w+@[A-z0-9.]+/.test(i.value);
@@ -181,7 +181,11 @@ function sendData(d) {
 nextBtn.onclick = function () {
   var data = {};
   [].forEach.call(formula_form.elements,
-                  function(i) { data[(i.id || i.type)] = i.value });
+                  function(i) {
+                    var v = i.value;
+                    if (i.type == 'email') v = v.indexOf('.edu') === v.length - 4 ? v.substring(0, v.length - 4) : v;
+                    data[(i.id || i.type)] = v.trim()
+  });
 
   console.log(data);
   console.log(JSON.stringify(data));
