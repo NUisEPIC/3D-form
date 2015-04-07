@@ -102,44 +102,46 @@ function pageIsInvalid() {
 
 // I wish I didn't have to do this in JS
 
-var inputGroupElements = qq('.input-group input~*')
-  , nearestInput       = inputGroupElements[0].previousElementSibling;
+function adjustPadding() {
+  var inputGroupElements = qq('.input-group input~*')
+    , nearestInput       = inputGroupElements[0].previousElementSibling;
 
-var basePad = 15, width = 0;
+  var basePad = 15, width = 0;
 
-var padLeft = padRight = basePad;
+  var padLeft = padRight = basePad;
 
-[].forEach.call(inputGroupElements, function(p) {
+  [].forEach.call(inputGroupElements, function(p) {
 
-  siblings  = p.parentElement.children;
-  groupSize = siblings.length;
-  lastChild = siblings[groupSize - 1];
-  nearestInput = siblings[0];
+    siblings  = p.parentElement.children;
+    groupSize = siblings.length;
+    lastChild = siblings[groupSize - 1];
+    nearestInput = siblings[0];
 
-  if (/pill-left|glance/g.test(p.classList)) {
-    padLeft += p.offsetWidth;
-  }
+    if (/pill-left|glance/g.test(p.classList)) {
+      padLeft += p.offsetWidth;
+    }
 
-  if (/pill-right/g.test(p.classList)) {
-    padRight += p.offsetWidth;
-  }
+    if (/pill-right/g.test(p.classList)) {
+      padRight += p.offsetWidth;
+    }
 
-  if (p.nodeName === 'LABEL') {
-    width = p.offsetWidth;
-  }
+    if (p.nodeName === 'LABEL') {
+      width = p.offsetWidth;
+    }
 
-  if (p === lastChild) {
-    console.log("STOP");
-    console.log(nearestInput);
+    if (p === lastChild) {
+      console.log("STOP");
+      console.log(nearestInput);
 
-    nearestInput.style.paddingLeft  = padLeft + "px";
-    nearestInput.style.paddingRight = padRight + "px";
-    nearestInput.style.width        = width + "px";
+      nearestInput.style.paddingLeft  = padLeft + "px";
+      nearestInput.style.paddingRight = padRight + "px";
+      nearestInput.style.width        = width + "px";
 
-    padLeft = padRight = basePad;
-  }
+      padLeft = padRight = basePad;
+    }
 
-});
+  });
+}
 
 //var submitBtn = qq('.submit-btn')[0];
 //
@@ -214,4 +216,9 @@ window.onload = function() {
       input.addClass('focus');
     }
   });
+
+  // NOTE(jordan): gross gross gross gross gross
+  adjustPadding();
+
+  window.onresize = adjustPadding;
 }
