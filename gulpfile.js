@@ -7,9 +7,11 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 
 gulp.task('styles', function () {
-    return gulp.src('app/styles/main.scss')
-        .pipe($.sass())
+    return gulp.src('app/styles/main.styl')
+        .pipe($.sourcemaps.init())
+        .pipe($.stylus())
         .pipe($.autoprefixer('last 4 versions'))
+        .pipe($.sourcemaps.write())
         .pipe(gulp.dest('.tmp/styles'))
         .pipe($.size());
 });
@@ -126,12 +128,12 @@ gulp.task('watch', ['connect', 'serve'], function () {
         '.tmp/styles/**/*.css',
         'app/scripts/**/*.js',
         'app/images/**/*',
-        'app/jade/**/*.jade'
+        'app/jae/**/*.jade'
     ]).on('change', function (file) {
         server.changed(file.path);
     });
 
-    gulp.watch('app/styles/**/*.scss', ['styles']);
+    gulp.watch('app/styles/**/*.styl', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('app/jade/**/*.jade', ['jade']);

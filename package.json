@@ -21,6 +21,8 @@
     "gulp-ruby-sass": "^0.4.3",
     "gulp-sass": "^0.7.3",
     "gulp-size": "^0.3.0",
+    "gulp-sourcemaps": "^1.5.1",
+    "gulp-stylus": "^2.0.1",
     "gulp-uglify": "^0.2.1",
     "gulp-useref": "^0.4.2",
     "jshint-stylish": "^0.2.0",
