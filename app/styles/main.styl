@@ -73,7 +73,8 @@
     background white
     z-index -1
 
-    transition right ease 0.2s
+    transition right ease 0.2s,
+               box-shadow ease 0.2s
     display table
 
     cursor pointer
@@ -95,9 +96,21 @@
 
     .next-btn
       right -20px
+      box-shadow inset 11px 0 rgba(0,0,0,0.04),
+                 inset 12px 0 rgba(0,0,0,0.035),
+                 inset 13px 0 rgba(0,0,0,0.03),
+                 inset 14px 0 rgba(0,0,0,0.025),
+                 inset 15px 0 rgba(0,0,0,0.02),
+                 inset 16px 0 rgba(0,0,0,0.015)
 
       &:hover
         right -25px
+        box-shadow inset 6px 0 rgba(0,0,0,0.04),
+                   inset 7px 0 rgba(0,0,0,0.035),
+                   inset 8px 0 rgba(0,0,0,0.03),
+                   inset 9px 0 rgba(0,0,0,0.025),
+                   inset 10px 0 rgba(0,0,0,0.02),
+                   inset 11px 0 rgba(0,0,0,0.015)
 
   &.punched
 
