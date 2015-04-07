@@ -26,7 +26,7 @@ function extend(el) {
 var qq = function(str) { return document.querySelectorAll(str) };
 
 var formula_labels = qq('.formula label');
-var formula_inputs = qq('.formula input');
+var formula_inputs = qq('.formula .page:last-child input');
 var formula        = extend(qq('.formula')[0]);
 
 [].forEach.call(formula_inputs, extend);

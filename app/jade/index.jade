@@ -20,7 +20,35 @@ html
 
     .formula
       .header
-      .primary-window
+      .next-btn
+        span Next
+      .primary-window.page
+        .forcefield
+          form
+            .input-group
+              input(type="text", required)
+              label Username
+              .glance
+            .input-group
+              input(type="email", required)
+              label School Email
+              .glance
+              .pill-right
+                span .edu
+            .input-group
+              input(type="text", required)
+              label Github
+              .glance
+              .pill-left
+                span @
+            .input-group
+              input(type="text")
+              label Team Name (if any)
+            .input-group
+              input(type="text", required)
+              label How did you hear about us?
+              .glance
+      .primary-window.page
         .forcefield
           form
             .input-group
@@ -49,8 +77,6 @@ html
           .thanks
             h2 Yo, you just got logged in!
             img(src="./images/fyeah.png", style="max-height: 165px")
-      .next-btn
-        span Next
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     //script.

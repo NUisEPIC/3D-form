@@ -16,7 +16,7 @@
   max-height 100%
 
   .header
-    background-image url('../images/epic-logo.png')
+    background-image url(../images/epic-logo.png)
     background-size contain
     background-repeat no-repeat
     width 300px
@@ -43,6 +43,12 @@
     top -150px
     left 0
 
+    &.page ~ .page
+      top -1 * (input-group-height * number-inputs + ff-padding-top + ff-padding-bottom + header-height / 2)
+
+    &.page:last-child
+      z-index 1
+
     .thanks
       position absolute
       text-align center
@@ -63,7 +69,8 @@
   .next-btn
     position absolute
     width 50px
-    height input-group-height * number-inputs + ff-padding-top + ff-padding-bottom
+    height:
+      input-group-height * number-inputs + ff-padding-top + ff-padding-bottom
 
     right 0
     top (header-height / 2)px
