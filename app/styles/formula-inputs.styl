@@ -19,6 +19,9 @@
     transition all ease 0.3s
     text-overflow ellipsis
     box-sizing border-box
+    // NOTE(jordan): FF will style required but
+    // blank inputs and make them ugly, so kill it
+    box-shadow none
 
     &:focus
       outline none

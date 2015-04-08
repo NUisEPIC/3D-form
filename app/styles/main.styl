@@ -36,6 +36,8 @@ form
   transition all ease 0.5s
   left 0
 
+  -moz-perspective 300px
+
 .formula
   display block
   margin 0 auto
@@ -72,6 +74,9 @@ form
 
     transform-origin top center
 
+    // FF hack
+    -moz-perspective 300px
+
     overflow hidden
     top -150px
     left 0
@@ -83,12 +88,13 @@ form
       z-index 1
 
     .thanks
+      display none
       position absolute
       text-align center
-      padding-top 20px
       width 100%
       opacity 0
-      transition all ease 1s 3s
+      top 115px
+      transition all ease 1s
       // firefox, you are a bitch.
       transform rotateY(180deg)
 
@@ -121,6 +127,8 @@ form
     display table
     transform rotateY(-4deg) translateZ(-8px)
 
+    -moz-perspective 300px
+
     cursor pointer
 
     .inner-btn
@@ -151,6 +159,7 @@ form
       top (header-height / 2)px - 12px
       right -34px
       transform rotateY(7deg) translateZ(-8px)
+      -moz-transform rotateY(7deg) translateZ(-8px) translateX(-3px) translateY(-6px)
 
       &:hover
         right -36px
@@ -166,13 +175,11 @@ form
     .input-group
       opacity 0
 
-    .thanks
-      display block
-      opacity 1
-      top 95px
-
     .submit-btn
       opacity 0
+
+    .thanks
+      display block
 
     // because firefox is a bitch.
     &.end
@@ -180,6 +187,9 @@ form
         // this one's for IE 10...
         transition none
         transform rotateY(180deg)
+
+      .thanks
+        opacity 1
 
 // FUKKKKKKiNG FIREFOX
 // NOTE  the build kills the moz keyframes because it's a bitch about this shit.

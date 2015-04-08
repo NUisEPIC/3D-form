@@ -201,7 +201,7 @@ nextBtn.onclick = function () {
   formula_form.submit();
 
   formula.removeClass('persp');
-  var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
+  var delay = 3000;
   setTimeout(function () { formula.addClass('punched') }, 500);
   setTimeout(function () { formula.addClass('end') }, delay);
 }
