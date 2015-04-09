@@ -13,6 +13,27 @@ var formula_default_validators = {
     return v.length > 0 && ns.length == 2
                         && ns[0].length > 0
                         && ns[1].length > 0;
+  },
+  tel: function (i, v) {
+    var telSegs = v.split(/[-\s.]/);
+    console.log(telSegs);
+    var areaCode = telSegs[0].replace(/[()]/g, '');
+    return (telSegs.length == 3
+            && areaCode.length == 3 && parseInt(areaCode) >= 100
+            && telSegs[1].length == 3 && parseInt(telSegs[1]) >= 100
+            && telSegs[2].length == 4 && parseInt(telSegs[2]) >= 1000)
+           || (/\d{10}/.test(v) && !isNaN(parseInt(v)));
+  },
+  text_year: function (i, v) {
+    return /\d{4}/.test(v) && parseInt(v) >= 2015;
+  },
+  checkbox: function (i, v) {
+    var checkBoxGroup = i.parentElement.children;
+    var valid = false;
+    [].forEach.call(checkBoxGroup, function (c) {
+      if (c.checked) valid = true;
+    });
+    return valid;
   }
 }
 
@@ -59,7 +80,7 @@ function formula_validate_input (i) {
   }
 
   // NOTE(jordan): i.next...Sibling.text... gets the content of the label
-  console.log(i.nextElementSibling.textContent + " valid? " + inputIsValid);
+  console.log(i.nextElementSibling && i.nextElementSibling.textContent + " valid? " + inputIsValid);
 
   inputIsValid ? i.addClass("valid") : i.removeClass("valid");
 
@@ -75,7 +96,7 @@ function formula_inputs_valid (inputs) {
 function formula_page_is_valid () {
   // NOTE(jordan): reset timeout every time this is called
   if (this.go) (clearTimeout(this.go), delete this.go);
-  this.go = formula_animator.tiltToRevealButton();
+  this.go = setTimeout(formula_animator.tiltToRevealButton, 500);
 }
 
 function formula_page_is_invalid () {
