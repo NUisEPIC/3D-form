@@ -13,14 +13,15 @@ var formula_animator = (function () {
     setTimeout(function () { formula.addClass('end') }, delay);
   }
 
-  _self.tiltToRevealButton = function () {
+  _self.tiltToRevealButton = function (fast) {
     var formula = _self.formula;
-    setTimeout(function () { formula.addClass('persp'); }, 500);
+    var delay   = fast ? 100 : 500;
+    return setTimeout(function () { formula.addClass('persp'); }, delay);
   }
 
   _self.unTilt = function () {
     var formula = _self.formula;
-    setTimeout(function () { formula.removeClass('persp') }, 500);
+    formula.removeClass('persp');
   }
 
   _self.reset = function () {
@@ -30,17 +31,17 @@ var formula_animator = (function () {
                  .removeClass('punched');
   }
 
-  _self.nextPage = function () {
-    var current_page = extend(qq('.page.current')[0])
-      , next_page    = extend(current_page.nextElementSibling);
-
+  _self.nextPage = function (current_page, next_page) {
     if (!next_page || next_page.className.indexOf('page') === -1)
       return;
 
     current_page.addClass('prev');
     next_page.addClass('next');
 
-    _self.formula.removeClass('persp').addClass('shuffle');
+    current_page.style.opacity = '1';
+
+    _self.unTilt();
+    _self.formula.addClass('shuffle');
     setTimeout(function () {
       next_page.addClass('current');
       current_page.removeClass('current');
@@ -48,21 +49,33 @@ var formula_animator = (function () {
         next_page.removeClass('next');
         current_page.removeClass('prev');
         _self.formula.removeClass('shuffle');
+        setTimeout(function () {
+          current_page.style.opacity = '';
+        }, 500);
       }, 100);
     }, 500);
   }
 
-  _self.previousPage = function () {
-    var current_page = extend(qq('.page.current')[0])
-      , prev_page    = extend(current_page.previousElementSibling);
-
+  _self.previousPage = function (current_page, prev_page) {
     if (!prev_page || prev_page.className.indexOf('page') === -1)
       return;
 
     current_page.addClass('prev');
     prev_page.addClass('next');
 
-    _self.formula.addClass('shuffle').addClass('reverse');
+    current_page.style.opacity = '1';
+
+    var delay = 500;
+
+    if (_self.formula.className.indexOf('persp') !== -1) {
+      _self.unTilt();
+      setTimeout(function () {
+        _self.formula.addClass('shuffle').addClass('reverse');
+      }, delay);
+      delay += 500;
+    } else {
+      _self.formula.addClass('shuffle').addClass('reverse');
+    }
     setTimeout(function () {
       prev_page.addClass('current');
       current_page.removeClass('current');
@@ -71,8 +84,11 @@ var formula_animator = (function () {
         current_page.removeClass('prev');
         _self.formula.removeClass('shuffle')
                      .removeClass('reverse');
+        setTimeout(function () {
+          current_page.style.opacity = '';
+        }, 500);
       }, 100);
-    }, 500);
+    }, delay);
   }
 
   return _self;

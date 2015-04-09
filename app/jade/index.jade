@@ -16,6 +16,17 @@ html
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
 
+  mixin essayQuestion(id, header, label)
+    .primary-window.page
+      i.back-btn Back
+      .forcefield
+        h2= header
+        .input-group
+          textarea(id=id, required, name!=attributes.name)
+          label= label
+      if block
+        block
+
   body
     #formula-container
       .mobile-warning
@@ -35,40 +46,77 @@ html
         form
           .primary-window.page.current
             .forcefield
-              h2 Welcome to the Official EPIC Application
+              h2 Welcome to the Official EPIC Application!
               .input-group
-                input#name(type="text", name='entry.2104495372', required)
+                input#name(type="text", name='entry.354342888', required)
                 label Name (First and Last)
                 .glance
               .input-group
-                input#email(type="email", name='entry.1061169608', required)
+                input#email(type="email", name='entry.436547589', required)
                 label School Email
                 .glance
                 .pill-right
                   span .edu
               .input-group
-                input#hearsay(type="text", name='entry.1597876375', required)
+                input#hearsay(type="text", name='entry.1486322634', required)
                 label How did you hear about our application?
                 .glance
           .primary-window.page
+            i.back-btn Back
             .forcefield
+              h2 Some Basic Info
               .input-group
-                input#name(type="text", name='entry.2104495372', required)
-                label Name (First and Last)
+                input#year(type="text", name='entry.1494609428', required)
+                label Class Year (eg: 2017)
                 .glance
               .input-group
-                input#email(type="email", name='entry.1061169608', required)
-                label School Email
+                input#major(type="text", name='entry.252100536', required)
+                label Major
                 .glance
-                .pill-right
-                  span .edu
               .input-group
-                input#hearsay(type="text", name='entry.1597876375', required)
-                label How did you hear about our application?
+                input#phone(type="tel", name='entry.1881012293', required)
+                label Phone Number: (xxx) yyy zzzz
+                .glance
+          .primary-window.page
+            i.back-btn Back
+            .forcefield
+              h2 I am a...
+              .input-group.checkboxes
+                input#hacker(type='checkbox', name='entry.2003569147', required)
+                label Hacker
+                input#designer(type='checkbox', name='entry.1080060025', required)
+                label Designer
+                input#builder(type='checkbox', name='entry.711584580', required)
+                label Builder
+                input#dinosaur(type='checkbox', name='entry.1762834979', required)
+                label Dinosaur
+              .input-group
+                textarea#explain-skills(name='entry.549867061', required)
+                label Explain your selections
+          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'Ex: What are you passionate about? What was your journey to NU?')(name='entry.1482811689')
+
+          +essayQuestion('why-epic-matters', 'Why does EPIC matter to Northwestern?', 'How is it different from other organizations?')(name='entry.1038701340')
+
+          +essayQuestion('why-interested', 'Why are you interested in joining EPIC?', 'What do you hope to learn? What skills do you hope to gain?')(name='entry.1277416023')
+
+          +essayQuestion('how-contribute', 'How will you contribute to your team?', 'Whichever it may be. How will you foster inter-team cooperation?')(name='entry.1133447629')
+
+          +essayQuestion('other-involvements', 'What else are you involved in?', 'e.g.; Work-study, ISBE, DOJO, etc.')(name='entry.93355119')
+
+          +essayQuestion('elevator-pitch', 'Why are you the best person for EPIC?', '5 Minutes! Elevator Pitch! Go!')(name='entry.555173403')
+
+          +essayQuestion('anything-else', 'Anything else you would like us to consider?', 'Maybe share some fun (or serious) facts. :)')(name='entry.1658748676')
+          .primary-window.page
+            i.back-btn Back
+            .forcefield
+              h2 Click on the button below to upload your resume:
+              .input-group
+                button#resume-btn Upload Resume
+                input#resume(type='text', required, disabled, style='visibility: hidden', name='entry.889690033')
                 .glance
             .thanks
-              h3 Thanks! We'll let you know as soon as the app is ready  :D
-              img(src="./images/fyeah.png")
+              h3 Thanks for applying! We'll be in touch. :D
+              img(src="./images/fyeah2.png")
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
@@ -111,6 +159,8 @@ html
     // bower:js
     // endbower
     // endbuild
+
+    script(type="text/javascript", src="//api.filepicker.io/v1/filepicker.js")
 
     // build:js scripts/main.js
     script(src='scripts/extensions.js')

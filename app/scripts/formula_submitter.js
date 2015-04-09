@@ -1,15 +1,10 @@
 var formula_one = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/signup' : 'http://formula-one.herokuapp.com/recruitment/signup';
 
-var formula_google_endpoint = 'https://docs.google.com/forms/d/1-oSLlkRTzro4FN51bySlMfbGVWGhQrmxFnhU4r-HwA4/formResponse';
+var formula_google_endpoint = 'https://docs.google.com/forms/d/15cZJhCpDrF9caF6-96BDtaUoxB1emT5uhW0snOnnGzE/formResponse';
 
 // NOTE(jordan): this is currently unused
 // TODO(jordan): dynamically set input[name] to google_form_mappings
 //               if input[name] is not already set.
-var formula_google_form_mappings = {
-  name: 'entry_2104495372',
-  email: 'entry_1061169608',
-  hearsay: 'entry_1597876375'
-}
 
 function basic_xhr_logging (x) {
   if (x.status == 200) {
@@ -51,21 +46,19 @@ function formula_value_with_pills (i) {
   return v.trim();
 }
 
-function formula_form_setup_google_submit (form, afterSubmit) {
+function formula_form_setup_google_submit (form) {
   form.action = formula_google_endpoint;
   form.target = 'dupe-frame';
   form.onsubmit = function (e) {
     // NOTE(jordan): Stop the page from reloading
     e.preventDefault();
     e.stopPropagation();
-
-    if (afterSubmit instanceof Function) afterSubmit(e);
   }
 }
 
 function formula_submit () {
   var formula_form   = qq('.formula form')[0]
-    , formula_inputs = formula_form.getElementsByTagName('input');
+    , formula_inputs = qq('.formula form input, .formula form textarea');
 
   function get_form_data (inputs) {
     var data = {};
@@ -83,9 +76,8 @@ function formula_submit () {
   formula_one_send_data(data);
   // NOTE(jordan): use the callback here in case later we want to
   // do anything after successful submission, like resetting the form.
-  formula_form_setup_google_submit(formula_form, function () {
-    formula_form.submit()
-  });
+  formula_form_setup_google_submit(formula_form);
+  formula_form.submit();
 
   formula_animator.punchTicket();
 }
