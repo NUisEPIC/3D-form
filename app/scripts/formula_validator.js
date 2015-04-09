@@ -19,9 +19,9 @@ var formula_default_validators = {
     console.log(telSegs);
     var areaCode = telSegs[0].replace(/[()]/g, '');
     return (telSegs.length == 3
-            && areaCode.length == 3 && parseInt(areaCode) >= 100
-            && telSegs[1].length == 3 && parseInt(telSegs[1]) >= 100
-            && telSegs[2].length == 4 && parseInt(telSegs[2]) >= 1000)
+            && areaCode.length == 3 && !isNaN(parseInt(areaCode))
+            && telSegs[1].length == 3 && !isNaN(parseInt(telSegs[1]))
+            && telSegs[2].length == 4 && !isNaN(parseInt(telSegs[2])))
            || (/\d{10}/.test(v) && !isNaN(parseInt(v)));
   },
   text_year: function (i, v) {
