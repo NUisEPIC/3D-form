@@ -2,7 +2,7 @@
 function formula_get_data (inputs) {
   var data = {}, cache = {};
   if (store) {
-    cache = store.get('formula_progress');
+    cache = (store.get('formula_progress') || cache);
     data.last_cache_time = cache.last_cache_time;
   }
   [].forEach.call(inputs, function (i) {
@@ -33,15 +33,23 @@ function formula_cache_data (inputs) {
   if (! store) return console.warn('localStorage not supported, progress will not be saved.');
 
   var page_data = formula_get_data(inputs);
-  var cache  = store.get('formula_progress');
-  // Only update the cache at most once every 5s
-  if (Date.now() - cache.last_cache_time < 5000)
+  var cache  = (store.get('formula_progress') || {});
+  var changeOccurred = false;
+  // Only update the cache at most once every 10s
+  if ((Date.now() - cache.last_cache_time) < 5000)
     return;
-  cache.last_cache_time = Date.now();
   for (var key in page_data) {
-    cache[key] = page_data[key];
+    var cacheValue = cache[key];
+    var pageValue  = page_data[key];
+    if (cacheValue != pageValue) {
+      changeOccurred = true;
+      cache[key] = page_data[key];
+    }
   }
-  store.set('formula_progress', cache);
+  if (changeOccurred) {
+    cache.last_cache_time = Date.now();
+    store.set('formula_progress', cache);
 
-  if (formula_notify) formula_notify.notify('Progress saved.');
+    if (formula_notify) formula_notify.notify('Changes saved.');
+  }
 }
