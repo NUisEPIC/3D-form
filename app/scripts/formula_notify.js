@@ -24,7 +24,7 @@ var formula_notify = (function () {
         setTimeout(function () {
           _self.notifyWindow.style.display = 'none';
         }, 200);
-      }, duration || 5000)
+      }, duration || 2000)
     }, 200);
   };
 

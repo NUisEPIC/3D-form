@@ -84,7 +84,7 @@ function formula_setup_inputs (inputs, formula_next_page) {
     inputs = inputs.concat(textareas);
 
     var validate_page = function () {
-      formula_validate(inputs);
+      formula_validate(inputs, 200);
     };
 
     var input_click = function () {
@@ -100,7 +100,11 @@ function formula_setup_inputs (inputs, formula_next_page) {
           e.stopPropagation();
           return false;
         } else {
-          validate_page();
+          formula_animator.unTilt();
+          if (this.timeout) clearTimeout(this.timeout) && delete this.timeout;
+          this.timeout = setTimeout(function () {
+            validate_page();
+          }, 500);
         }
       }
     });
