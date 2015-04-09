@@ -132,7 +132,8 @@ iframe[name*='dupe-frame']
     background white
     z-index -1
 
-    transition all ease 0.5s
+    transition all ease 0.5s,
+               opacity ease 0.1s
     display table
     transform rotateY(-4deg) translateZ(-8px)
 
@@ -163,12 +164,6 @@ iframe[name*='dupe-frame']
                  inset 0 25px rgba(0,0,0,0.02),
                  inset 0 10px rgba(0,0,0,0.025)
 
-     &.page.current.shuffle
-       left -100px
-
-       &+.page
-         left 600px
-
     .next-btn
       height formula-height + 31px
       top (header-height / 2)px - 16px
@@ -178,6 +173,20 @@ iframe[name*='dupe-frame']
 
       &:hover
         right -36px
+
+  &.shuffle
+    .page.prev
+      left -300px
+
+    .page.next
+      left 450px
+
+    &.reverse
+      .page.prev
+        left 450px
+
+      .page.next
+        left -300px
 
   &.punched
 
