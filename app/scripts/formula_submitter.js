@@ -27,19 +27,31 @@ function formula_one_send_data(d) {
   x.send(JSON.stringify(d));
 }
 
-function formula_value_with_pills (i) {
+function formula_get_pills (i) {
   var parent = i.parentElement
     , l_pill = parent.getElementsByClassName('pill-left')[0]
     , r_pill = parent.getElementsByClassName('pill-right')[0]
-    // NOTE(jordan): pills should have 1 child, a span containing text
-    , l_text = l_pill ? l_pill.children[0].innerText : ''
-    , r_text = r_pill ? r_pill.children[0].innerText : ''
+    , pills  = [l_pill, r_pill];
+
+  function isFalsy (v) { return !v };
+
+  return pills.every(isFalsy) ? false : pills;
+}
+
+function formula_value_with_pills (i) {
+  var pills = formula_get_pills(i)
     , v      = i.value.trim();
 
-  if (l_pill && v.indexOf(l_text) != 0) {
+  if (! pills)
+    return v;
+
+  var l_text = pills[0] && pills[0].children[0].textContent
+    , r_text = pills[1] && pills[1].children[0].textContent;
+
+  if (l_text && v.indexOf(l_text) != 0) {
     v = l_text + v;
   }
-  if (r_pill && v.indexOf(r_text) != v.length - r_text.length) {
+  if (r_text && v.indexOf(r_text) != v.length - r_text.length) {
     v = v + r_text;
   }
 
@@ -60,15 +72,15 @@ function formula_submit () {
   var formula_form   = qq('.formula form')[0]
     , formula_inputs = qq('.formula form input, .formula form textarea');
 
-  function get_form_data (inputs) {
-    var data = {};
-    [].forEach.call(inputs, function (i) {
-      data[( i.id || i.type )] = formula_value_with_pills(i);
-    });
-    return data;
-  }
 
-  var data = get_form_data(formula_inputs);
+  var data = formula_get_data(formula_inputs);
+  [].forEach.call(formula_inputs, function (i) {
+    if (formula_get_pills(i)) {
+      var key   = ( i.id || i.type );
+      var cval  = data[key];
+      data[key] = formula_value_with_pills(cval);
+    }
+  });
 
   console.log(data);
   console.log(JSON.stringify(data));

@@ -292,6 +292,23 @@ iframe[name*='dupe-frame']
       img
         height 260px
 
+.formula-notify-window
+  position fixed
+  top 20px
+  right 20px
+  display none
+  opacity 0
+  border-radius 4px
+  padding 10px
+  font-size 14px
+  box-shadow 0 0 2px rgba(0,0,0,0.1)
+  background #fafafa
+  z-index 9999
+  transition opacity ease 0.2s
+
+  &:hover
+    border 1px solid rgba(0,0,0,0.2)
+
 // FUKKKKKKiNG FIREFOX
 // NOTE  the build kills the moz keyframes because it's a bitch about this shit.
 // soooooo... ugh. copy this line every time it builds and you want to save.

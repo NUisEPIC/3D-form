@@ -82,7 +82,7 @@ function formula_validate_input (i) {
   // NOTE(jordan): i.next...Sibling.text... gets the content of the label
   console.log(i.nextElementSibling && i.nextElementSibling.textContent + " valid? " + inputIsValid);
 
-  inputIsValid ? i.addClass("valid") : i.removeClass("valid");
+  inputIsValid ? i.addClass('valid') : i.removeClass('valid');
 
   return inputIsValid;
 }
@@ -93,24 +93,27 @@ function formula_inputs_valid (inputs) {
   return [].map.call(inputs, formula_validate_input).every(isValid);
 }
 
-function formula_page_is_valid () {
+function formula_page_is_valid (inputs) {
   // NOTE(jordan): reset timeout every time this is called
-  if (this.go) (clearTimeout(this.go), delete this.go);
-  this.go = setTimeout(formula_animator.tiltToRevealButton, 500);
+  formula_cache_data(inputs);
+  formula_animator.tiltToRevealButton();
 }
 
 function formula_page_is_invalid () {
   formula_animator.unTilt();
 }
 
-function formula_validate (inputs, valid, invalid) {
+function formula_validate (inputs, delay, valid, invalid) {
+  if (this.go) (clearTimeout(this.go), delete this.go);
 
-  valid   = valid   || formula_page_is_valid;
-  invalid  = invalid || formula_page_is_invalid;
+  this.go = setTimeout(function () {
+    valid    = valid   || formula_page_is_valid;
+    invalid  = invalid || formula_page_is_invalid;
 
-  if (formula_inputs_valid(inputs)) {
-    valid();
-  } else {
-    invalid();
-  }
+    if (formula_inputs_valid(inputs)) {
+      valid(inputs);
+    } else {
+      invalid();
+    }
+  }, delay || 500);
 }
