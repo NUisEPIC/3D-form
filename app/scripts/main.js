@@ -162,8 +162,9 @@ window.onload = function() {
 
   var resumeBtn = document.getElementById('resume-btn');
 
+  filepicker.setKey('AV96DZseeSYOldbUvmYwGz');
+
   resumeBtn.onclick = function () {
-    filepicker.setKey('AV96DZseeSYOldbUvmYwGz');
     filepicker.pick({
       mimetypes: ['text/plain',
                   'text/richtext',
