@@ -4,8 +4,6 @@
 
 // formula
 
-next-btn-height = input-group-height * number-inputs + ff-padding-top + ff-padding-bottom
-
 .mobile-warning
   position fixed
   z-index 9999
@@ -31,12 +29,12 @@ iframe[name*='dupe-frame']
     &.dismissed
       max-height 0
 
-form
-  position relative
-  transition all ease 0.5s
-  left 0
-
-  -moz-perspective 300px
+#formula-container
+  width 100%
+  height 100%
+  overflow hidden
+  perspective 300px
+  perspective-origin center center
 
 .formula
   display block
@@ -45,9 +43,15 @@ form
   position relative
   max-width 700px
   transition all ease 1s
-  perspective 300px
-  perspective-origin center center
   max-height 100%
+
+  form
+    position relative
+    transition all ease 0.5s
+    left 0
+
+    -moz-perspective 300px
+
 
   .header
     background-image url(../images/epic-logo.png)
@@ -68,7 +72,9 @@ form
     box-shadow 0 0 15px rgba(0,0,0,0.2)
     position relative
 
-    max-height 100%
+    width 100%
+    height formula-height
+    display inline-table
     background radial-gradient(circle, #f2f2f2 0%, #ebebeb 100%)
     transition all ease 0.5s
 
@@ -84,7 +90,7 @@ form
     &.page ~ .page
       top -1 * (input-group-height * number-inputs + ff-padding-top + ff-padding-bottom + header-height / 2)
 
-    &.page:first-child
+    &.page.current
       z-index 1
 
     .thanks
@@ -109,12 +115,15 @@ form
 
   .forcefield
     padding ff-padding
+    box-sizing border-box
+    display table-cell
+    vertical-align middle
 
   .next-btn
     position absolute
-    height next-btn-height - 4px
+    height formula-height - 4px
 
-    top (header-height / 2)px + 2px
+    top (header-height / 2)px
     right 0
 
     border-top-right-radius 4px
@@ -154,9 +163,15 @@ form
                  inset 0 25px rgba(0,0,0,0.02),
                  inset 0 10px rgba(0,0,0,0.025)
 
+     &.page.current.shuffle
+       left -100px
+
+       &+.page
+         left 600px
+
     .next-btn
-      height next-btn-height + 25px
-      top (header-height / 2)px - 12px
+      height formula-height + 31px
+      top (header-height / 2)px - 16px
       right -34px
       transform rotateY(7deg) translateZ(-8px)
       -moz-transform rotateY(7deg) translateZ(-8px) translateX(-3px) translateY(-6px)

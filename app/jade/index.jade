@@ -17,40 +17,62 @@ html
     // endbuild
 
   body
-    .mobile-warning
-      p Hey! It looks like you're using a mobile phone, which is awesome.
-      p But we spent a lot of time making this application look juuuust right for desktop, and it'll probably be a little squishy on your phone.
-      p (But it should still work!)
-      p If that's OK with you, you really want the squishy, less exciting version, then&nbsp;
-        a(href='#', do='close-warning') tap here
-        | .
-      p Otherwise, come back on your computer later, ok? ;)
-    iframe(name='dupe-frame')
-    .formula
-      .header
-      .next-btn
-        .inner-btn
-          span Submit!
-      form
-        .primary-window.page.current
-          .forcefield
-            .input-group
-              input#name(type="text", name='entry.2104495372', required)
-              label Name (First and Last)
-              .glance
-            .input-group
-              input#email(type="email", name='entry.1061169608', required)
-              label School Email
-              .glance
-              .pill-right
-                span .edu
-            .input-group
-              input#hearsay(type="text", name='entry.1597876375', required)
-              label How did you hear about our application?
-              .glance
-          .thanks
-            h3 Thanks! We'll let you know as soon as the app is ready  :D
-            img(src="./images/fyeah.png")
+    #formula-container
+      .mobile-warning
+        p Hey! It looks like you're using a mobile phone, which is awesome.
+        p But we spent a lot of time making this application look juuuust right for desktop, and it'll probably be a little squishy on your phone.
+        p (But it should still work!)
+        p If that's OK with you, you really want the squishy, less exciting version, then&nbsp;
+          a(href='#', do='close-warning') tap here
+          | .
+        p Otherwise, come back on your computer later, ok? ;)
+      iframe(name='dupe-frame')
+      .formula
+        .header
+        .next-btn
+          .inner-btn
+            span Next
+        form
+          .primary-window.page.current
+            .forcefield
+              h2 Welcome to the Official EPIC Application
+              .input-group
+                input#name(type="text", name='entry.2104495372', required)
+                label Name (First and Last)
+                .glance
+              .input-group
+                input#email(type="email", name='entry.1061169608', required)
+                label School Email
+                .glance
+                .pill-right
+                  span .edu
+              .input-group
+                input#hearsay(type="text", name='entry.1597876375', required)
+                label How did you hear about our application?
+                .glance
+            .thanks
+              h3 Thanks! We'll let you know as soon as the app is ready  :D
+              img(src="./images/fyeah.png")
+          .primary-window.page
+            .forcefield
+              .input-group
+                input#name(type="text", name='entry.2104495372', required)
+                label Name (First and Last)
+                .glance
+              .input-group
+                input#email(type="email", name='entry.1061169608', required)
+                label School Email
+                .glance
+                .pill-right
+                  span .edu
+              .input-group
+                input#hearsay(type="text", name='entry.1597876375', required)
+                label How did you hear about our application?
+                .glance
+            .thanks
+              h3 Thanks! We'll let you know as soon as the app is ready  :D
+              img(src="./images/fyeah.png")
+
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

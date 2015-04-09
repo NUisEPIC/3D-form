@@ -64,13 +64,15 @@ function formula_form_setup_google_submit (form, afterSubmit) {
 }
 
 function formula_submit () {
-  var formula_inputs = qq('.formula form input');
+  var formula_form   = qq('.formula form')[0]
+    , formula_inputs = formula_form.getElementsByTagName('input');
 
   function get_form_data (inputs) {
     var data = {};
     [].forEach.call(inputs, function (i) {
       data[( i.id || i.type )] = formula_value_with_pills(i);
     });
+    return data;
   }
 
   var data = get_form_data(formula_inputs);
