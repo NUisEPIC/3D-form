@@ -227,6 +227,9 @@ iframe[name*='dupe-frame']
       display block
       transform rotateY(180deg) translateX(700px)
 
+      @media all and (max-height 800px)
+        transform rotateY(180deg) translateX(650px)
+
     // because firefox is a bitch.
     &.end
       .primary-window
@@ -234,9 +237,12 @@ iframe[name*='dupe-frame']
         transition none
         transform rotateY(180deg)
 
+
       .thanks
         opacity 1
         transform rotateY(180deg) translateX(700px)
+        @media all and (max-height 800px)
+          transform rotateY(180deg) translateX(650px)
         & *
           opacity 1
 
@@ -246,40 +252,44 @@ iframe[name*='dupe-frame']
     font-size 18px
 
   .formula
+    max-width 650px
+
     .header
-      width 250px
-      height 250px
+      width 225px
+      height 225px
 
     .forcefield
-      padding ff-padding-top - 20px ff-padding-right ff-padding-bottom ff-padding-left
+      padding ff-padding-top - 10px ff-padding-right ff-padding-bottom ff-padding-left
 
     .primary-window
       top -125px
-      height formula-height - 110px
+      height formula-height - 130px
 
     .next-btn
-      top 127px
-      height formula-height - 110px
+      top 100px
+      height formula-height - 130px
 
     &.persp
       .next-btn
-        top 123px
-        height formula-height - 106px
+        top 98px
+        height formula-height - 127px
 
     .glance
       height field-height - 3px
+      &:after
+        top 2px
 
     *[class*="pill-"]
       height field-height - 3px
 
     textarea
-      height 275px
+      height 230px
       &#explain-skills
-        height 100px
+        height 68px
 
     .primary-window .thanks
       img
-        height 325px
+        height 260px
 
 // FUKKKKKKiNG FIREFOX
 // NOTE  the build kills the moz keyframes because it's a bitch about this shit.
