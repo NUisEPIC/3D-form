@@ -240,6 +240,44 @@ iframe[name*='dupe-frame']
         & *
           opacity 1
 
+@media all and (max-height: 800px)
+  // stuff
+  html
+    font-size 18px
+
+  .formula
+    .header
+      width 250px
+      height 250px
+
+    .primary-window
+      top -125px
+      height formula-height - 50px
+
+    .next-btn
+      top 130px
+      height formula-height - 50px
+
+    &.persp
+      .next-btn
+        top 123px
+        height formula-height - 46px
+
+    .glance
+      height field-height - 3px
+
+    *[class*="pill-"]
+      height field-height - 3px
+
+    textarea
+      height 275px
+      &#explain-skills
+        height 100px
+
+    .primary-window .thanks
+      img
+        height 325px
+
 // FUKKKKKKiNG FIREFOX
 // NOTE  the build kills the moz keyframes because it's a bitch about this shit.
 // soooooo... ugh. copy this line every time it builds and you want to save.
