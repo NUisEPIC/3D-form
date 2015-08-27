@@ -1,6 +1,6 @@
 var formula_default_validators = {
   email: function (i, v) {
-    return /\w+@[A-z0-9.]+/.test(v)
+    return /\w+@[A-z0-9.\-]+/.test(v)
   },
   password: function (i, v) {
     var special_chars = /[_\-!@#$%^&* `~]/;
@@ -96,7 +96,7 @@ function formula_inputs_valid (inputs) {
 function formula_page_is_valid (inputs) {
   // NOTE(jordan): reset timeout every time this is called
   formula_cache_data(inputs);
-  formula_animator.tiltToRevealButton();
+  formula_animator.tilt();
 }
 
 function formula_page_is_invalid () {

@@ -65,7 +65,7 @@ iframe[name*='dupe-frame']
     position relative
     // safari
     transform none
-    -webkit-transform translateZ(0)
+    -webkit-transform translateZ(5px)
 
   .primary-window
     border-radius 4px
@@ -90,10 +90,12 @@ iframe[name*='dupe-frame']
 
     &.page
       opacity 0
+      -webkit-transform translateZ(-1px)
 
     &.page.current
       z-index 1
       opacity 1
+      -webkit-transform translateZ(0px)
 
     i.back-btn
       position absolute
@@ -179,7 +181,7 @@ iframe[name*='dupe-frame']
       // NOTE(jordan): Must do all overarching translates
       // on form now, lest it overlap with next-btn
       left -30px
-    .primary-window
+    .primary-window.page
       transform rotateY(-1deg) translateZ(-8px)
       box-shadow inset 0 30px rgba(0,0,0,0.015),
                  inset 0 25px rgba(0,0,0,0.02),
@@ -196,22 +198,30 @@ iframe[name*='dupe-frame']
         right -23px
 
   &.shuffle
+
+    .next-btn
+      -webkit-transform translateZ(-10px)
+
     .page
       left -300px
+      -webkit-transform translateZ(-2px)
 
     .page.next
       opacity 1
       left 450px
       transform rotateY(1deg)
+      -webkit-transform translateZ(-1px) rotateY(1deg)
 
     &.reverse
       .page
         left 450px
+        -webkit-transform rotateY(-1deg) translateZ(-3px)
 
       .page.next
         opacity 1
         left -300px
         transform rotateY(-1deg)
+        -webkit-transform translateZ(-1px) rotateY(1deg)
 
   &.punched
 
