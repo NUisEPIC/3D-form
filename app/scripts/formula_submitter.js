@@ -78,7 +78,7 @@ function formula_submit () {
     if (formula_get_pills(i)) {
       var key   = ( i.id || i.type );
       var cval  = data[key];
-      data[key] = formula_value_with_pills(cval);
+      data[key] = formula_value_with_pills(i);
     }
   });
 

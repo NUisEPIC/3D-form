@@ -191,7 +191,7 @@ window.onload = function() {
                   'text/richtext',
                   'application/pdf',
                   'text/pdf'],
-      container: 'modal',
+      container: 'window',
       services: ['COMPUTER', 'GMAIL', 'BOX'
                  , 'DROPBOX', 'GOOGLE_DRIVE'
                  , 'SKYDRIVE', 'EVERNOTE'

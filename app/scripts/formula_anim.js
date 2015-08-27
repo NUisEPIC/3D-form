@@ -5,15 +5,14 @@ var formula_animator = (function () {
 
   _self.punchTicket = function () {
     var formula = _self.formula;
-    var delay = 3000;
 
     formula.removeClass('persp');
 
     setTimeout(function () { formula.addClass('punched') }, 500);
-    setTimeout(function () { formula.addClass('end') }, delay);
+    setTimeout(function () { formula.addClass('end') }, 3000);
   }
 
-  _self.tiltToRevealButton = function () {
+  _self.tilt = function () {
     var formula = _self.formula;
     formula.addClass('persp');
   }
@@ -32,66 +31,77 @@ var formula_animator = (function () {
                  .removeClass('reverse');
   }
 
-  _self.nextPage = function (current_page, next_page, cb) {
-    if (!next_page || next_page.className.indexOf('page') === -1)
+  _self.calculateTimings = function (t_array) {
+    var time_total = 0;
+    return t_array.map(function (t) {
+      return time_total += t;
+    });
+  }
+
+  function page_shuffle(from, to, options) {
+    var timings = [500, 100, 500];
+    var pre, post;
+
+    if (options instanceof Object)
+      pre = options.pre, post = options.post;
+
+    timings = _self.calculateTimings(timings);
+
+    if (to instanceof Function)
+      timings = post, post = pre, pre = to, to = from.nextElementSibling;
+    else if (pre instanceof Function && !post)
+      post = pre, pre = null;
+
+    if (!to || to.className.indexOf('page') === -1)
       return;
 
-    current_page.addClass('prev');
-    next_page.addClass('next');
+    from.addClass('prev');
+    to.addClass('next');
 
-    current_page.style.opacity = '1';
+    from.style.opacity = '1';
 
     _self.reset();
     _self.formula.addClass('shuffle');
+    pre && pre();
+
     setTimeout(function () {
-      next_page.addClass('current');
-      current_page.removeClass('current');
-      setTimeout(function () {
-        next_page.removeClass('next');
-        current_page.removeClass('prev');
-        _self.formula.removeClass('shuffle');
-        if (cb instanceof Function) cb();
-        setTimeout(function () {
-          current_page.style.opacity = '';
-        }, 500);
-      }, 100);
-    }, 500);
+      to.addClass('current');
+      from.removeClass('current');
+    }, timings[0]);
+
+    setTimeout(function () {
+      to.removeClass('next');
+      from.removeClass('prev');
+      _self.formula.removeClass('shuffle');
+      post && post();
+    }, timings[1]);
+
+    setTimeout(function () {
+      from.style.opacity = '';
+    }, timings[2]);
+  }
+
+  _self.nextPage = function (current_page, next_page, cb) {
+    if (next_page instanceof Function)
+      cb = next_page, next_page = null;
+
+    page_shuffle(current_page, next_page, {post: cb});
   }
 
   _self.previousPage = function (current_page, prev_page, cb) {
-    if (!prev_page || prev_page.className.indexOf('page') === -1)
-      return;
+    if (prev_page instanceof Function)
+      cb = prev_page, prev_page = null;
 
-    current_page.addClass('prev');
-    prev_page.addClass('next');
-
-    current_page.style.opacity = '1';
-
-    var delay = 500;
-
-    if (_self.formula.className.indexOf('persp') !== -1) {
-      _self.unTilt();
-      setTimeout(function () {
-        _self.formula.addClass('shuffle').addClass('reverse');
-      }, delay);
-      delay += 300;
-    } else {
-      _self.formula.addClass('shuffle').addClass('reverse');
+    var pre = function () {
+      _self.formula.addClass('reverse');
     }
-    setTimeout(function () {
-      prev_page.addClass('current');
-      current_page.removeClass('current');
-      setTimeout(function () {
-        prev_page.removeClass('next');
-        current_page.removeClass('prev');
-        _self.formula.removeClass('shuffle')
-                     .removeClass('reverse');
-        if (cb instanceof Function) cb();
-        setTimeout(function () {
-          current_page.style.opacity = '';
-        }, 500);
-      }, 100);
-    }, delay);
+
+    var post = function () {
+      _self.formula.removeClass('reverse');
+      if (cb instanceof Function) cb();
+    }
+
+    page_shuffle(current_page, prev_page, {pre: pre, post: post});
   }
 
   return _self;
