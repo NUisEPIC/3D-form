@@ -4,6 +4,38 @@
 
 // formula
 
+.mobile-warning
+  position fixed
+  z-index 9999
+  margin 20px 10%
+  width 80%
+  background #fafafa
+  display none
+  border-radius 4px
+  box-shadow 0 0 10px 10px rgba(0,0,0,0.1)
+  p
+    padding 0 30px
+    font-size 18px
+
+iframe[name*='dupe-frame']
+  display none
+
+@media all and (max-width: 700px)
+  .mobile-warning
+    display block
+    transition all ease 1s
+    overflow: hidden
+    max-height 100%
+    &.dismissed
+      max-height 0
+
+#formula-container
+  width 100%
+  height 100%
+  overflow hidden
+  perspective 300px
+  perspective-origin center center
+
 .formula
   display block
   margin 0 auto
@@ -11,12 +43,18 @@
   position relative
   max-width 700px
   transition all ease 1s
-  perspective 300px
-  perspective-origin center center
   max-height 100%
 
+  form
+    position relative
+    transition all ease 0.5s
+    left 0
+
+    -moz-perspective 300px
+
+
   .header
-    background-image url('../images/epic-logo.png')
+    background-image url(../images/epic-logo.png)
     background-size contain
     background-repeat no-repeat
     width 300px
@@ -25,33 +63,74 @@
     margin 0 auto
     z-index 2
     position relative
+    // safari
+    transform none
+    -webkit-transform translateZ(5px)
 
   .primary-window
     border-radius 4px
     box-shadow 0 0 15px rgba(0,0,0,0.2)
-    position relative
+    position absolute
 
-    max-height 100%
+    width 100%
+    height formula-height
+    display inline-table
     background radial-gradient(circle, #f2f2f2 0%, #ebebeb 100%)
     transition transform ease 0.5s,
-               top ease 0.5s,
-               max-height ease 0.5s
+               left ease 0.5s
 
-    transform-style preserve-3d
+    transform-origin top center
+
+    // FF hack
+    -moz-perspective 300px
 
     overflow hidden
     top -150px
     left 0
 
+    &.page
+      opacity 0
+      -webkit-transform translateZ(-1px)
+
+    &.page.current
+      z-index 1
+      opacity 1
+      -webkit-transform translateZ(0px)
+
+    i.back-btn
+      position absolute
+      left 20px
+      top 20px
+      font-style normal
+      color rgba(0,0,0,0.5)
+      transition color ease 0.5s
+      cursor pointer
+      user-select none
+
+      &:hover
+        color rgb(0,0,0)
+
+      &:before
+        content '\2190'
+        margin-right 10px
+        position relative
+        top -1px
+
     .thanks
+      display none
       position absolute
       text-align center
       width 100%
       opacity 0
-      transition all ease 1s 3s
-      margin-left -30px
+      top 115px
+      transition all ease 1s
       // firefox, you are a bitch.
       transform rotateY(180deg)
+
+      img
+        position relative
+        top 10px
+        height 360px
 
   &:focus
     box-shadow 0 0 5px rgba(0,0,0,0.25)
@@ -59,78 +138,186 @@
 
   .forcefield
     padding ff-padding
-
-  btn-top = header-height / 2 + ff-padding-top + ff-padding-bottom + number-inputs * input-group-height - field-height
-
-  .submit-btn
-    height field-height
-    position absolute
-    top btn-top
-    width 100%
-    padding 10px 0
-    text-align center
-    background white
-    border-bottom-left-radius 2px
-    border-bottom-right-radius 2px
-    z-index -1
-    opacity 0
-    transform-origin bottom
-    transform rotateX(-35.9deg)
-    transition transform ease 0.3s,
-               top ease 0.4s,
-               box-shadow ease 0.6s,
-               opacity ease 0.1s 0.1s
     box-sizing border-box
+    display table-cell
+    vertical-align middle
+
+  .next-btn
+    position absolute
+    height formula-height - 4px
+
+    top (header-height / 2)px
+    right 0
+
+    border-top-right-radius 4px
+    border-bottom-right-radius 4px
+
+    background white
+    z-index -1
+
+    transition all ease 0.5s,
+               opacity ease 0.1s
+    display table
+    transform rotateY(-4deg) translateZ(-8px)
+
+    -moz-perspective 300px
+
+    cursor pointer
+
+    .inner-btn
+      display table-cell
+      vertical-align middle
+
+      span
+        // NOTE(jordan): This width defines the width of all next-btn
+        width 50px
+        display block
+        transform-origin center center
+        right 2px
+        transform rotate(-90deg)
 
   &.persp
-    .primary-window
-      transform rotateX(3deg)
-      top -170px
+    form
+      // NOTE(jordan): Must do all overarching translates
+      // on form now, lest it overlap with next-btn
+      left -30px
+    .primary-window.page
+      transform rotateY(-1deg) translateZ(-8px)
       box-shadow inset 0 30px rgba(0,0,0,0.015),
                  inset 0 25px rgba(0,0,0,0.02),
                  inset 0 10px rgba(0,0,0,0.025)
 
-    .submit-btn
-      left -3.5%
-      width 107%
-      top btn-top + field-height + 5px
-      transform-origin top
-      transform rotateX(-5deg)
+    .next-btn
+      height formula-height + 6px
+      top (header-height / 2)px - 3px
+      right -20px
+      transform rotateY(7deg) translateZ(-8px)
+      -moz-transform rotateY(7deg) translateZ(-8px) translateX(-3px) translateY(-6px)
+
+      &:hover
+        right -23px
+
+  &.shuffle
+
+    .next-btn
+      -webkit-transform translateZ(-10px)
+
+    .page
+      left -300px
+      -webkit-transform translateZ(-2px)
+
+    .page.next
       opacity 1
+      left 450px
+      transform rotateY(1deg)
+      -webkit-transform translateZ(-1px) rotateY(1deg)
 
-      box-shadow 0 7px 15px rgba(0,0,0,0.2)
+    &.reverse
+      .page
+        left 450px
+        -webkit-transform rotateY(-1deg) translateZ(-3px)
 
-      transition transform ease 0.3s,
-                 top ease 0.4s,
-                 box-shadow ease 0.6s,
-                 opacity ease 0.1s
-
-      cursor pointer
+      .page.next
+        opacity 1
+        left -300px
+        transform rotateY(-1deg)
+        -webkit-transform translateZ(-1px) rotateY(1deg)
 
   &.punched
 
     .primary-window
-      transform-origin  50% 0%
       animation 3s punch-ticket
+      & *
+        opacity 0
 
-    .input-group
-      opacity 0
+    .next-btn
+      display none
 
     .thanks
       display block
-      opacity 1
-      top 95px
+      transform rotateY(180deg) translateX(700px)
 
-    .submit-btn
-      opacity 0
+      @media all and (max-height 800px)
+        transform rotateY(180deg) translateX(650px)
 
     // because firefox is a bitch.
     &.end
       .primary-window
-        max-height 620px
         // this one's for IE 10...
         transition none
         transform rotateY(180deg)
+
+
+      .thanks
+        opacity 1
+        transform rotateY(180deg) translateX(700px)
+        @media all and (max-height 800px)
+          transform rotateY(180deg) translateX(650px)
+        & *
+          opacity 1
+
+@media all and (max-height: 800px)
+  // stuff
+  html
+    font-size 18px
+
+  .formula
+    max-width 650px
+
+    .header
+      width 225px
+      height 225px
+      top -10px
+
+    .forcefield
+      padding ff-padding-top - 10px ff-padding-right ff-padding-bottom ff-padding-left
+
+    .primary-window
+      top -125px
+      height formula-height - 130px
+
+    .next-btn
+      top 100px
+      height formula-height - 130px
+
+    &.persp
+      .next-btn
+        top 98px
+        height formula-height - 127px
+
+    .glance
+      height field-height - 3px
+      &:after
+        top 2px
+
+    *[class*="pill-"]
+      height field-height - 3px
+
+    textarea
+      height 230px
+      &#explain-skills
+        height 68px
+
+    .primary-window .thanks
+      img
+        height 260px
+
+.formula-notify-window
+  position fixed
+  top 20px
+  right 20px
+  display none
+  opacity 0
+  border-radius 4px
+  padding 10px
+  font-size 14px
+  box-shadow 0 0 2px rgba(0,0,0,0.1)
+  background #fafafa
+  z-index 9999
+  transition opacity ease 0.2s
+
+  &:hover
+    border 1px solid rgba(0,0,0,0.2)
 
 // FUKKKKKKiNG FIREFOX
 // NOTE  the build kills the moz keyframes because it's a bitch about this shit.
@@ -142,45 +329,24 @@
     transform rotateX(180deg) translateY(0)
   50%
     transform rotateX(180deg) translateY(80px)
-    max-height 620px
   65%
     transform rotateX(180deg) translateY(0)
-    max-height 620px
   100%
     transform rotateX(180deg) rotateZ(180deg)
-    max-height 620px
 
 @keyframes punch-ticket
-   0%
-    transform rotateX(0deg) translateY(0)
-  35%
-    transform rotateX(-180deg) translateY(0)
-    height 620px
-   50%
-    transform rotateX(-180deg) translateY(80px)
-    height 620px
-  65%
-    transform rotateX(-180deg) translateY(0)
-    height 620px
-  100%
-    transform rotateX(-180deg) rotateZ(180deg)
-    height 620px
-
-@-webkit-keyframes punch-ticket
   0%
     transform rotateX(0deg) translateY(0)
+    box-shadow initial
   35%
     transform rotateX(-180deg) translateY(0)
-    height 620px
+    box-shadow none
   50%
     transform rotateX(-180deg) translateY(80px)
-    height 620px
   65%
     transform rotateX(-180deg) translateY(0)
-    height 620px
   100%
     transform rotateX(-180deg) rotateZ(180deg)
-    height 620px
 
 @-ms-keyframes punch-ticket
   0%
@@ -189,11 +355,8 @@
     transform rotateX(180deg) translateY(0)
   50%
     transform rotateX(180deg) translateY(80px)
-    height 620px
   65%
     transform rotateX(180deg) translateY(0)
-    height 620px
   // for some reason, IE flips Z.
   100%
     transform rotateX(-180deg) rotateZ(180deg)
-    height 620px

@@ -2,8 +2,8 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    title 3d Form -- Jordan T
-    meta(name='description', content='3d Form Test Concept')
+    title EPIC Application
+    meta(name='description', content='Apply to EPIC, Northwestern\'s premier Entrepreneurship Student Group!')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
     // vendor.css is currently empty
@@ -16,56 +16,151 @@ html
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
 
-  body
+  mixin essayQuestion(id, header, label)
+    .primary-window.page
+      i.back-btn Back
+      .forcefield
+        h2= header
+        .input-group
+          textarea(id=id, required, name!=attributes.name)
+          label= label
+      if block
+        block
 
-    .formula
-      .header
-      .primary-window
-        .forcefield
-          form
-            .input-group
-              input(type="text", required)
-              label Username
-              .glance
-            .input-group
-              input(type="email", required)
-              label School Email
-              .glance
-              .pill-right
-                span .edu
-            .input-group
-              input(type="text", required)
-              label Github
-              .glance
-              .pill-left
-                span @
-            .input-group
-              input(type="text")
-              label Team Name (if any)
-            .input-group
-              input(type="text", required)
-              label How did you hear about us?
-              .glance
-          .thanks
-            h2 Yo, you just got logged in!
-            img(src="./images/fyeah.png", style="max-height: 165px")
-      .submit-btn Punch it!
+  body
+    #formula-container
+      .mobile-warning
+        p Hey! It looks like you're using a mobile phone, which is awesome.
+        p But we spent a lot of time making this application look juuuust right for desktop, and it'll probably be a little squishy on your phone.
+        p (But it should still work!)
+        p If that's OK with you, you really want the squishy, less exciting version, then&nbsp;
+          a(href='#', do='close-warning') tap here
+          | .
+        p Otherwise, come back on your computer later, ok? ;)
+      iframe(name='dupe-frame')
+      .formula
+        .header
+        .next-btn
+          .inner-btn
+            span Next
+        form
+          .primary-window.page.current
+            .forcefield
+              h2 Welcome to the Official EPIC Application!
+              .input-group
+                input#name(type="text", name='entry.354342888', required)
+                label Name (First and Last)
+                .glance
+              .input-group
+                input#email(type="email", name='entry.436547589', required)
+                label School Email
+                .glance
+                .pill-right
+                  span .edu
+              .input-group
+                input#hearsay(type="text", name='entry.1486322634', required)
+                label How did you hear about our application?
+                .glance
+          .primary-window.page
+            i.back-btn Back
+            .forcefield
+              h2 Some Basic Info
+              .input-group
+                input#year(type="text", name='entry.1494609428', required)
+                label Class Year (eg: 2017)
+                .glance
+              .input-group
+                input#major(type="text", name='entry.252100536', required)
+                label Major
+                .glance
+              .input-group
+                input#phone(type="tel", name='entry.1881012293', required)
+                label Phone Number: (xxx) yyy zzzz
+                .glance
+          .primary-window.page
+            i.back-btn Back
+            .forcefield
+              h2 I am a...
+              .input-group.checkboxes
+                input#hacker(type='checkbox', name='entry.2003569147', required)
+                label Hacker
+                input#designer(type='checkbox', name='entry.1080060025', required)
+                label Designer
+                input#builder(type='checkbox', name='entry.711584580', required)
+                label Builder
+                input#dinosaur(type='checkbox', name='entry.1762834979', required)
+                label Dinosaur
+              .input-group
+                textarea#explain-skills(name='entry.549867061', required)
+                label Explain your selections
+          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'Ex: What are you passionate about? What was your journey to NU?')(name='entry.1482811689')
+
+          +essayQuestion('why-epic-matters', 'Why does EPIC matter to Northwestern?', 'How is it different from other organizations?')(name='entry.1038701340')
+
+          +essayQuestion('why-interested', 'Why are you interested in joining EPIC?', 'What do you hope to learn? What skills do you hope to gain?')(name='entry.1277416023')
+
+          +essayQuestion('how-contribute', 'How will you contribute to your team?', 'Whichever it may be. How will you foster inter-team cooperation?')(name='entry.1133447629')
+
+          +essayQuestion('other-involvements', 'What else are you involved in?', 'e.g.; Work-study, ISBE, DOJO, etc.')(name='entry.93355119')
+
+          +essayQuestion('elevator-pitch', 'Why are you the best person for EPIC?', '5 Minutes! Elevator Pitch! Go!')(name='entry.555173403')
+
+          +essayQuestion('anything-else', 'Anything else you would like us to consider?', 'Maybe share some fun (or serious) facts. :)')(name='entry.1658748676')
+            .thanks
+              h3 Thanks for applying! We'll be in touch. :D
+              img(src="./images/fyeah2.png")
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
-    //script.
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-43952603-6', 'auto');
+      ga('send', 'pageview');
+
+    // begin olark code
+    script(data-cfasync='false').
+      /*<![CDATA[*/window.olark||(function(c){var f=window,d=document,l=f.location.protocol=="https:"?"https:":"http:",z=c.name,r="load";var nt=function(){
+      f[z]=function(){
+      (a.s=a.s||[]).push(arguments)};var a=f[z]._={
+      },q=c.methods.length;while(q--){(function(n){f[z][n]=function(){
+      f[z]("call",n,arguments)}})(c.methods[q])}a.l=c.loader;a.i=nt;a.p={
+      0:+new Date};a.P=function(u){
+      a.p[u]=new Date-a.p[0]};function s(){
+      a.P(r);f[z](r)}f.addEventListener?f.addEventListener(r,s,false):f.attachEvent("on"+r,s);var ld=function(){function p(hd){
+      hd="head";return["<",hd,"></",hd,"><",i,' onl' + 'oad="var d=',g,";d.getElementsByTagName('head')[0].",j,"(d.",h,"('script')).",k,"='",l,"//",a.l,"'",'"',"></",i,">"].join("")}var i="body",m=d[i];if(!m){
+      return setTimeout(ld,100)}a.P(1);var j="appendChild",h="createElement",k="src",n=d[h]("div"),v=n[j](d[h](z)),b=d[h]("iframe"),g="document",e="domain",o;n.style.display="none";m.insertBefore(n,m.firstChild).id=z;b.frameBorder="0";b.id=z+"-loader";if(/MSIE[ ]+6/.test(navigator.userAgent)){
+      b.src="javascript:false"}b.allowTransparency="true";v[j](b);try{
+      b.contentWindow[g].open()}catch(w){
+      c[e]=d[e];o="javascript:var d="+g+".open();d.domain='"+d.domain+"';";b[k]=o+"void(0);"}try{
+      var t=b.contentWindow[g];t.write(p());t.close()}catch(x){
+      b[k]=o+'d.write("'+p().replace(/"/g,String.fromCharCode(92)+'"')+'");d.close();'}a.P(2)};ld()};nt()})({
+      loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
+      /* custom configuration goes here (www.olark.com/documentation) */
+      olark.identify('2927-692-10-4152');/*]]>*/
+    noscript
+      a(href="https://www.olark.com/site/2927-692-10-4152/contact", title="Contact us", target="_blank") Questions? Feedback?
+      | powered by
+      a(href="http://www.olark.com?welcome", title="Olark live chat software") Olark live chat software
+    // end olark code
 
     // vendor.js is currently empty
     // build:js scripts/vendor.js
+    script(type='text/javascript', src='bower_components/store/dist/store2.min.js')
     // bower:js
     // endbower
     // endbuild
 
+    script(type="text/javascript", src="//api.filepicker.io/v1/filepicker.js" async)
+
     // build:js scripts/main.js
-    script(src='scripts/main.js')
+    script(src='scripts/extensions.js' async)
+    script(src='scripts/formula_anim.js' async)
+    script(src='scripts/formula_notify.js' async)
+    script(src='scripts/formula_cache.js' async)
+    script(src='scripts/formula_validator.js' async)
+    script(src='scripts/formula_submitter.js' async)
+    script(src='scripts/main.js' async)
     // endbuild

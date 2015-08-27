@@ -1,161 +1,210 @@
-addClass = function(el, c) {
-  var i = el.className.indexOf(c);
-  if(i > -1) return el;
-  else return (el.className = (el.className + ' ' + c.trim()), el);
-}
+// NOTE(jordan): requires: extensions.js, formula_validation.js,
+//               formula_submitter.js
 
-removeClass = function(el, c) {
-  var i = el.className.indexOf(c);
-  if(i < 0) return el;
-  else return (el.className = el.className.replace(c.trim(), '')
-               .replace('  ', ' '),
-               el);
-}
+// NOTE(jordan): I wish I didn't have to do this in JS
+function adjustPadding () {
+  var inputGroupElements = qq('.input-group input~*, .input-group textarea~*')
+    , basePad = 15
+    , width = 0
+    , padLeft = basePad
+    , padRight = basePad;
 
-function extend(el) {
-  el.addClass = function(c) {
-    addClass(el, c);
-  }
-  el.removeClass = function(c) {
-    removeClass(el, c);
-  }
+  [].forEach.call(inputGroupElements, function(p) {
+    var siblings  = p.parentElement.children
+      , groupSize = siblings.length
+      , lastChild = siblings[groupSize - 1]
+      , nearestInput = siblings[0];
 
-  return el;
-}
+    if (nearestInput.type
+        && ['text', 'email', 'tel'].indexOf(nearestInput.type) === -1)
+      return;
 
-var qq = function(str) { return document.querySelectorAll(str) };
-
-var formula_labels = qq('.formula label');
-var formula_inputs = qq('.formula input');
-var formula        = extend(qq('.formula')[0]);
-
-[].forEach.call(formula_inputs, extend);
-
-[].forEach.call(formula_inputs, function(input) {
-  console.log(input.value);
-  input.onchange = input.onblur = function() {
-    if(input.value.length === 0) {
-      input.removeClass('focus');
-    } else { input.addClass('focus'); }
-  }
-  input.onkeyup = function() {
-    if ([].map.call(formula_inputs, validateInput).every(isValid)) {
-      formIsValid();
-    } else {
-      formIsInvalid();
+    if (/pill-left|glance/g.test(p.classList)) {
+      padLeft += p.offsetWidth;
     }
-  }
-});
 
-function isValid(i) {
-  return i === true;
+    if (/pill-right/g.test(p.classList)) {
+      padRight += p.offsetWidth;
+    }
+
+    if (p.nodeName === 'LABEL') {
+      width = p.offsetWidth;
+    }
+
+    if (p === lastChild) {
+      console.log("STOP");
+      console.log(nearestInput);
+
+      nearestInput.style.paddingLeft  = padLeft + "px";
+      nearestInput.style.paddingRight = padRight + "px";
+      nearestInput.style.width        = width + "px";
+
+      padLeft = padRight = basePad;
+    }
+  });
 }
 
-var inputIsValid;
-
-function validateInput(i) {
-  inputIsValid = false;
-  if (!i.required) return true;
-  switch(i.type) {
-      case "email":
-        inputIsValid = /\w+@[A-z0-9.]+/.test(i.value);
-        break;
-      case "password":
-        var v = i.value;
-        inputIsValid = v.length > 8 &&
-                       /\d+/.test(v) &&
-                       /[_\-!@#$%^&* `~]/.test(v);
-        break;
-      default:
-        inputIsValid = i.value.length > 0;
-  }
-  console.log(i.nextElementSibling.textContent + " valid? " + inputIsValid);
-  inputIsValid ? i.addClass("valid") : i.removeClass("valid");
-  return inputIsValid;
+function closeWarning (clickEvent) {
+  var p = clickEvent.target.parentElement.parentElement;
+  extend(p);
+  p.addClass('dismissed');
 }
 
-function formIsValid() {
-  if(this.go) (clearTimeout(this.go), delete this.go);
-  this.go = setTimeout(function() { formula.addClass('persp'); }, 500);
-}
+function formula_setup_inputs (inputs, formula_next_page) {
+  console.log(inputs);
 
-function formIsInvalid() {
-  setTimeout(function() { formula.removeClass('persp') }, 500);
-}
+  extend(inputs);
 
-// I wish I didn't have to do this in JS
-
-var inputGroupElements = qq('.input-group input~*')
-  , nearestInput       = inputGroupElements[0].previousElementSibling;
-
-var basePad = 15, width = 0;
-
-var padLeft = padRight = basePad;
-
-[].forEach.call(inputGroupElements, function(p) {
-
-  siblings  = p.parentElement.children;
-  groupSize = siblings.length;
-  lastChild = siblings[groupSize - 1];
-  nearestInput = siblings[0];
-
-  if (/pill-left|glance/g.test(p.classList)) {
-    padLeft += p.offsetWidth;
+  function input_change (e) {
+    var input = this;
+    input.value.length === 0 ? input.removeClass('focus')
+                             : input.addClass('focus');
   }
 
-  if (/pill-right/g.test(p.classList)) {
-    padRight += p.offsetWidth;
+  function label_focus (e) {
+    var label = this;
+    label.previousElementSibling.addClass('focus');
+    label.previousElementSibling.focus();
   }
 
-  if (p.nodeName === 'LABEL') {
-    width = p.offsetWidth;
-  }
+  [].forEach.call(inputs, function (i) {
+    var label = i.nextElementSibling;
+    if (! label) return;
+    label.onclick = label_focus;
+    i.onchange = i.onblur = input_change;
 
-  if (p === lastChild) {
-    console.log("STOP");
-    console.log(nearestInput);
+    if (i.value.length > 0) i.addClass('focus');
+  });
 
-    nearestInput.style.paddingLeft  = padLeft + "px";
-    nearestInput.style.paddingRight = padRight + "px";
-    nearestInput.style.width        = width + "px";
+  var pages = qq('.page');
 
-    padLeft = padRight = basePad;
-  }
+  [].forEach.call(pages, function (page) {
+    var inputs = [].slice.call(page.getElementsByTagName('input'));
+    var textareas = [].slice.call(page.getElementsByTagName('textarea'));
+    inputs = inputs.concat(textareas);
 
-});
+    var validate_page = function () {
+      formula_validate(inputs, 200);
+    };
 
-var submitBtn = qq('.submit-btn')[0];
+    var input_click = function () {
+      if (this.type == 'checkbox') formula_cache_set(this);
+      validate_page();
+    };
 
-submitBtn.onmousedown = function(e) {
-  formula.removeClass('persp');
-
-  formula.onmouseup = function(e) {
-    // FUCKING. FIREFOX. IS. A. BITCH.
-    var delay = /Chrome/g.test(navigator.userAgent) ? 1950 : 3400;
-    setTimeout(function() { formula.addClass('punched'); }, 450);
-    setTimeout(function() { formula.addClass('end'); }, delay);
-  }
-
-  document.onmouseup = function(e) {
-    formula.onmouseup = "";
-  }
+    [].forEach.call(inputs, function (i) {
+      i.onclick = input_click;
+      i.onkeydown = function (e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        } else {
+          formula_animator.unTilt();
+          if (this.timeout) clearTimeout(this.timeout) && delete this.timeout;
+          this.timeout = setTimeout(function () {
+            validate_page();
+          }, 500);
+        }
+      }
+    });
+  });
 }
 
 window.onload = function() {
-  if ([].map.call(formula_inputs, validateInput).every(isValid)) {
-    formIsValid();
+  var formula_inputs = qq('.formula input, .formula textarea');
+
+  var nextBtn = qq('.next-btn')[0];
+
+  function formula_next_page (current_page, next_page) {
+    // NOTE(jordan): I don't know why this happens
+    if (next_page) {
+      var next_page = extend(next_page)
+        , next_page_inputs = next_page.getElementsByTagName('input')
+        , next_page_textareas = next_page.getElementsByTagName('textarea');
+      next_page_inputs = [].slice.call(next_page_inputs)
+                           .concat([].slice.call(next_page_textareas));
+      formula_animator.nextPage(current_page, next_page, function () {
+        formula_validate(next_page_inputs);
+        next_page_inputs[0].focus();
+      });
+    } else if (formula_inputs_valid(formula_inputs)) {
+      formula_submit();
+    } else {
+      alert("Looks like something isn't quite right. Try going back and checking that all the textboxes are filled it, and all answers have little green check marks next to them.");
+    }
   }
 
-  [].forEach.call(formula_labels, function(label) {
-    label.onclick = function(e) {
-      label.previousElementSibling.addClass('focus');
-      label.previousElementSibling.focus();
-    }
-  });
+  nextBtn.onclick = function () {
+    var current_page = extend(qq('.page.current')[0])
+      , next_page    = current_page.nextElementSibling;
+    formula_next_page(current_page, next_page);
+  }
 
-  [].forEach.call(formula_inputs, function(input) {
-    if (input.value.length > 0) {
-      input.addClass('focus');
+  var backBtns = qq('.back-btn');
+
+  [].forEach.call(backBtns, function(btn) {
+    var btn_page  = extend(btn.parentElement)
+      , prev_page = btn_page.previousElementSibling;
+    if (prev_page) {
+      var prev_page = extend(prev_page)
+        , prev_page_inputs = prev_page.getElementsByTagName('input')
+        , prev_page_textareas = prev_page.getElementsByTagName('textarea');
+      prev_page_inputs = [].slice.call(prev_page_inputs)
+                           .concat([].slice.call(prev_page_textareas));
+      btn.onclick = function (e) {
+        formula_animator.previousPage(btn_page, prev_page, function () {
+          prev_page_inputs[0].focus();
+          formula_validate(prev_page_inputs);
+        });
+      }
+    } else {
+      alert("There's nothing to go back to! This is the beginning!");
     }
-  });
+  })
+
+  formula_setup_inputs(formula_inputs, formula_next_page);
+
+  formula_get_data(formula_inputs);
+
+  var current_page_inputs = qq('.page.current input');
+
+  formula_validate(current_page_inputs);
+
+  // NOTE(jordan): gross gross gross gross gross
+  adjustPadding();
+
+  window.onresize = adjustPadding;
+
+  // NOTE(jordan): make mobile warning dismissable
+  var closeWarningBtn = qq('a[do*="close-warning"]')[0];
+
+  closeWarningBtn.onclick = closeWarning;
+
+  var resumeBtn = document.getElementById('resume-btn');
+
+  filepicker.setKey('AV96DZseeSYOldbUvmYwGz');
+
+  resumeBtn.onclick = function () {
+    filepicker.pick({
+      mimetypes: ['text/plain',
+                  'text/richtext',
+                  'application/pdf',
+                  'text/pdf'],
+      container: 'window',
+      services: ['COMPUTER', 'GMAIL', 'BOX'
+                 , 'DROPBOX', 'GOOGLE_DRIVE'
+                 , 'SKYDRIVE', 'EVERNOTE'
+                 , 'CLOUDDRIVE'],
+      //debug: true
+    },
+    function(InkBlob) {
+      var current_page_inputs = qq('.page.current input');
+      resumeBtn.nextElementSibling.value = JSON.stringify(InkBlob);
+      formula_validate(current_page_inputs);
+    },
+    function(PFError) {
+      console.log(PFError.toString());
+    });
+  }
 }

@@ -1,24 +1,89 @@
 .formula
   .input-group
     margin-top input-group-margin-top
-    height field-height
+    width 100%
+    min-height field-height
     position relative
     transition opacity ease 0.1s 0.325s
 
-  input
-    width 100% // will be overwritten.
-    max-height field-height
-    padding 10px 5% // will be overwritten.
-    margin 0
+    @media all and (max-height: 800px)
+      margin-top input-group-margin-top - 20px
+
+    &.checkboxes
+      margin-top 0
+      overflow hidden
+
+  input[type='checkbox']
+    opacity 0
+    position absolute
+    width 125px
+    left 41%
+    max-height none
+    height 125px
+    z-index 1
+    cursor pointer
+
+    &+label
+      display block
+      position relative
+      left 41%
+      height field-height - 20
+      text-align left
+      padding 5px 0
+      color #888
+      transition all ease 0.5s
+      z-index 0
+
+      &:before
+        margin-right 10px
+        content '\2713'
+        color lighten(green, 30%)
+        opacity 0
+
+    &:hover+label
+      color #000
+
+    &:checked+label
+      color #000
+      &:before
+        opacity 1
+
+  input, textarea, button
     font-size inherit
     text-align left
     font-family inherit
     font-weight inherit
+    transition all ease 0.3s
+    box-sizing border-box
+    // NOTE(jordan): FF will style required but
+    // blank inputs and make them ugly, so kill it
+    box-shadow none
+
+  input
+    max-height field-height
+
+  input[type='text'], input[type='email'], input[type='tel'], textarea, button
+    width 100% // will be overwritten.
+    padding 10px 5% // will be overwritten.
+    margin 0
     border 1px solid rgba(0,0,0,0.1)
     border-radius 2px
-    transition all ease 0.3s
     text-overflow ellipsis
-    box-sizing border-box
+
+    &~label
+      display block
+      padding label-padding 0
+      height label-height
+      margin-top -1 * field-height - 3px
+      text-align center
+      position relative
+      top 0px
+      cursor text
+      transition top ease 0.8s,
+                 color ease 0.5s 0.25s,
+                 all ease 0.8s
+      color #aaa
+      box-sizing border-box
 
     &:focus
       outline none
@@ -40,12 +105,58 @@
     &.focus~label
       top -55px
 
+    @media all and (max-height: 800px)
+      &~label
+        margin-top -1 * field-height + 1px
+
+      &:focus~label, &.focus~label
+        top -45px
+
     &~*
       transition top ease 0.3s
 
     &.valid~.glance:after
       color rgb(10, 225, 10)
       text-shadow 0 0 7px rgb(255,255,255)
+
+  textarea
+    height 300px
+    padding 10px 15px
+    font-size 80%
+    resize none
+
+    &#explain-skills
+      height 150px
+
+    &~label
+      position absolute
+      width 100%
+      padding 0
+      margin-top 15px
+      text-align center
+
+  button
+    display block
+    text-align center
+    background #fafafa
+    padding 8px 0
+
+    margin-top -1px
+    margin-bottom 1px
+    box-shadow -1px 2px 2px rgba(0,0,0,0.07),
+                1px 2px 2px rgba(0,0,0,0.07)
+
+    &:hover
+      border 1px solid rgba(0,0,0,0.25)
+
+    &:active
+      margin-top 0
+      margin-bottom 0
+      box-shadow none
+
+    &~.glance
+      @media all and (max-height: 800px)
+        height field-height - 7px
 
   .glance
     height field-height - 2px
@@ -98,17 +209,3 @@
     //box-shadow 1px 0 1px rgba(0,0,0,0.1),
     //            inset 1px 0 1px rgba(0,0,0,0.1)
 
-  label
-    display block
-    padding label-padding 0
-    height label-height
-    margin-top -1 * field-height - 3px
-    text-align center
-    position relative
-    top 0px
-    cursor text
-    transition top ease 0.8s,
-               color ease 0.5s 0.25s,
-               all ease 0.8s
-    color #aaa
-    box-sizing border-box
