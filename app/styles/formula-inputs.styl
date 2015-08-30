@@ -62,6 +62,29 @@
   input
     max-height field-height
 
+  input[type='file']
+    color: transparent
+    width: 143px
+    display block
+    margin 0 auto
+    padding-left 5%
+
+  input[type='file'] ~ label
+    position relative
+    top -55px !important
+    // below here lies an ugly fix
+    margin-left 45%
+
+  select ~ label
+    position relative
+    top -45px
+    text-align center
+    display block
+
+  select
+    display block
+    margin 0 auto
+
   input[type='text'], input[type='email'], input[type='tel'], textarea, button
     width 100% // will be overwritten.
     padding 10px 5% // will be overwritten.
@@ -208,4 +231,3 @@
     border-bottom-left-radius 0
     //box-shadow 1px 0 1px rgba(0,0,0,0.1),
     //            inset 1px 0 1px rgba(0,0,0,0.1)
-

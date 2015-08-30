@@ -2,8 +2,8 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    title EPIC Application
-    meta(name='description', content='Apply to EPIC, Northwestern\'s premier Entrepreneurship Student Group!')
+    title WildHacks 2015 Application
+    meta(name='description', content='Apply to WildHacks 2015, Northwestern\'s ONLY Hackathon!')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
     // vendor.css is currently empty
@@ -80,32 +80,67 @@ html
           .primary-window.page
             i.back-btn Back
             .forcefield
-              h2 I am a...
-              .input-group.checkboxes
-                input#hacker(type='checkbox', name='entry.2003569147', required)
-                label Hacker
-                input#designer(type='checkbox', name='entry.1080060025', required)
-                label Designer
-                input#builder(type='checkbox', name='entry.711584580', required)
-                label Builder
-                input#dinosaur(type='checkbox', name='entry.1762834979', required)
-                label Dinosaur
+              h2 Where Can We Find You?
               .input-group
-                textarea#explain-skills(name='entry.549867061', required)
-                label Explain your selections
-          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'Ex: What are you passionate about? What was your journey to NU?')(name='entry.1482811689')
+                input#github(type="text", name='')
+                label Github Link
+                .glance
+              .input-group
+                input#website(type="text", name='')
+                label Website
+                .glance
+              .input-group
+                input#resume(type='file', name='')
+                label Resume
+                .glance
+          .primary-window.page
+            i.back-btn Back
+            .forcefield
+              h2 Some Boring Stuff
+              .input-group
+                select#gender(required)
+                  option(value) Please Select
+                  option(value='Male') Male
+                  option(value='Female') Female
+                  option(value='Other') Other
+                  option(value='Prefer not to specify') Prefer not to specify
+                label Gender
+              .input-group
+                select#shirt(required)
+                  option(value) Please Select
+                  option(value='Small') Small
+                  option(value='Medium') Medium
+                  option(value='Large') Large
+                  option(value='XL') XL
+                  option(value='XXL') XXL
+                label Shirt Size (Unisex)
+              .input-group
+                select#job(required)
+                  option(value) Please Select
+                  option(value='Small') None
+                  option(value='Medium') Internship
+                  option(value='Large') Full-Time
+                  option(value='XL') Part-Time (With School)
+                label Job Interest Level
+                  
+                    
+              //- .input-group.checkboxes
+              //-   input#hacker(type='checkbox', name='entry.2003569147', required)
+              //-   label Hacker
+              //-   input#designer(type='checkbox', name='entry.1080060025', required)
+              //-   label Designer
+              //-   input#builder(type='checkbox', name='entry.711584580', required)
+              //-   label Builder
+              //-   input#dinosaur(type='checkbox', name='entry.1762834979', required)
+              //-   label Dinosaur
+              //- .input-group
+              //-   textarea#explain-skills(name='entry.549867061', required)
+              //-   label Explain your selections
+          +essayQuestion('story', 'What do you daydream about?', 'Ex: The biggest, most banana-y banana bread')(name='entry.1482811689')
 
-          +essayQuestion('why-epic-matters', 'Why does EPIC matter to Northwestern?', 'How is it different from other organizations?')(name='entry.1038701340')
+          +essayQuestion('elevator-pitch', '', 'Uhh, uhh, uhhhhhhhhh...')(name='entry.555173403')
 
-          +essayQuestion('why-interested', 'Why are you interested in joining EPIC?', 'What do you hope to learn? What skills do you hope to gain?')(name='entry.1277416023')
-
-          +essayQuestion('how-contribute', 'How will you contribute to your team?', 'Whichever it may be. How will you foster inter-team cooperation?')(name='entry.1133447629')
-
-          +essayQuestion('other-involvements', 'What else are you involved in?', 'e.g.; Work-study, ISBE, DOJO, etc.')(name='entry.93355119')
-
-          +essayQuestion('elevator-pitch', 'Why are you the best person for EPIC?', '5 Minutes! Elevator Pitch! Go!')(name='entry.555173403')
-
-          +essayQuestion('anything-else', 'Anything else you would like us to consider?', 'Maybe share some fun (or serious) facts. :)')(name='entry.1658748676')
+          +essayQuestion('anything-else', 'Anything else we need to know?', 'E.g. dietary restrictions, etc')(name='entry.1658748676')
             .thanks
               h3 Thanks for applying! We'll be in touch. :D
               img(src="./images/fyeah2.png")

@@ -34,6 +34,9 @@ var formula_default_validators = {
       if (c.checked) valid = true;
     });
     return valid;
+  },
+  resume: function(i, v) {
+
   }
 }
 
