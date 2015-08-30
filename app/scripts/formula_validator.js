@@ -35,8 +35,8 @@ var formula_default_validators = {
     });
     return valid;
   },
-  resume: function(i, v) {
-
+  dropdown: function(i, v) {
+    return v != "";
   }
 }
 
