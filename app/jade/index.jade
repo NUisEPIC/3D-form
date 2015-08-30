@@ -48,19 +48,20 @@ html
             .forcefield
               h2 Welcome to the Official EPIC Application!
               .input-group
-                input#name(type="text", name='entry.354342888', required)
-                label Name (First and Last)
+                input(type="text", name='entry.354342888', required)
+                label First Name
                 .glance
               .input-group
-                input#email(type="email", name='entry.436547589', required)
-                label School Email
+                input(type="email", name='entry.436547589', required)
+                label Last Name
                 .glance
                 .pill-right
                   span .edu
               .input-group
-                input#hearsay(type="text", name='entry.1486322634', required)
-                label How did you hear about our application?
+                input(type="text", name='entry.1486322634', required)
+                label School
                 .glance
+                
           .primary-window.page
             i.back-btn Back
             .forcefield
@@ -90,7 +91,7 @@ html
                 label Website
                 .glance
               .input-group
-                input#resume(type='file', name='')
+                input#file(type='file', name='')
                 label Resume
                 .glance
           .primary-window.page
@@ -98,7 +99,7 @@ html
             .forcefield
               h2 Some Boring Stuff
               .input-group
-                select#dropdown(required)
+                select#gender(required)
                   option(value='') Please Select
                   option(value='Male') Male
                   option(value='Female') Female
@@ -106,7 +107,7 @@ html
                   option(value='Prefer not to specify') Prefer not to specify
                 label Gender
               .input-group
-                select#dropdown(required)
+                select#shirt(required)
                   option(value='') Please Select
                   option(value='Small') Small
                   option(value='Medium') Medium
@@ -115,13 +116,18 @@ html
                   option(value='XXL') XXL
                 label Shirt Size (Unisex)
               .input-group
-                select#dropdown(required)
-                  option(value='') Please Select
-                  option(value='Small') None
-                  option(value='Medium') Internship
-                  option(value='Large') Full-Time
-                  option(value='XL') Part-Time (With School)
-                label Job Interest Level
+                input(type='number')
+                label How many hackathons have you been to?
+                .glance
+                  
+          .primary-window.page
+            i.back-btn Back
+            .forcefield
+              h2 Some Housekeeping
+              .input-group
+                input(type='radio', required) 
+                label Will you be 18 by Nov. 21, 2015?
+                .glance
                   
                     
               //- .input-group.checkboxes
@@ -136,9 +142,7 @@ html
               //- .input-group
               //-   textarea#explain-skills(name='entry.549867061', required)
               //-   label Explain your selections
-          +essayQuestion('story', 'What do you daydream about?', 'Ex: The biggest, most banana-y banana bread')(name='entry.1482811689')
-
-          +essayQuestion('elevator-pitch', '', 'Uhh, uhh, uhhhhhhhhh...')(name='entry.555173403')
+          +essayQuestion('story', 'Why do you want to come to WildHacks?', 'Because I hate myself')(name='entry.1482811689')
 
           +essayQuestion('anything-else', 'Anything else we need to know?', 'E.g. dietary restrictions, etc')(name='entry.1658748676')
             .thanks

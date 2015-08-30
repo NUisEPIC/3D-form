@@ -3,7 +3,7 @@
 
 // NOTE(jordan): I wish I didn't have to do this in JS
 function adjustPadding () {
-  var inputGroupElements = qq('.input-group input~*, .input-group textarea~*')
+  var inputGroupElements = qq('.input-group input~*, .input-group textarea~*, .input-group select~*')
     , basePad = 15
     , width = 0
     , padLeft = basePad
@@ -80,9 +80,12 @@ function formula_setup_inputs (inputs, formula_next_page) {
 
   [].forEach.call(pages, function (page) {
     var inputs = [].slice.call(page.getElementsByTagName('input'));
+    var selections = [].slice.call(page.getElementsByTagName('select'));
     var textareas = [].slice.call(page.getElementsByTagName('textarea'));
-    inputs = inputs.concat(textareas);
 
+    inputs = inputs.concat(textareas);
+    inputs = inputs.concat(selections);
+    console.log(inputs);
     var validate_page = function () {
       formula_validate(inputs, 200);
     };
@@ -112,7 +115,7 @@ function formula_setup_inputs (inputs, formula_next_page) {
 }
 
 window.onload = function() {
-  var formula_inputs = qq('.formula input, .formula textarea');
+  var formula_inputs = qq('.formula input, .formula textarea, .formula select');
 
   var nextBtn = qq('.next-btn')[0];
 
@@ -121,9 +124,12 @@ window.onload = function() {
     if (next_page) {
       var next_page = extend(next_page)
         , next_page_inputs = next_page.getElementsByTagName('input')
+        , next_page_selections = next_page.getElementsByTagName('select')
         , next_page_textareas = next_page.getElementsByTagName('textarea');
       next_page_inputs = [].slice.call(next_page_inputs)
                            .concat([].slice.call(next_page_textareas));
+      next_page_inputs = [].slice.call(next_page_inputs)
+                          .concat([].slice.call(next_page_selections));
       formula_animator.nextPage(current_page, next_page, function () {
         formula_validate(next_page_inputs);
         next_page_inputs[0].focus();
@@ -149,9 +155,12 @@ window.onload = function() {
     if (prev_page) {
       var prev_page = extend(prev_page)
         , prev_page_inputs = prev_page.getElementsByTagName('input')
+        , prev_page_selections = prev_page.getElementsByTagName('select')
         , prev_page_textareas = prev_page.getElementsByTagName('textarea');
       prev_page_inputs = [].slice.call(prev_page_inputs)
                            .concat([].slice.call(prev_page_textareas));
+      prev_page_inputs = [].slice.call(prev_page_inputs)
+                          .concat([].slice.call(prev_page_selections));
       btn.onclick = function (e) {
         formula_animator.previousPage(btn_page, prev_page, function () {
           prev_page_inputs[0].focus();

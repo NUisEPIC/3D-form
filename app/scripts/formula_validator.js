@@ -34,9 +34,6 @@ var formula_default_validators = {
       if (c.checked) valid = true;
     });
     return valid;
-  },
-  dropdown: function(i, v) {
-    return v != "";
   }
 }
 
