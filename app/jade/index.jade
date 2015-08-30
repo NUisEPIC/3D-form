@@ -49,17 +49,15 @@ html
               h2 Welcome to the Official EPIC Application!
               .input-group
                 input(type="text", name='entry.354342888', required)
-                label First Name
+                label First Name*
                 .glance
               .input-group
-                input(type="email", name='entry.436547589', required)
-                label Last Name
+                input(type="text", name='entry.436547589', required)
+                label Last Name*
                 .glance
-                .pill-right
-                  span .edu
               .input-group
                 input(type="text", name='entry.1486322634', required)
-                label School
+                label School*
                 .glance
                 
           .primary-window.page
@@ -68,16 +66,17 @@ html
               h2 Some Basic Info
               .input-group
                 input#year(type="text", name='entry.1494609428', required)
-                label Class Year (eg: 2017)
+                label Class Year (eg: 2017)*
                 .glance
               .input-group
                 input#major(type="text", name='entry.252100536', required)
-                label Major
-                .glance
+                label Major*
+                .glance    
               .input-group
-                input#phone(type="tel", name='entry.1881012293', required)
-                label Phone Number: (xxx) yyy zzzz
+                input#travel(type='text', name='', required)
+                label Where will you be traveling from?*
                 .glance
+                  
           .primary-window.page
             i.back-btn Back
             .forcefield
@@ -90,16 +89,22 @@ html
                 input#website(type="text", name='')
                 label Website
                 .glance
+                  
+          .primary-window.page
+            i.back-btn Back
+            .forcefield
+              h2 Do You Have a Resume?
               .input-group
                 input#file(type='file', name='')
                 label Resume
                 .glance
+                  
           .primary-window.page
             i.back-btn Back
             .forcefield
               h2 Some Boring Stuff
               .input-group
-                select#gender(required)
+                select#gender
                   option(value='') Please Select
                   option(value='Male') Male
                   option(value='Female') Female
@@ -116,7 +121,7 @@ html
                   option(value='XXL') XXL
                 label Shirt Size (Unisex)
               .input-group
-                input(type='number')
+                input#hackathons(type='number', required)
                 label How many hackathons have you been to?
                 .glance
                   
@@ -125,9 +130,19 @@ html
             .forcefield
               h2 Some Housekeeping
               .input-group
-                input(type='radio', required) 
-                label Will you be 18 by Nov. 21, 2015?
+                //- this should be a radio input but i can't figure out how it works 
+                select#18(required)
+                  option(value='') Please Select
+                  option(value=1) Yes
+                  option(value=0) No
+                label Will you be 18 by Nov. 21, 2015?*
+              .input-group
+                input#teammates(type='text', name='')
+                label Please list emails of teammates, if any, separated by commas:
                 .glance
+              .input-group
+                input(type='checkbox', name='', required)
+                label I agree to the MLH Code of Conduct
                   
                     
               //- .input-group.checkboxes

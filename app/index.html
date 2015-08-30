@@ -35,18 +35,17 @@
               <h2>Welcome to the Official EPIC Application!</h2>
               <div class="input-group">
                 <input type="text" name="entry.354342888" required>
-                <label>First Name</label>
+                <label>First Name*</label>
                 <div class="glance"></div>
               </div>
               <div class="input-group">
-                <input type="email" name="entry.436547589" required>
-                <label>Last Name</label>
+                <input type="text" name="entry.436547589" required>
+                <label>Last Name*</label>
                 <div class="glance"></div>
-                <div class="pill-right"><span>.edu</span></div>
               </div>
               <div class="input-group">
                 <input type="text" name="entry.1486322634" required>
-                <label>School</label>
+                <label>School*</label>
                 <div class="glance"></div>
               </div>
             </div>
@@ -56,17 +55,17 @@
               <h2>Some Basic Info</h2>
               <div class="input-group">
                 <input id="year" type="text" name="entry.1494609428" required>
-                <label>Class Year (eg: 2017)</label>
+                <label>Class Year (eg: 2017)*</label>
                 <div class="glance"></div>
               </div>
               <div class="input-group">
                 <input id="major" type="text" name="entry.252100536" required>
-                <label>Major</label>
-                <div class="glance"></div>
+                <label>Major*</label>
+                <div class="glance">   </div>
               </div>
               <div class="input-group">
-                <input id="phone" type="tel" name="entry.1881012293" required>
-                <label>Phone Number: (xxx) yyy zzzz</label>
+                <input id="travel" type="text" name="" required>
+                <label>Where will you be traveling from?*</label>
                 <div class="glance"></div>
               </div>
             </div>
@@ -84,6 +83,11 @@
                 <label>Website</label>
                 <div class="glance"></div>
               </div>
+            </div>
+          </div>
+          <div class="primary-window page"><i class="back-btn">Back</i>
+            <div class="forcefield">
+              <h2>Do You Have a Resume?</h2>
               <div class="input-group">
                 <input id="file" type="file" name="">
                 <label>Resume</label>
@@ -95,7 +99,7 @@
             <div class="forcefield">
               <h2>Some Boring Stuff</h2>
               <div class="input-group">
-                <select id="gender" required>
+                <select id="gender">
                   <option value="">Please Select</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -116,7 +120,7 @@
                 <label>Shirt Size (Unisex)</label>
               </div>
               <div class="input-group">
-                <input type="number">
+                <input id="hackathons" type="number" required>
                 <label>How many hackathons have you been to?</label>
                 <div class="glance"></div>
               </div>
@@ -126,9 +130,21 @@
             <div class="forcefield">
               <h2>Some Housekeeping</h2>
               <div class="input-group">
-                <input type="radio" required>
-                <label>Will you be 18 by Nov. 21, 2015?</label>
+                <select id="18" required>
+                  <option value="">Please Select</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+                <label>Will you be 18 by Nov. 21, 2015?*</label>
+              </div>
+              <div class="input-group">
+                <input id="teammates" type="text" name="">
+                <label>Please list emails of teammates, if any, separated by commas:</label>
                 <div class="glance"></div>
+              </div>
+              <div class="input-group">
+                <input type="checkbox" name="" required>
+                <label>I agree to the MLH Code of Conduct</label>
               </div>
             </div>
           </div>
