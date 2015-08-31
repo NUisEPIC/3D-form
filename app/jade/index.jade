@@ -45,6 +45,7 @@ html
             span Next
         form
           .primary-window.page.current
+            .place 1/7
             .forcefield
               h2 Welcome to the WildHacks Application!
               .input-group
@@ -61,6 +62,7 @@ html
                 .glance
                 
           .primary-window.page
+            .place 2/7
             i.back-btn Back
             .forcefield
               h2 Some Basic Info
@@ -78,6 +80,7 @@ html
                 .glance
                   
           .primary-window.page
+            .place 3/7
             i.back-btn Back
             .forcefield
               h2 Where Can We Find You?
@@ -91,6 +94,7 @@ html
                 .glance
                   
           .primary-window.page
+            .place 4/7
             i.back-btn Back
             .forcefield
               h2 Do You Have a Resume?
@@ -100,6 +104,7 @@ html
                 .glance
                   
           .primary-window.page
+            .place 5/7
             i.back-btn Back
             .forcefield
               h2 Some Boring Stuff
@@ -126,6 +131,7 @@ html
                 .glance
                   
           .primary-window.page
+            .place 6/7
             i.back-btn Back
             .forcefield
               h2 Some Housekeeping
@@ -157,7 +163,15 @@ html
               //- .input-group
               //-   textarea#explain-skills(name='entry.549867061', required)
               //-   label Explain your selections
-          +essayQuestion('story', 'Why do you want to come to WildHacks?', 'Because I hate myself')(name='entry.1482811689')
+              
+          .primary-window.page
+            .place 7/7
+            i.back-btn Back
+            .forcefield
+              h2 Why do you want to come to WildHacks?
+              .input-group
+                textarea#explain-skills(name='entry.549867061', required)
+                label Just tell us the truth or something
             .thanks
               h3 Thanks for applying! Be sure to follow us for updates!
               
