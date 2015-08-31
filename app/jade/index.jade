@@ -46,7 +46,7 @@ html
         form
           .primary-window.page.current
             .forcefield
-              h2 Welcome to the Official EPIC Application!
+              h2 Welcome to the WildHacks Application!
               .input-group
                 input(type="text", name='entry.354342888', required)
                 label First Name*
@@ -119,7 +119,7 @@ html
                   option(value='Large') Large
                   option(value='XL') XL
                   option(value='XXL') XXL
-                label Shirt Size (Unisex)
+                label Shirt Size* (Unisex)
               .input-group
                 input#hackathons(type='number', required)
                 label How many hackathons have you been to?
@@ -142,7 +142,7 @@ html
                 .glance
               .input-group
                 input(type='checkbox', name='', required)
-                label I agree to the MLH Code of Conduct
+                label I agree to the #[a(href='http://static.mlh.io/docs/mlh-code-of-conduct.pdf') MLH Code of Conduct.]*
                   
                     
               //- .input-group.checkboxes
@@ -158,11 +158,9 @@ html
               //-   textarea#explain-skills(name='entry.549867061', required)
               //-   label Explain your selections
           +essayQuestion('story', 'Why do you want to come to WildHacks?', 'Because I hate myself')(name='entry.1482811689')
-
-          +essayQuestion('anything-else', 'Anything else we need to know?', 'E.g. dietary restrictions, etc')(name='entry.1658748676')
             .thanks
-              h3 Thanks for applying! We'll be in touch. :D
-              img(src="./images/fyeah2.png")
+              h3 Thanks for applying! Be sure to follow us for updates!
+              
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.

@@ -1,39 +1,43 @@
-var formula_animator = (function () {
+var formula_animator = (function() {
   var _self = {};
 
   _self.formula = extend(qq('.formula')[0]);
 
-  _self.punchTicket = function () {
+  _self.punchTicket = function() {
     var formula = _self.formula;
 
     formula.removeClass('persp');
 
-    setTimeout(function () { formula.addClass('punched') }, 500);
-    setTimeout(function () { formula.addClass('end') }, 3000);
+    setTimeout(function() {
+      formula.addClass('punched')
+    }, 500);
+    setTimeout(function() {
+      formula.addClass('end')
+    }, 3000);
   }
 
-  _self.tilt = function () {
+  _self.tilt = function() {
     var formula = _self.formula;
     formula.addClass('persp');
   }
 
-  _self.unTilt = function () {
+  _self.unTilt = function() {
     var formula = _self.formula;
     formula.removeClass('persp');
   }
 
-  _self.reset = function () {
+  _self.reset = function() {
     // NOTE(jordan): if I used timeouts this could animate smoothly
     _self.formula.removeClass('persp')
-                 .removeClass('end')
-                 .removeClass('punched')
-                 .removeClass('shuffle')
-                 .removeClass('reverse');
+      .removeClass('end')
+      .removeClass('punched')
+      .removeClass('shuffle')
+      .removeClass('reverse');
   }
 
-  _self.calculateTimings = function (t_array) {
+  _self.calculateTimings = function(t_array) {
     var time_total = 0;
-    return t_array.map(function (t) {
+    return t_array.map(function(t) {
       return time_total += t;
     });
   }
@@ -64,44 +68,58 @@ var formula_animator = (function () {
     _self.formula.addClass('shuffle');
     pre && pre();
 
-    setTimeout(function () {
+    setTimeout(function() {
       to.addClass('current');
       from.removeClass('current');
     }, timings[0]);
 
-    setTimeout(function () {
+    setTimeout(function() {
       to.removeClass('next');
       from.removeClass('prev');
       _self.formula.removeClass('shuffle');
       post && post();
     }, timings[1]);
 
-    setTimeout(function () {
+    setTimeout(function() {
       from.style.opacity = '';
     }, timings[2]);
   }
 
-  _self.nextPage = function (current_page, next_page, cb) {
+  _self.nextPage = function(current_page, next_page, y, cb) {
     if (next_page instanceof Function)
       cb = next_page, next_page = null;
 
-    page_shuffle(current_page, next_page, {post: cb});
+    page_shuffle(current_page, next_page, {
+      post: cb
+    });
+
+    scrollBackground(y);
   }
 
-  _self.previousPage = function (current_page, prev_page, cb) {
+  _self.previousPage = function(current_page, prev_page, y, cb) {
     if (prev_page instanceof Function)
       cb = prev_page, prev_page = null;
 
-    var pre = function () {
+    var pre = function() {
       _self.formula.addClass('reverse');
     }
 
-    var post = function () {
+    var post = function() {
       _self.formula.removeClass('reverse');
       if (cb instanceof Function) cb();
     }
 
-    page_shuffle(current_page, prev_page, {pre: pre, post: post});
+    page_shuffle(current_page, prev_page, {
+      pre: pre,
+      post: post
+    });
+
+    scrollBackground(y);
+  }
+
+  function scrollBackground(y) {
+    var backgroundTemplate = document.createElement("STYLE").style.backgroundPosition = '0% ';
+    document.getElementById('formula-container').style.backgroundPosition = backgroundTemplate + y + '%';
   }
 
   return _self;

@@ -119,6 +119,8 @@ window.onload = function() {
 
   var nextBtn = qq('.next-btn')[0];
 
+  var backgroundY = 0;
+
   function formula_next_page (current_page, next_page) {
     // NOTE(jordan): I don't know why this happens
     if (next_page) {
@@ -130,7 +132,7 @@ window.onload = function() {
                            .concat([].slice.call(next_page_textareas));
       next_page_inputs = [].slice.call(next_page_inputs)
                           .concat([].slice.call(next_page_selections));
-      formula_animator.nextPage(current_page, next_page, function () {
+      formula_animator.nextPage(current_page, next_page, backgroundY += 100/6, function () {
         formula_validate(next_page_inputs);
         next_page_inputs[0].focus();
       });
@@ -162,7 +164,7 @@ window.onload = function() {
       prev_page_inputs = [].slice.call(prev_page_inputs)
                           .concat([].slice.call(prev_page_selections));
       btn.onclick = function (e) {
-        formula_animator.previousPage(btn_page, prev_page, function () {
+        formula_animator.previousPage(btn_page, prev_page, backgroundY -= 100/6 , function () {
           prev_page_inputs[0].focus();
           formula_validate(prev_page_inputs);
         });
