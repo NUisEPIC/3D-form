@@ -45,6 +45,7 @@ html
             span Next
         form
           .primary-window.page.current
+            //- (josh) i know these placeholders shouldnt be hardcoded but i also know that i shouldnt fart on small children and im not going to stop doing that either 
             .place 1/7
             .forcefield
               h2 Welcome to the WildHacks Application!
@@ -127,7 +128,7 @@ html
                 label Shirt Size* (Unisex)
               .input-group
                 input#hackathons(type='number', required)
-                label How many hackathons have you been to?
+                label How many hackathons have you been to?*
                 .glance
                   
           .primary-window.page
@@ -169,6 +170,7 @@ html
             i.back-btn Back
             .forcefield
               h2 Why do you want to come to WildHacks?
+              //- (josh) i know this should probably be an essay question but im not about to fux with a mixin when i can just slap a place number on a textarea, ya dig
               .input-group
                 textarea#explain-skills(name='entry.549867061', required)
                 label Just tell us the truth or something

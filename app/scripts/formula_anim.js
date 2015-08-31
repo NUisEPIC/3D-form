@@ -117,6 +117,7 @@ var formula_animator = (function() {
     scrollBackground(y);
   }
 
+  // (josh) lmao it works
   function scrollBackground(y) {
     var backgroundTemplate = document.createElement("STYLE").style.backgroundPosition = '0% ';
     document.getElementById('formula-container').style.backgroundPosition = backgroundTemplate + y + '%';
