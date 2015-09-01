@@ -25,26 +25,11 @@ function formula_get_data (inputs) {
 function formula_cache_set (i) {
   var cache = store.get('formula_progress');
 
-  var v;
-
-  // TODO(jordan): this is shit, fix it
-  switch(i.type.toLowerCase()) {
-    case 'checkbox':
-      v = i.checked
-      cache[( i.id || i.type )] = v;
-      break;
-    case 'radio':
-      var p = i.parentNode;
-      [].forEach.call(p.querySelectorAll('input'), function (i) {
-        v = i.checked;
-        cache[( i.id || i.type )] = v;
-      })
-      break;
-    default:
-      v = i.value.trim()
-      cache[( i.id || i.type )] = v;
-      break;
-  }
+  if (i.type == 'radio')
+    cache[ i.name ] = i.value || i.checked
+  else
+    var v = i.type == 'checkbox' ? i.checked : i.value.trim()
+    cache[( i.id || i.type )] = v;
 
   store.set('formula_progress', cache);
 }
