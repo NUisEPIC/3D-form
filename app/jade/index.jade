@@ -16,6 +16,8 @@ html
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
 
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+
   mixin essayQuestion(id, header, label)
     .primary-window.page
       i.back-btn Back
@@ -173,9 +175,11 @@ html
               //- (josh) i know this should probably be an essay question but im not about to fux with a mixin when i can just slap a place number on a textarea, ya dig
               .input-group
                 textarea#explain-skills(name='entry.549867061', required)
-                label Just tell us the truth or something
+                label It's okay, we can take the truth.
             .thanks
               h3 Thanks for applying! Be sure to follow us for updates!
+              a(href="https://www.facebook.com/nuwildhacks", target="_blank") <i class="fa fa-facebook-official fa-5x"></i>
+              a(href="https://twitter.com/NUWildHacks", target="_blank") <i class="fa fa-twitter fa-5x"></i>
 
 
     script.
