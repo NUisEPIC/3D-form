@@ -8,7 +8,7 @@ function formula_get_data (inputs) {
   [].forEach.call(inputs, function (i) {
     var key = ( i.id || i.type );
     var cachedValue   = cache[key];
-    if ( i.type == 'checkbox' ) {
+    if ( i.type == 'checkbox' || i.type =='radio' ) {
       data[key] = i.checked = cachedValue;
     }
     else if (cachedValue && !i.value.trim()) {
@@ -24,8 +24,28 @@ function formula_get_data (inputs) {
 
 function formula_cache_set (i) {
   var cache = store.get('formula_progress');
-  var v = i.type == 'checkbox' ? i.checked : i.value.trim();
-  cache[( i.id || i.type )] = v;
+
+  var v;
+
+  // TODO(jordan): this is shit, fix it
+  switch(i.type.toLowerCase()) {
+    case 'checkbox':
+      v = i.checked
+      cache[( i.id || i.type )] = v;
+      break;
+    case 'radio':
+      var p = i.parentNode;
+      [].forEach.call(p.querySelectorAll('input'), function (i) {
+        v = i.checked;
+        cache[( i.id || i.type )] = v;
+      })
+      break;
+    default:
+      v = i.value.trim()
+      cache[( i.id || i.type )] = v;
+      break;
+  }
+
   store.set('formula_progress', cache);
 }
 
@@ -35,7 +55,7 @@ function formula_cache_data (inputs) {
   var page_data = formula_get_data(inputs);
   var cache  = (store.get('formula_progress') || {});
   var changeOccurred = false;
-  // Only update the cache at most once every 10s
+  // Only update the cache at most once every 5s
   if ((Date.now() - cache.last_cache_time) < 5000)
     return;
   for (var key in page_data) {

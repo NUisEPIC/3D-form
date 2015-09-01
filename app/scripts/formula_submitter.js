@@ -60,9 +60,9 @@ function formula_value_with_pills (i) {
 
 function formula_form_setup_google_submit (form) {
   form.action = formula_google_endpoint;
+  // NOTE(jordan): Stop the page from reloading
   form.target = 'dupe-frame';
   form.onsubmit = function (e) {
-    // NOTE(jordan): Stop the page from reloading
     e.preventDefault();
     e.stopPropagation();
   }

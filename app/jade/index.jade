@@ -52,15 +52,15 @@ html
             .forcefield
               h2 Welcome to the WildHacks Application!
               .input-group
-                input(type="text", name='entry.354342888', required)
+                input#first-name(type="text", name='entry.354342888', required)
                 label First Name*
                 .glance
               .input-group
-                input(type="text", name='entry.436547589', required)
+                input#last-name(type="text", name='entry.436547589', required)
                 label Last Name*
                 .glance
               .input-group
-                input(type="text", name='entry.1486322634', required)
+                input#school(type="text", name='entry.1486322634', required)
                 label School*
                 .glance
 
@@ -102,8 +102,8 @@ html
             .forcefield
               h2 Do You Have a Resume?
               .input-group
-                input#file(type='file', name='')
-                label Resume
+                input#resume(type='text', name='', required, disabled)
+                label#resume-btn Click here to upload it
                 .glance
 
           .primary-window.page
@@ -113,7 +113,7 @@ html
               h2 Some Boring Stuff
               .input-group
                 select#gender
-                  option(value='') Please Select
+                  option(values='') Please Select
                   option(value='Male') Male
                   option(value='Female') Female
                   option(value='Other') Other
@@ -138,34 +138,22 @@ html
             i.back-btn Back
             .forcefield
               h2 Some Housekeeping
+              p Can you legally buy cigarettes on Nov. 26th?
               .input-group
-                //- this should be a radio input but i can't figure out how it works
-                select#18(required)
-                  option(value='') Please Select
-                  option(value=1) Yes
-                  option(value=0) No
-                label Will you be 18 by Nov. 21, 2015?*
+                // (jordan) it works like this
+                input#18yes(type='radio', name='18yet', required)
+                label Yes
+
+                input#18no(type='radio', name='18yet', required)
+                // (jordan) nbsp hacksss
+                label No&nbsp;
               .input-group
                 input#teammates(type='text', name='')
                 label Please list emails of teammates, if any, separated by commas:
                 .glance
               .input-group
-                input(type='checkbox', name='', required)
+                input#mlh-code-of-conduct(type='checkbox', name='', required)
                 label I agree to the #[a(href='http://static.mlh.io/docs/mlh-code-of-conduct.pdf') MLH Code of Conduct.]*
-
-
-              //- .input-group.checkboxes
-              //-   input#hacker(type='checkbox', name='entry.2003569147', required)
-              //-   label Hacker
-              //-   input#designer(type='checkbox', name='entry.1080060025', required)
-              //-   label Designer
-              //-   input#builder(type='checkbox', name='entry.711584580', required)
-              //-   label Builder
-              //-   input#dinosaur(type='checkbox', name='entry.1762834979', required)
-              //-   label Dinosaur
-              //- .input-group
-              //-   textarea#explain-skills(name='entry.549867061', required)
-              //-   label Explain your selections
 
           .primary-window.page
             .place 7/7
