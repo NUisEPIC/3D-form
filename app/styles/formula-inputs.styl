@@ -13,22 +13,21 @@
       margin-top 0
       overflow hidden
 
-  input[type='checkbox']
+  input[type='checkbox'], input[type='radio']
+    // (jordan) Josh I'm not sure what you did but I undid it
     opacity 0
     position absolute
-    width 200px
-    left 41%
+    width 100%
     max-height none
-    height 35px
+    height 30px
     z-index 1
     cursor pointer
 
     &+label
       display block
       position relative
-      left 41%
       height field-height - 20
-      text-align left
+      text-align center
       padding 5px 0
       color #888
       transition all ease 0.5s
@@ -37,8 +36,9 @@
       &:before
         margin-right 10px
         content '\2713'
-        color lighten(green, 30%)
-        opacity 0
+        color transparent
+        background #fff
+        border-radius 3px
 
     &:hover+label
       color #000
@@ -46,7 +46,7 @@
     &:checked+label
       color #000
       &:before
-        opacity 1
+        color lighten(green, 30%)
 
   input, textarea, button
     font-size inherit
@@ -208,4 +208,3 @@
     border-bottom-left-radius 0
     //box-shadow 1px 0 1px rgba(0,0,0,0.1),
     //            inset 1px 0 1px rgba(0,0,0,0.1)
-
