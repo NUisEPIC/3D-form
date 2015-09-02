@@ -174,6 +174,8 @@ window.onload = function() {
     }
   })
 
+  formula_cache_init();
+
   formula_setup_inputs(formula_inputs, formula_next_page);
 
   formula_get_data(formula_inputs);
