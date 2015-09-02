@@ -1,6 +1,6 @@
 
 var formula_sync_url = '/application-session/'
-                       + location.hash.substr(1).split(':')[1]
+                       + location.hash.substr(1).split(':')[1] || ''
 
 function formula_sync_server (data, then) {
   var xhr = new XMLHttpRequest();
