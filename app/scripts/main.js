@@ -192,6 +192,7 @@ window.onload = function() {
 
   closeWarningBtn.onclick = closeWarning;
 
+  // NOTE(jordan): set up resume upload via filepicker
   var resumeBtn = document.getElementById('resume-btn');
 
   filepicker.setKey('AV96DZseeSYOldbUvmYwGz');
@@ -219,9 +220,9 @@ window.onload = function() {
     });
   }
 
+  // NOTE(jordan): fixes a dumb glitch where things flicker if there's uncovered content on the back of the page element
   var thank = qq('.thanks')[0]
   thank.onclick = function (e) {
-    // NOTE(jordan): fixes a dumb glitch where things flicker if there's uncovered content on the back of the page element
     e.preventDefault()
     e.stopPropagation()
     return false

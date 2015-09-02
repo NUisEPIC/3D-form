@@ -63,16 +63,15 @@
   input
     max-height field-height
 
-  input[type='file']
+  input#resume
     display block
     margin 0 auto
     padding-left 5%
+    color transparent
 
-  input[type='file'] ~ label
-    position relative
-    top -55px !important
-    // below here lies an ugly fix
-    margin-left 45%
+    & ~ label
+      color black
+      top 0
 
   select ~ label
     position relative
