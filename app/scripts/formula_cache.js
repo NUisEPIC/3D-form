@@ -6,15 +6,20 @@ function formula_get_data (inputs) {
     data.last_cache_time = cache.last_cache_time;
   }
   [].forEach.call(inputs, function (i) {
-    var key = ( i.id || i.type );
+    var key = i.type == 'radio' ? i.name : ( i.id || i.type );
     var cachedValue   = cache[key];
-    if ( i.type == 'checkbox' || i.type =='radio' ) {
+    if ( i.type == 'checkbox') {
       data[key] = i.checked = cachedValue;
+    }
+    else if (i.type == 'radio') {
+      data[key] = cachedValue;
+      i.checked = cachedValue == i.value;
     }
     else if (cachedValue && !i.value.trim()) {
       // NOTE(jordan): if we have a cached version when the input
       // is blank, load the cached version into the form.
-      data[key] = i.value = cachedValue, i.onchange();
+      data[key] = i.value = cachedValue;
+      i.onchange();
     } else {
       data[key] = i.value;
     }
