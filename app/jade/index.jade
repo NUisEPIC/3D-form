@@ -102,7 +102,7 @@ html
             .forcefield
               h2 Do You Have a Resume?
               .input-group
-                input#resume(type='text', required, disabled)
+                input#resume(type='text', disabled)
                 label#resume-btn Click to Update
                 .glance
 
@@ -113,7 +113,7 @@ html
               h2 Some Boring Stuff
               .input-group
                 select#gender
-                  option(values='') Please Select
+                  option(value='') Please Select
                   option(value='Male') Male
                   option(value='Female') Female
                   option(value='Other') Other
@@ -141,10 +141,10 @@ html
               p Can you legally buy cigarettes on Nov. 26th?
               .input-group
                 // (jordan) it works like this
-                input#18yes(type='radio', name='18yet', required)
+                input(type='radio', name='18yet', value='yes', required)
                 label Yes
 
-                input#18no(type='radio', name='18yet', required)
+                input(type='radio', name='18yet', value='no', required)
                 // (jordan) nbsp hacksss
                 label No&nbsp;
               .input-group

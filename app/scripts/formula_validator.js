@@ -34,6 +34,9 @@ var formula_default_validators = {
       if (c.checked) valid = true;
     });
     return valid;
+  },
+  radio: function (i, v) {
+    return true;
   }
 }
 
@@ -49,8 +52,6 @@ function formula_set_validators (newValidators) {
 
 function formula_validate_input (i) {
   var inputIsValid = false;
-
-  if (!i.required) return true;
 
   // NOTE(jordan): clean up after those dirty, dirty users ;)
   var value = i.value.trim()
@@ -84,7 +85,7 @@ function formula_validate_input (i) {
 
   inputIsValid ? i.addClass('valid') : i.removeClass('valid');
 
-  return inputIsValid;
+  return i.required ? inputIsValid : true;
 }
 
 function formula_inputs_valid (inputs) {
