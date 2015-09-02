@@ -62,7 +62,27 @@
   input
     max-height field-height
 
-  input[type='text'], input[type='email'], input[type='tel'], textarea, button
+  input#executive-summary, input#pitch-deck
+    display block
+    margin 0 auto
+    padding-left 5%
+    color transparent
+
+    & ~ label
+      color black
+      top 0
+
+  select ~ label
+    position relative
+    top -45px
+    text-align center
+    display block
+
+  select
+    display block
+    margin 0 auto
+
+  input[type='text'], input[type='number'], input[type='email'], input[type='tel'], textarea, button
     width 100% // will be overwritten.
     padding 10px 5% // will be overwritten.
     margin 0
