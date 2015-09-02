@@ -1,31 +1,6 @@
-var formula_one = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/application' : 'https://formula-one.herokuapp.com/recruitment/application';
-
-var formula_google_endpoint = 'https://docs.google.com/forms/d/15cZJhCpDrF9caF6-96BDtaUoxB1emT5uhW0snOnnGzE/formResponse';
-
 // NOTE(jordan): this is currently unused
 // TODO(jordan): dynamically set input[name] to google_form_mappings
 //               if input[name] is not already set.
-
-function basic_xhr_logging (x) {
-  if (x.status == 200) {
-    console.log('Awesomesauce');
-    console.log(x.responseText);
-  } else {
-    console.log('Not so awesomesauce. :(');
-    console.log(x.status);
-    console.log(x.responseText);
-  }
-}
-
-function formula_one_send_data(d) {
-  var x = new XMLHttpRequest();
-  x.open('POST', formula_one);
-  x.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-
-  x.onreadystatechange = basic_xhr_logging;
-
-  x.send(JSON.stringify(d));
-}
 
 function formula_get_pills (i) {
   var parent = i.parentElement
@@ -60,9 +35,9 @@ function formula_value_with_pills (i) {
 
 function formula_form_setup_google_submit (form) {
   form.action = formula_google_endpoint;
+  // NOTE(jordan): Stop the page from reloading
   form.target = 'dupe-frame';
   form.onsubmit = function (e) {
-    // NOTE(jordan): Stop the page from reloading
     e.preventDefault();
     e.stopPropagation();
   }
@@ -82,14 +57,7 @@ function formula_submit () {
     }
   });
 
-  console.log(data);
-  console.log(JSON.stringify(data));
-
-  formula_one_send_data(data);
-  // NOTE(jordan): use the callback here in case later we want to
-  // do anything after successful submission, like resetting the form.
-  formula_form_setup_google_submit(formula_form);
-  formula_form.submit();
+  formula_sync_server(data);
 
   formula_animator.punchTicket();
 }

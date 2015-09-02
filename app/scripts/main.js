@@ -91,7 +91,7 @@ function formula_setup_inputs (inputs, formula_next_page) {
     };
 
     var input_click = function () {
-      if (this.type == 'checkbox') formula_cache_set(this);
+      if (/checkbox|radio/.test(this.type)) formula_cache_set(this);
       validate_page();
     };
 
@@ -174,6 +174,8 @@ window.onload = function() {
     }
   })
 
+  formula_cache_init();
+
   formula_setup_inputs(formula_inputs, formula_next_page);
 
   formula_get_data(formula_inputs);
@@ -192,11 +194,12 @@ window.onload = function() {
 
   closeWarningBtn.onclick = closeWarning;
 
+  // NOTE(jordan): set up resume upload via filepicker
   var resumeBtn = document.getElementById('resume-btn');
 
   filepicker.setKey('AV96DZseeSYOldbUvmYwGz');
 
-  resumeBtn.onclick = function () {
+   resumeBtn.onclick = function () {
     filepicker.pick({
       mimetypes: ['text/plain',
                   'text/richtext',
@@ -211,11 +214,19 @@ window.onload = function() {
     },
     function(InkBlob) {
       var current_page_inputs = qq('.page.current input');
-      resumeBtn.nextElementSibling.value = JSON.stringify(InkBlob);
+      resumeBtn.previousElementSibling.value = JSON.stringify(InkBlob);
       formula_validate(current_page_inputs);
     },
     function(PFError) {
       console.log(PFError.toString());
     });
+  }
+
+  // NOTE(jordan): fixes a dumb glitch where things flicker if there's uncovered content on the back of the page element
+  var thank = qq('.thanks')[0]
+  thank.onclick = function (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    return false
   }
 }

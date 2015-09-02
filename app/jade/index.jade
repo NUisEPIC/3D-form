@@ -12,7 +12,7 @@ html
     // endbower
     // endbuild
 
-    // build:css styles/main.css
+    // build:css styles/formula.css
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
 
@@ -52,15 +52,15 @@ html
             .forcefield
               h2 Welcome to the WildHacks Application!
               .input-group
-                input(type="text", name='entry.354342888', required)
+                input#first-name(type="text", required)
                 label First Name*
                 .glance
               .input-group
-                input(type="text", name='entry.436547589', required)
+                input#last-name(type="text", required)
                 label Last Name*
                 .glance
               .input-group
-                input(type="text", name='entry.1486322634', required)
+                input#school(type="text", required)
                 label School*
                 .glance
 
@@ -70,15 +70,15 @@ html
             .forcefield
               h2 Some Basic Info
               .input-group
-                input#year(type="text", name='entry.1494609428', required)
+                input#year(type="text", required)
                 label Class Year (eg: 2017)*
                 .glance
               .input-group
-                input#major(type="text", name='entry.252100536', required)
+                input#major(type="text", required)
                 label Major*
                 .glance
               .input-group
-                input#travel(type='text', name='', required)
+                input#travel(type='text', required)
                 label Where will you be traveling from?*
                 .glance
 
@@ -88,11 +88,11 @@ html
             .forcefield
               h2 Where Can We Find You?
               .input-group
-                input#github(type="text", name='')
+                input#github(type="text")
                 label Github Link
                 .glance
               .input-group
-                input#website(type="text", name='')
+                input#website(type="text")
                 label Website
                 .glance
 
@@ -102,8 +102,8 @@ html
             .forcefield
               h2 Do You Have a Resume?
               .input-group
-                input#file(type='file', name='')
-                label Resume
+                input#resume(type='text', disabled)
+                label#resume-btn Click to Update
                 .glance
 
           .primary-window.page
@@ -138,34 +138,22 @@ html
             i.back-btn Back
             .forcefield
               h2 Some Housekeeping
+              p Can you legally buy cigarettes on Nov. 26th?
               .input-group
-                //- this should be a radio input but i can't figure out how it works
-                select#18(required)
-                  option(value='') Please Select
-                  option(value=1) Yes
-                  option(value=0) No
-                label Will you be 18 by Nov. 21, 2015?*
+                // (jordan) it works like this
+                input(type='radio', name='18yet', value='yes', required)
+                label Yes
+
+                input(type='radio', name='18yet', value='no', required)
+                // (jordan) nbsp hacksss
+                label No&nbsp;
               .input-group
-                input#teammates(type='text', name='')
+                input#teammates(type='text')
                 label Please list emails of teammates, if any, separated by commas:
                 .glance
               .input-group
-                input(type='checkbox', name='', required)
+                input#mlh-code-of-conduct(type='checkbox' required)
                 label I agree to the #[a(href='http://static.mlh.io/docs/mlh-code-of-conduct.pdf') MLH Code of Conduct.]*
-
-
-              //- .input-group.checkboxes
-              //-   input#hacker(type='checkbox', name='entry.2003569147', required)
-              //-   label Hacker
-              //-   input#designer(type='checkbox', name='entry.1080060025', required)
-              //-   label Designer
-              //-   input#builder(type='checkbox', name='entry.711584580', required)
-              //-   label Builder
-              //-   input#dinosaur(type='checkbox', name='entry.1762834979', required)
-              //-   label Dinosaur
-              //- .input-group
-              //-   textarea#explain-skills(name='entry.549867061', required)
-              //-   label Explain your selections
 
           .primary-window.page
             .place 7/7
@@ -174,7 +162,7 @@ html
               h2 Why do you want to come to WildHacks?
               //- (josh) i know this should probably be an essay question but im not about to fux with a mixin when i can just slap a place number on a textarea, ya dig
               .input-group
-                textarea#explain-skills(name='entry.549867061', required)
+                textarea#why-do-you-want-to-come(required)
                 label It's okay, we can take the truth.
             .thanks
               h3 Thanks for applying! Be sure to follow us for updates!
@@ -218,21 +206,21 @@ html
       a(href="http://www.olark.com?welcome", title="Olark live chat software") Olark live chat software
     // end olark code
 
-    // vendor.js is currently empty
-    // build:js scripts/vendor.js
-    script(type='text/javascript', src='bower_components/store/dist/store2.min.js')
+    // build:js scripts/formula-vendor.js
     // bower:js
+    script(type='text/javascript', src='bower_components/store/dist/store2.min.js')
     // endbower
     // endbuild
 
-    script(type="text/javascript", src="//api.filepicker.io/v1/filepicker.js" async)
+    script(type="text/javascript", src="//api.filepicker.io/v1/filepicker.js")
 
-    // build:js scripts/main.js
-    script(src='scripts/extensions.js' async)
-    script(src='scripts/formula_anim.js' async)
-    script(src='scripts/formula_notify.js' async)
-    script(src='scripts/formula_cache.js' async)
-    script(src='scripts/formula_validator.js' async)
-    script(src='scripts/formula_submitter.js' async)
-    script(src='scripts/main.js' async)
+    // build:js scripts/formula.js
+    script(src='scripts/extensions.js')
+    script(src='scripts/formula_sync_server.js')
+    script(src='scripts/formula_anim.js')
+    script(src='scripts/formula_notify.js')
+    script(src='scripts/formula_cache.js')
+    script(src='scripts/formula_validator.js')
+    script(src='scripts/formula_submitter.js')
+    script(src='scripts/main.js')
     // endbuild
