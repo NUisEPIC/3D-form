@@ -70,9 +70,16 @@ html
             .forcefield
               h2 Some Basic Info
               .input-group
-                input#year(type="text", required)
-                label Class Year (eg: 2017)*
-                .glance
+                select#year(required)
+                  option(value='') Select your year
+                  option(value='2016') 2016
+                  option(value='2017') 2017
+                  option(value='2018') 2018
+                  option(value='2019') 2019
+                  option(value='highschool') High School Student
+                  option(value='grad') Grad Student
+                  option(value='other') Other
+                label Class Year*
               .input-group
                 input#major(type="text", required)
                 label Major*
@@ -110,15 +117,15 @@ html
             .place 5/7
             i.back-btn Back
             .forcefield
-              h2 Some Boring Stuff
+              h2 Let's get to know you
               .input-group
-                select#gender
+                select#gender(required)
                   option(value='') Please Select
                   option(value='Male') Male
                   option(value='Female') Female
                   option(value='Other') Other
                   option(value='Prefer not to specify') Prefer not to specify
-                label Gender
+                label Gender*
               .input-group
                 select#shirt(required)
                   option(value='') Please Select
@@ -137,8 +144,8 @@ html
             .place 6/7
             i.back-btn Back
             .forcefield
-              h2 Some Housekeeping
-              p Can you legally buy cigarettes on Nov. 26th?
+              h2 Let's get to know you pt. II
+              p Will you be 18+ on Nov. 26th?
               .input-group
                 // (jordan) it works like this
                 input(type='radio', name='18yet', value='yes', required)

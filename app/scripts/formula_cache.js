@@ -23,7 +23,7 @@ function formula_cache_init () {
   })
 }
 
-function formula_get_data (inputs) {
+function formula_load_data (inputs) {
   var data = {}, cache = {};
   if (store) {
     cache = (store.get('formula_progress') || cache);
@@ -50,15 +50,39 @@ function formula_get_data (inputs) {
   });
   return data;
 }
+function formula_get_data (inputs) {
+  var data = {}, cache = {};
+  if (store) {
+    cache = (store.get('formula_progress') || cache);
+    data.last_cache_time = cache.last_cache_time;
+  }
+  [].forEach.call(inputs, function (i) {
+    var key = i.type == 'radio' ? i.name : ( i.id || i.type );
+    var cachedValue   = cache[key];
+    if ( i.type == 'checkbox') {
+      data[key] = i.checked;
+    }
+    else if (i.type == 'radio') {
+      i.checked = cachedValue == i.value;
+      if (i.checked)
+        data[key] = i.value;
+    }
+    else {
+      data[key] = i.value;
+    }
+  });
+  return data;
+}
 
 function formula_cache_set (i) {
   var cache = store.get('formula_progress');
 
-  if (i.type == 'radio')
+  if (i.type == 'radio') {
     cache[ i.name ] = i.value || i.checked
-  else
+  } else {
     var v = i.type == 'checkbox' ? i.checked : i.value.trim()
     cache[( i.id || i.type )] = v;
+  }
 
   store.set('formula_progress', cache);
 }

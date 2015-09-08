@@ -178,7 +178,7 @@ window.onload = function() {
 
   formula_setup_inputs(formula_inputs, formula_next_page);
 
-  formula_get_data(formula_inputs);
+  formula_load_data(formula_inputs);
 
   var current_page_inputs = qq('.page.current input');
 
