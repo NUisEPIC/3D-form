@@ -197,7 +197,7 @@ window.onload = function() {
   // NOTE(jordan): set up resume upload via filepicker
   var resumeBtn = document.getElementById('resume-btn');
 
-  filepicker.setKey('AV96DZseeSYOldbUvmYwGz');
+  filepicker.setKey('AG434Ppy3RES7VKbftrEnz');
 
    resumeBtn.onclick = function () {
     filepicker.pick({
