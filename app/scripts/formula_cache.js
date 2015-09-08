@@ -8,9 +8,9 @@ function formula_cache_init () {
   var cache = (store.get('formula_progress') || cache);
 
   formula_load_server(function (server_cache) {
-    if ( !cache[hash] || cache[hash] != email) {
+    if ( !cache['email'] || cache['email'] != email) {
       // NOTE(jordan): data corrupt; wipe it
-      cache = { }, cache[hash] = email
+      cache = { }, cache['email'] = email
     }
 
     for (var key in server_cache) {
