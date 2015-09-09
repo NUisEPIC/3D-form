@@ -180,7 +180,7 @@ window.onload = function() {
 
   formula_load_data(formula_inputs);
 
-  var current_page_inputs = qq('.page.current input');
+  var current_page_inputs = qq('.page.current input, .page.current select, .page.current textarea');
 
   formula_validate(current_page_inputs);
 
@@ -220,13 +220,5 @@ window.onload = function() {
     function(PFError) {
       console.log(PFError.toString());
     });
-  }
-
-  // NOTE(jordan): fixes a dumb glitch where things flicker if there's uncovered content on the back of the page element
-  var thank = qq('.thanks')[0]
-  thank.onclick = function (e) {
-    e.preventDefault()
-    e.stopPropagation()
-    return false
   }
 }

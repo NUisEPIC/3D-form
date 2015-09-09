@@ -45,7 +45,7 @@ function formula_form_setup_google_submit (form) {
 
 function formula_submit () {
   var formula_form   = qq('.formula form')[0]
-    , formula_inputs = qq('.formula form input, .formula form textarea');
+    , formula_inputs = qq('.formula form input, .formula form textarea, .formula form select');
 
 
   var data = formula_get_data(formula_inputs);
