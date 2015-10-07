@@ -1,5 +1,5 @@
 
-function formula_cache_init () {
+function formula_cache_init (then) {
   var id    = location.hash.substr(1).split(':')
     , email = id[0]
     , hash  = id[1]
@@ -14,12 +14,13 @@ function formula_cache_init () {
     }
 
     for (var key in server_cache) {
-      if (server_cache[key] && !cache[key])
+      if (server_cache[key])
         cache[key] = server_cache[key]
     }
 
     store.set('formula_progress', cache);
     formula_sync_server(cache);
+    then();
   })
 }
 

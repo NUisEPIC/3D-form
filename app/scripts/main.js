@@ -174,15 +174,16 @@ window.onload = function() {
     }
   })
 
-  formula_cache_init();
+  formula_cache_init(function () {
 
-  formula_setup_inputs(formula_inputs, formula_next_page);
+    formula_setup_inputs(formula_inputs, formula_next_page);
 
-  formula_load_data(formula_inputs);
+    formula_load_data(formula_inputs);
 
-  var current_page_inputs = qq('.page.current input, .page.current select, .page.current textarea');
+    var current_page_inputs = qq('.page.current input, .page.current select, .page.current textarea');
 
-  formula_validate(current_page_inputs);
+    formula_validate(current_page_inputs);
+  })
 
   // NOTE(jordan): gross gross gross gross gross
   adjustPadding();
