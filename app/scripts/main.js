@@ -183,6 +183,31 @@ window.onload = function() {
     var current_page_inputs = qq('.page.current input, .page.current select, .page.current textarea');
 
     formula_validate(current_page_inputs);
+
+    // NOTE(jordan): set up resume upload via filepicker
+    var resumeBtn = document.getElementById('resume-btn');
+
+    resumeBtn.onclick = function () {
+      filepicker.pick({
+        mimetypes: ['text/plain',
+                    'text/richtext',
+                    'application/pdf',
+                    'text/pdf'],
+        container: 'window',
+        services: ['COMPUTER', 'GMAIL', 'BOX'
+                   , 'DROPBOX', 'GOOGLE_DRIVE'
+                   , 'SKYDRIVE', 'EVERNOTE'
+                   , 'CLOUDDRIVE']
+      },
+      function(InkBlob) {
+        var current_page_inputs = qq('.page.current input');
+        resumeBtn.previousElementSibling.value = JSON.stringify(InkBlob);
+        formula_validate(current_page_inputs);
+      },
+      function(PFError) {
+        console.log(PFError.toString());
+      });
+  }
   })
 
   // NOTE(jordan): gross gross gross gross gross
@@ -195,31 +220,5 @@ window.onload = function() {
 
   closeWarningBtn.onclick = closeWarning;
 
-  // NOTE(jordan): set up resume upload via filepicker
-  var resumeBtn = document.getElementById('resume-btn');
-
   filepicker.setKey('AG434Ppy3RES7VKbftrEnz');
-
-   resumeBtn.onclick = function () {
-    filepicker.pick({
-      mimetypes: ['text/plain',
-                  'text/richtext',
-                  'application/pdf',
-                  'text/pdf'],
-      container: 'window',
-      services: ['COMPUTER', 'GMAIL', 'BOX'
-                 , 'DROPBOX', 'GOOGLE_DRIVE'
-                 , 'SKYDRIVE', 'EVERNOTE'
-                 , 'CLOUDDRIVE'],
-      //debug: true
-    },
-    function(InkBlob) {
-      var current_page_inputs = qq('.page.current input');
-      resumeBtn.previousElementSibling.value = JSON.stringify(InkBlob);
-      formula_validate(current_page_inputs);
-    },
-    function(PFError) {
-      console.log(PFError.toString());
-    });
-  }
 }
