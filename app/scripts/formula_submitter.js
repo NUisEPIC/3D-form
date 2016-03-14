@@ -72,7 +72,6 @@ function formula_submit () {
   var formula_form   = qq('.formula form')[0]
     , formula_inputs = qq('.formula form input, .formula form textarea');
 
-
   var data = formula_get_data(formula_inputs);
   [].forEach.call(formula_inputs, function (i) {
     if (formula_get_pills(i)) {

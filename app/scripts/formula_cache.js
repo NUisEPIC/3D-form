@@ -1,7 +1,7 @@
 
 function formula_get_data (inputs) {
   var data = {}, cache = {};
-  if (store) {
+  if (store) { // NOTE(jordan): if store.js is available, use it
     cache = (store.get('formula_progress') || cache);
     data.last_cache_time = cache.last_cache_time;
   }
@@ -35,7 +35,7 @@ function formula_cache_data (inputs) {
   var page_data = formula_get_data(inputs);
   var cache  = (store.get('formula_progress') || {});
   var changeOccurred = false;
-  // Only update the cache at most once every 10s
+  // Only update the cache at most once every 5s
   if ((Date.now() - cache.last_cache_time) < 5000)
     return;
   for (var key in page_data) {

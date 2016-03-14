@@ -24,11 +24,8 @@ var formula_animator = (function () {
 
   _self.reset = function () {
     // NOTE(jordan): if I used timeouts this could animate smoothly
-    _self.formula.removeClass('persp')
-                 .removeClass('end')
-                 .removeClass('punched')
-                 .removeClass('shuffle')
-                 .removeClass('reverse');
+    ['persp', 'end', 'punched', 'shuffle', 'reverse']
+      .map(_self.formula.removeClass)
   }
 
   _self.calculateTimings = function (t_array) {
