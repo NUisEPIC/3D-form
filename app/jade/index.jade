@@ -63,7 +63,7 @@ html
           
         .input-group
           input(id='phone-number-applicant-#{number}', type='tel', name='', required)
-          label Phone Number *
+          label Phone Number (xxx) yyy-zzzz *
           .glance
 
   body
@@ -108,7 +108,7 @@ html
                 label Consumer Products + Internet
                 
                 input#healthcare-medical-innovation(type='checkbox', required)
-                label Healhtcare + Medical Innovation
+                label Healthcare + Medical Innovation
                 
                 input#green-energy-sustainability(type='checkbox', required)
                 label Green Energy + Sustainability
@@ -121,6 +121,14 @@ html
             i.back-btn Back
             .forcefield
               h2 Uploads
+              .input-group
+                input#executive-summary(type='text', name='', required, disabled)
+                label#executive-summary-btn Executive Summary (.doc, .docx, .pdf, .txt. &leq; 3 pages)
+                .glance
+              .input-group
+                input#pitch-deck(type='text', name='', required, disabled)
+                label#pitch-deck-btn Pitch Deck (.ppt, .pptx, .pdf. &leq; 20 slides)
+                .glance
             .thanks
               h3 Thanks for applying! We'll be in touch. :D
               img(src="./images/fyeah2.png")

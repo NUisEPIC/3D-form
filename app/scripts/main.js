@@ -181,31 +181,34 @@ window.onload = function() {
 
   closeWarningBtn.onclick = closeWarning;
 
-  var resumeBtn = document.getElementById('resume-btn');
+  var executiveSummaryBtn = document.getElementById('executive-summary-btn')
+    , pitchDeckBtn        = document.getElementById('pitch-deck-btn')
 
-  filepicker.setKey('AV96DZseeSYOldbUvmYwGz');
+  filepicker.setKey('AwcwduAoSOC9x7Qoi9y4Az');
 
-   resumeBtn.onclick = function () {
-    filepicker.pick({
-      mimetypes: ['text/plain',
-                  'text/richtext',
-                  'application/pdf',
-                  'text/pdf'],
-      container: 'window',
-      services: ['COMPUTER', 'GMAIL', 'BOX'
-                 , 'DROPBOX', 'GOOGLE_DRIVE'
-                 , 'SKYDRIVE', 'EVERNOTE'
-                 , 'CLOUDDRIVE'],
-      //debug: true
-    },
-    function(InkBlob) {
-      var current_page_inputs = qq('.page.current input');
-      resumeBtn.previousElementSibling.value = JSON.stringify(InkBlob);
-      formula_validate(current_page_inputs);
-    },
-    function(PFError) {
-      console.log(PFError.toString());
-    });
+  makeFileInput(executiveSummaryBtn, ['.pdf', '.doc', '.docx'])
+  makeFileInput(pitchDeckBtn, ['.ppt', '.pptx', '.pdf'])
+
+  function makeFileInput (targetEl, extensions) {
+    targetEl.onclick = function () {
+      filepicker.pick({
+        extensions: extensions,
+        container: 'window',
+        services: ['COMPUTER', 'GMAIL', 'BOX'
+                   , 'DROPBOX', 'GOOGLE_DRIVE'
+                   , 'SKYDRIVE' 
+                   , 'CLOUDDRIVE'],
+        //debug: true
+      },
+      function(InkBlob) {
+        var current_page_inputs = qq('.page.current input');
+        targetEl.previousElementSibling.value = JSON.stringify(InkBlob);
+        formula_validate(current_page_inputs);
+      },
+      function(PFError) {
+        console.log(PFError.toString());
+      });
+    }
   }
 
   var thank = qq('.thanks')[0]
