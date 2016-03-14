@@ -27,6 +27,45 @@ html
       if block
         block
 
+  mixin applicantInformation(number)
+    .primary-window.page
+      i.back-btn Back
+      .forcefield
+        h2 Applicant Information (Applicant #{number} Page 1)
+        .input-group
+          input(id='name-applicant-#{number}', type='text', name='', required)
+          label Name (First and Last) *
+          .glance
+          
+        .input-group
+          input(id='email-applicant-#{number}', type='email', name='', required)
+          label Email Address *
+          .glance
+          
+        .input-group
+          input(id='company-position-applicant-#{number}', type='text', name='', required)
+          label Position in the Company *
+          .glance
+          
+    .primary-window.page
+      i.back-btn Back
+      .forcefield
+        h2 Applicant Information (Applicant #{number} Page 2)
+        .input-group
+          input(id='nu-affiliation-applicant-#{number}', type='text', name='', required)
+          label Northwestern Affiliation *
+          .glance
+          
+        .input-group
+          input(id='graduation-year-applicant-#{number}', type='text', name='')
+          label Year of Graduation (if any)
+          .glance
+          
+        .input-group
+          input(id='phone-number-applicant-#{number}', type='tel', name='', required)
+          label Phone Number *
+          .glance
+
   body
     #formula-container
       .mobile-warning
@@ -46,90 +85,42 @@ html
         form
           .primary-window.page.current
             .forcefield
-              h2 Welcome to the Official EPIC Application!
+              h2 Welcome to the NUVC 2016 Application!
+              h4 Let's bring your ideas to life.
+              hr
               .input-group
-                input#name(type="text", name='entry.354342888', required)
-                label Name (First and Last)
+                input#business-name(type="text", name='entry.354342888', required)
+                label Business Name
                 .glance
               .input-group
-                input#email(type="email", name='entry.436547589', required)
-                label School Email
-                .glance
-                .pill-right
-                  span .edu
-              .input-group
-                input#hearsay(type="text", name='entry.1486322634', required)
-                label How did you hear about our application?
+                input#website(type='text', name='', required)
+                label Website URL (if any)
                 .glance
           .primary-window.page
             i.back-btn Back
             .forcefield
-              h2 Some Basic Info
-              .input-group
-                input#year(type="text", name='entry.1494609428', required)
-                label Class Year (eg: 2017)
-                .glance
-              .input-group
-                input#major(type="text", name='entry.252100536', required)
-                label Major
-                .glance
-              .input-group
-                input#phone(type="tel", name='entry.1881012293', required)
-                label Phone Number: (xxx) yyy zzzz
-                .glance
-          .primary-window.page
-            i.back-btn Back
-            .forcefield
-              h2 I am applying to (select as many as apply):
+              h2 My business belongs to the following track:
               .input-group.checkboxes
-                input#apply-for-launch(type='checkbox', required)
-                label Participate in Launch
-
-                input#apply-for-epic(type='checkbox', required)
-                label Join EPIC Teams
+                input#business-products-internet(type='checkbox', required)
+                label Business Products + Internet
+                
+                input#consumer-products-internet(type='checkbox', required)
+                label Consumer Products + Internet
+                
+                input#healthcare-medical-innovation(type='checkbox', required)
+                label Healhtcare + Medical Innovation
+                
+                input#green-energy-sustainability(type='checkbox', required)
+                label Green Energy + Sustainability
+                
+                input#social-enterprise-nonprofit(type='checkbox', required)
+                label Social Enterprise + NonProfit
+          - each applicantNumber in [1, 2, 3, 4, 5]
+            +applicantInformation(applicantNumber)
           .primary-window.page
             i.back-btn Back
             .forcefield
-              h2 I want to...
-              .input-group.checkboxes
-                input#build-a-startup(type='checkbox', required)
-                label Build a Startup
-
-                input#run-a-hackathon(type='checkbox', required)
-                label Run a Hackathon
-
-                input#learn-to-code(type='checkbox', required)
-                label Learn to Code
-
-                input#teach-entrepreneurship(type='checkbox', required)
-                label Teach Entrepreneurship
-          .primary-window.page
-            i.back-btn Back
-            .forcefield
-              h2 I am a...
-              .input-group.checkboxes
-                input#hacker(type='checkbox', name='entry.2003569147', required)
-                label Hacker
-                input#designer(type='checkbox', name='entry.1080060025', required)
-                label Designer
-                input#builder(type='checkbox', name='entry.711584580', required)
-                label Builder
-              .input-group
-                textarea#explain-skills(name='entry.549867061', required)
-                label Explain your selections
-          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'Ex: What are you passionate about? What was your journey to NU?')(name='entry.1482811689')
-
-          +essayQuestion('why-epic-matters', 'Why does EPIC matter to Northwestern?', 'How is it different from other organizations?')(name='entry.1038701340')
-
-          +essayQuestion('why-interested', 'Why are you interested in joining EPIC?', 'What do you hope to learn? What skills do you hope to gain?')(name='entry.1277416023')
-
-          +essayQuestion('how-contribute', 'How will you contribute to your team?', 'Whichever it may be. How will you foster inter-team cooperation?')(name='entry.1133447629')
-
-          +essayQuestion('other-involvements', 'What else are you involved in?', 'e.g.; Work-study, ISBE, DOJO, etc.')(name='entry.93355119')
-
-          +essayQuestion('elevator-pitch', 'Why are you the best person for EPIC?', '5 Minutes! Elevator Pitch! Go!')(name='entry.555173403')
-
-          +essayQuestion('anything-else', 'Anything else you would like us to consider?', 'Maybe share some fun (or serious) facts. :)')(name='entry.1658748676')
+              h2 Uploads
             .thanks
               h3 Thanks for applying! We'll be in touch. :D
               img(src="./images/fyeah2.png")
