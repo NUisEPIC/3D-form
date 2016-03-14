@@ -163,6 +163,21 @@ window.onload = function() {
     }
   })
 
+  var noMoreTeamMembersBtn = qq('.no-more-applicants-btn')
+    , afterApplicantsPage  = qq('#after-applicants')[0]
+    , afterApplicantsPageInputs = afterApplicantsPage.getElementsByTagName('input')
+
+  ;[].forEach.call(noMoreTeamMembersBtn, function (btn) {
+    var btn_page = extend(btn.parentElement)
+
+    btn.onclick = function () {
+      formula_animator.nextPage(btn_page, afterApplicantsPage, function () {
+        afterApplicantsPageInputs[0].focus()
+        formula_validate(afterApplicantsPageInputs)
+      })
+    }
+  })
+
   formula_setup_inputs(formula_inputs, formula_next_page);
 
   formula_get_data(formula_inputs);
@@ -196,7 +211,7 @@ window.onload = function() {
         container: 'window',
         services: ['COMPUTER', 'GMAIL', 'BOX'
                    , 'DROPBOX', 'GOOGLE_DRIVE'
-                   , 'SKYDRIVE' 
+                   , 'SKYDRIVE'
                    , 'CLOUDDRIVE'],
         //debug: true
       },

@@ -3,7 +3,7 @@ html
   head
     meta(charset='utf-8')
     title EPIC Application
-    meta(name='description', content='Apply to EPIC, Northwestern\'s premier Entrepreneurship Student Group!')
+    meta(name='description', content='Apply to NUVC 2016')
     meta(name='viewport', content='width=device-width, initial-scale=1')
 
     // vendor.css is currently empty
@@ -27,32 +27,33 @@ html
       if block
         block
 
-  mixin applicantInformation(number)
+  mixin applicantInformation(number, req)
     .primary-window.page
       i.back-btn Back
       .forcefield
-        h2 Applicant Information (Applicant #{number} Page 1)
+        h2 Team Member (Member #{number} Page 1)
         .input-group
-          input(id='name-applicant-#{number}', type='text', name='', required)
+          input(id='name-applicant-#{number}', type='text', name='', required!=req)
           label Name (First and Last) *
           .glance
           
         .input-group
-          input(id='email-applicant-#{number}', type='email', name='', required)
+          input(id='email-applicant-#{number}', type='email', name='', required!=req)
           label Email Address *
           .glance
           
         .input-group
-          input(id='company-position-applicant-#{number}', type='text', name='', required)
+          input(id='company-position-applicant-#{number}', type='text', name='', required!=req)
           label Position in the Company *
           .glance
           
     .primary-window.page
       i.back-btn Back
+      i.no-more-applicants-btn No more Team Members
       .forcefield
-        h2 Applicant Information (Applicant #{number} Page 2)
+        h2 Team Member (Member #{number} Page 2)
         .input-group
-          input(id='nu-affiliation-applicant-#{number}', type='text', name='', required)
+          input(id='nu-affiliation-applicant-#{number}', type='text', name='', required!=req)
           label Northwestern Affiliation *
           .glance
           
@@ -62,7 +63,7 @@ html
           .glance
           
         .input-group
-          input(id='phone-number-applicant-#{number}', type='tel', name='', required)
+          input(id='phone-number-applicant-#{number}', type='tel', name='', required!=req)
           label Phone Number (xxx) yyy-zzzz *
           .glance
 
@@ -100,24 +101,24 @@ html
             i.back-btn Back
             .forcefield
               h2 My business belongs to the following track:
-              .input-group.checkboxes
-                input#business-products-internet(type='checkbox', required)
+              .input-group
+                input(type='radio', name='track', value='business-products-internet', required)
                 label Business Products + Internet
                 
-                input#consumer-products-internet(type='checkbox', required)
+                input(type='radio', name='track', value='consumer-products-internet', required)
                 label Consumer Products + Internet
                 
-                input#healthcare-medical-innovation(type='checkbox', required)
+                input(type='radio', name='track', value='healthcare-medical-innovation', required)
                 label Healthcare + Medical Innovation
                 
-                input#green-energy-sustainability(type='checkbox', required)
+                input(type='radio', name='track', value='green-energy-sustainability', required)
                 label Green Energy + Sustainability
                 
-                input#social-enterprise-nonprofit(type='checkbox', required)
+                input(type='radio', name='track', value='social-enterprise-nonprofit', required)
                 label Social Enterprise + NonProfit
           - each applicantNumber in [1, 2, 3, 4, 5]
-            +applicantInformation(applicantNumber)
-          .primary-window.page
+            +applicantInformation(applicantNumber, applicantNumber == 1)
+          .primary-window.page#after-applicants
             i.back-btn Back
             .forcefield
               h2 Uploads
@@ -131,7 +132,7 @@ html
                 .glance
             .thanks
               h3 Thanks for applying! We'll be in touch. :D
-              img(src="./images/fyeah2.png")
+              img(src="./images/nuvc-logo.png")
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
