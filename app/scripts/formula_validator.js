@@ -76,7 +76,7 @@ function formula_validate_input (i) {
       // NOTE(jordan): default
       console.log('Validating ' + type + '...');
       console.log('With: failover validator');
-      inputIsValid = value.length > 0;
+      inputIsValid = !i.required || value.length > 0;
     }
   }
 

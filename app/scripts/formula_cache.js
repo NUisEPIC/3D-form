@@ -1,5 +1,4 @@
-
-function formula_get_data (inputs) {
+function formula_get_data (inputs, init) {
   var data = {}, cache = {};
   if (store) { // NOTE(jordan): if store.js is available, use it
     cache = (store.get('formula_progress') || cache);
@@ -8,14 +7,13 @@ function formula_get_data (inputs) {
   [].forEach.call(inputs, function (i) {
     var key = i.type == 'radio' ? i.name : ( i.id || i.type );
     var cachedValue   = cache[key];
+
     if ( i.type == 'checkbox') {
       data[key] = i.checked = cachedValue;
-    }
-    else if (i.type == 'radio') {
+    } else if (i.type == 'radio') {
       data[key] = cachedValue;
       i.checked = cachedValue == i.value;
-    }
-    else if (cachedValue && !i.value.trim()) {
+    } else if (init && cachedValue && !i.value.trim()) {
       // NOTE(jordan): if we have a cached version when the input
       // is blank, load the cached version into the form.
       data[key] = i.value = cachedValue;
@@ -32,9 +30,10 @@ function formula_cache_set (i) {
 
   if (i.type == 'radio')
     cache[ i.name ] = i.value || i.checked
-  else
+  else {
     var v = i.type == 'checkbox' ? i.checked : i.value.trim()
     cache[( i.id || i.type )] = v;
+  }
 
   store.set('formula_progress', cache);
 }
