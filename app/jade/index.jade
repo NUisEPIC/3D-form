@@ -27,7 +27,7 @@ html
       if block
         block
 
-  mixin applicantInformation(number, req)
+  mixin applicantInformation(number, names, req)
     .primary-window.page
       i.back-btn Back
       - if (!req)
@@ -35,17 +35,17 @@ html
       .forcefield
         h2 Team Member (Member #{number} Page 1)
         .input-group
-          input(id='name-applicant-#{number}', type='text', name='', required!=req)
+          input(id='name-applicant-#{number}', type='text', name!=names[0], required!=req)
           label Name (First and Last) *
           .glance
           
         .input-group
-          input(id='email-applicant-#{number}', type='email', name='', required!=req)
+          input(id='email-applicant-#{number}', type='email', name!=names[1], required!=req)
           label Email Address *
           .glance
           
         .input-group
-          input(id='company-position-applicant-#{number}', type='text', name='', required!=req)
+          input(id='company-position-applicant-#{number}', type='text', name!=names[2], required!=req)
           label Position in the Company *
           .glance
           
@@ -54,17 +54,17 @@ html
       .forcefield
         h2 Team Member (Member #{number} Page 2)
         .input-group
-          input(id='nu-affiliation-applicant-#{number}', type='text', name='', required!=req)
+          input(id='nu-affiliation-applicant-#{number}', type='text', name!=names[3], required!=req)
           label Northwestern Affiliation *
           .glance
           
         .input-group
-          input(id='graduation-year-applicant-#{number}', type='text', name='')
+          input(id='graduation-year-applicant-#{number}', type='text', name!=names[4])
           label Year of Graduation (if any)
           .glance
           
         .input-group
-          input(id='phone-number-applicant-#{number}', type='tel', name='', required!=req)
+          input(id='phone-number-applicant-#{number}', type='tel', name!=names[5], required!=req)
           label Phone Number (xxx) yyy-zzzz *
           .glance
 
@@ -91,11 +91,11 @@ html
               h4 Let's bring your ideas to life.
               hr
               .input-group
-                input#business-name(type="text", name='entry.354342888', required)
+                input#business-name(type="text", name='entry.1504244289', required)
                 label Business Name
                 .glance
               .input-group
-                input#website(type='text', name='', required)
+                input#website(type='text', name='entry.17159063', required)
                 label Website URL (if any)
                 .glance
           .primary-window.page
@@ -103,32 +103,70 @@ html
             .forcefield
               h2 My business belongs to the following track:
               .input-group
-                input(type='radio', name='track', value='business-products-internet', required)
+                input(type='radio', name='track', value='business products + internet', required)
                 label Business Products + Internet
                 
-                input(type='radio', name='track', value='consumer-products-internet', required)
+                input(type='radio', name='track', value='consumer products + internet', required)
                 label Consumer Products + Internet
                 
-                input(type='radio', name='track', value='healthcare-medical-innovation', required)
+                input(type='radio', name='track', value='healthcare + medical innovation', required)
                 label Healthcare + Medical Innovation
                 
-                input(type='radio', name='track', value='green-energy-sustainability', required)
+                input(type='radio', name='track', value='green energy + sustainability', required)
                 label Green Energy + Sustainability
                 
-                input(type='radio', name='track', value='social-enterprise-nonprofit', required)
+                input(type='radio', name='track', value='social enterprise + nonprofit', required)
                 label Social Enterprise + NonProfit
-          - each applicantNumber in [1, 2, 3, 4, 5]
-            +applicantInformation(applicantNumber, applicantNumber == 1)
+          +applicantInformation(1, [
+            'entry.277896896',
+            'entry.736223702',
+            'entry.957245702',
+            'entry.209404180',
+            'entry.533819606',
+            'entry.1326031523'
+            ], true)
+          +applicantInformation(2, [
+            'entry.583788180',
+            'entry.653732657',
+            'entry.1734461939',
+            'entry.1528661410',
+            'entry.362840488',
+            'entry.1283934602'
+            ])
+          +applicantInformation(3, [
+            'entry.1051053391',
+            'entry.322405344',
+            'entry.2039175511',
+            'entry.313171812',
+            'entry.407399639',
+            'entry.394801260'
+            ])
+          +applicantInformation(4, [
+            'entry.1906496757',
+            'entry.259070768',
+            'entry.444052365',
+            'entry.1565311189',
+            'entry.65440090',
+            'entry.28612929'
+            ])
+          +applicantInformation(5, [
+            'entry.1437193799',
+            'entry.70272653',
+            'entry.1153644332',
+            'entry.652731287',
+            'entry.847369347',
+            'entry.121294965'
+            ])
           .primary-window.page#after-applicants
             i.back-btn Back
             .forcefield
               h2 Uploads
               .input-group
-                input#executive-summary(type='text', name='', required, disabled)
+                input#executive-summary(type='text', name='entry.1459856723', required, disabled)
                 label#executive-summary-btn Executive Summary (.doc, .docx, .pdf, .txt. &leq; 3 pages)
                 .glance
               .input-group
-                input#pitch-deck(type='text', name='', required, disabled)
+                input#pitch-deck(type='text', name='entry.1606385102', required, disabled)
                 label#pitch-deck-btn Pitch Deck (.ppt, .pptx, .pdf. &leq; 20 slides)
                 .glance
             .thanks

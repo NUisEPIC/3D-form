@@ -1,6 +1,6 @@
-var formula_one = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/application' : 'https://formula-one.herokuapp.com/recruitment/application';
+var formula_one = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/application' : 'https://formula-one.herokuapp.com/nuvc/year:2016/application';
 
-var formula_google_endpoint = 'https://docs.google.com/forms/d/15cZJhCpDrF9caF6-96BDtaUoxB1emT5uhW0snOnnGzE/formResponse';
+var formula_google_endpoint = 'https://docs.google.com/forms/d/1uLqotx5bmCla2xumwkPVK3iN4yBFkHXgh0_p0c4iOHs/formResponse';
 
 // NOTE(jordan): this is currently unused
 // TODO(jordan): dynamically set input[name] to google_form_mappings
@@ -61,10 +61,23 @@ function formula_value_with_pills (i) {
 function formula_form_setup_google_submit (form) {
   form.action = formula_google_endpoint;
   // NOTE(jordan): Stop the page from reloading
+  // NOTE(jordan): lul no
+  [].forEach.call(qq('input[type="radio"]'), function (radio) {
+    radio.name = 'entry.1704788677'
+  })
+
+  var disabled = qq('[disabled]')
+  ;[].forEach.call(disabled, function (disabled) {
+    disabled.disabled = false
+  })
+
   form.target = 'dupe-frame';
   form.onsubmit = function (e) {
     e.preventDefault();
     e.stopPropagation();
+    ;[].forEach.call(disabled, function (disabled) {
+      disabled.disabled = true
+    })
   }
 }
 
