@@ -1,4 +1,4 @@
-var formula_one = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/application' : 'https://formula-one.herokuapp.com/nuvc/year:2016/application';
+var formula_one = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/application' : 'https://formula-one.herokuapp.com/nuvc/application';
 
 var formula_google_endpoint = 'https://docs.google.com/forms/d/1uLqotx5bmCla2xumwkPVK3iN4yBFkHXgh0_p0c4iOHs/formResponse';
 
