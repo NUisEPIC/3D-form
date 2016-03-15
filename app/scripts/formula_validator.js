@@ -36,7 +36,10 @@ var formula_default_validators = {
     return valid;
   },
   radio: function (i, v) {
-    return true;
+    return [].some.call(i.parentElement.getElementsByTagName('input'),
+      function (radio) {
+        return radio.checked
+    })
   }
 }
 

@@ -30,6 +30,8 @@ html
   mixin applicantInformation(number, req)
     .primary-window.page
       i.back-btn Back
+      - if (!req)
+        i.no-more-applicants-btn No more Team Members
       .forcefield
         h2 Team Member (Member #{number} Page 1)
         .input-group
@@ -49,7 +51,6 @@ html
           
     .primary-window.page
       i.back-btn Back
-      i.no-more-applicants-btn No more Team Members
       .forcefield
         h2 Team Member (Member #{number} Page 2)
         .input-group
@@ -131,7 +132,7 @@ html
                 label#pitch-deck-btn Pitch Deck (.ppt, .pptx, .pdf. &leq; 20 slides)
                 .glance
             .thanks
-              h3 Thanks for applying! We'll be in touch. :D
+              h3 Thanks for applying! We'll be in touch.
               img(src="./images/nuvc-logo.png")
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
