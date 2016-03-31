@@ -6,4 +6,4 @@ app/bower_components
 test/bower_components
 .editorconfig
 
-app/index.html
+app/*.html
