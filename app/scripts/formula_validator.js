@@ -45,14 +45,6 @@ var formula_default_validators = {
 
 var formula_validators = formula_default_validators;
 
-function formula_set_validators (newValidators) {
-  newValidators = newValidators || {};
-
-  // NOTE(jordan): validators = _.extend(validators, new_validators)
-  for (var validatorName in newValidators)
-    formula_validators[validatorName] = newValidators[validatorName];
-}
-
 function formula_validate_input (i) {
   var inputIsValid = false;
 

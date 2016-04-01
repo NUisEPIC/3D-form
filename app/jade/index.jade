@@ -1,16 +1,10 @@
 doctype html
-html
+html(lang='en')
   head
     meta(charset='utf-8')
-    title EPIC Application
-    meta(name='description', content='Apply to NUVC 2016')
+    title EPIC Spring 2016 Application
+    meta(name='description', content='Apply to EPIC Spring 2016')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-
-    // vendor.css is currently empty
-    // build:css styles/vendor.css
-    // bower:css
-    // endbower
-    // endbuild
 
     // build:css styles/main.css
     link(rel='stylesheet', href='styles/main.css')
@@ -27,49 +21,9 @@ html
       if block
         block
 
-  mixin applicantInformation(number, names, req)
-    .primary-window.page
-      i.back-btn Back
-      - if (!req)
-        i.no-more-applicants-btn No more Team Members
-      .forcefield
-        h2 Team Member (Member #{number} Page 1)
-        .input-group
-          input(id='name-applicant-#{number}', type='text', name!=names[0], required!=req)
-          label Name (First and Last) *
-          .glance
-          
-        .input-group
-          input(id='email-applicant-#{number}', type='email', name!=names[1], required!=req)
-          label Email Address *
-          .glance
-          
-        .input-group
-          input(id='company-position-applicant-#{number}', type='text', name!=names[2], required!=req)
-          label Position in the Company *
-          .glance
-          
-    .primary-window.page
-      i.back-btn Back
-      .forcefield
-        h2 Team Member (Member #{number} Page 2)
-        .input-group
-          input(id='nu-affiliation-applicant-#{number}', type='text', name!=names[3], required!=req)
-          label Northwestern Affiliation *
-          .glance
-          
-        .input-group
-          input(id='graduation-year-applicant-#{number}', type='text', name!=names[4])
-          label Year of Graduation (if any)
-          .glance
-          
-        .input-group
-          input(id='phone-number-applicant-#{number}', type='tel', name!=names[5], required!=req)
-          label Phone Number (xxx) yyy-zzzz *
-          .glance
-
   body
     #formula-container
+
       .mobile-warning
         p Hey! It looks like you're using a mobile phone, which is awesome.
         p But we spent a lot of time making this application look juuuust right for desktop, and it'll probably be a little squishy on your phone.
@@ -78,100 +32,105 @@ html
           a(href='#', do='close-warning') tap here
           | .
         p Otherwise, come back on your computer later, ok? ;)
+
       iframe(name='dupe-frame')
+      
       .formula
         .header
         .next-btn
           .inner-btn
             span Next
+  
         form
           .primary-window.page.current
             .forcefield
-              h2 Welcome to the NUVC 2016 Application!
-              h4 Let's bring your ideas to life.
-              hr
+              h2 Welcome to the EPIC 2016 Spring Application!
               .input-group
-                input#business-name(type="text", name='entry.1504244289', required)
-                label Business Name
+                input#name(type='text', required)
+                label Name (First and Last)
                 .glance
+              
               .input-group
-                input#website(type='text', name='entry.17159063', required)
-                label Website URL (if any)
+                input#email(type='text', required)
+                label School Email
                 .glance
+                .pill-right
+                  span .edu
+              
+              .input-group
+                input#year(type='text', required)
+                label Year (e.g.; 2017)
+                .glance
+              
+              .input-group  
+                input#major(type='text', required)
+                label Major
+                .glance
+              
+              .input-group
+                input#phone(type='tel', required)
+                label Phone Number
+                .glance
+
           .primary-window.page
             i.back-btn Back
             .forcefield
-              h2 My business belongs to the following track:
+              h2 Where do you see yourself in EPIC?
               .input-group
-                input(type='radio', name='track', value='business products + internet', required)
-                label Business Products + Internet
+                input(type='radio', name='track', value='EPIC Teams', required)
+                label EPIC Teams
                 
-                input(type='radio', name='track', value='consumer products + internet', required)
-                label Consumer Products + Internet
-                
-                input(type='radio', name='track', value='healthcare + medical innovation', required)
-                label Healthcare + Medical Innovation
-                
-                input(type='radio', name='track', value='green energy + sustainability', required)
-                label Green Energy + Sustainability
-                
-                input(type='radio', name='track', value='social enterprise + nonprofit', required)
-                label Social Enterprise + NonProfit
-          +applicantInformation(1, [
-            'entry.277896896',
-            'entry.736223702',
-            'entry.957245702',
-            'entry.209404180',
-            'entry.533819606',
-            'entry.1326031523'
-            ], true)
-          +applicantInformation(2, [
-            'entry.583788180',
-            'entry.653732657',
-            'entry.1734461939',
-            'entry.1528661410',
-            'entry.362840488',
-            'entry.1283934602'
-            ])
-          +applicantInformation(3, [
-            'entry.1051053391',
-            'entry.322405344',
-            'entry.2039175511',
-            'entry.313171812',
-            'entry.407399639',
-            'entry.394801260'
-            ])
-          +applicantInformation(4, [
-            'entry.1906496757',
-            'entry.259070768',
-            'entry.444052365',
-            'entry.1565311189',
-            'entry.65440090',
-            'entry.28612929'
-            ])
-          +applicantInformation(5, [
-            'entry.1437193799',
-            'entry.70272653',
-            'entry.1153644332',
-            'entry.652731287',
-            'entry.847369347',
-            'entry.121294965'
-            ])
-          .primary-window.page#after-applicants
+                input(type='radio', name='track', value='EPIC General Membership', required)
+                label EPIC General Membership
+
+          .primary-window.page#branch-1
             i.back-btn Back
             .forcefield
-              h2 Uploads
+              h2 EPIC General Membership Application
               .input-group
-                input#executive-summary(type='text', name='entry.1459856723', required, disabled)
-                label#executive-summary-btn Executive Summary (.doc, .docx, .pdf, .txt. &leq; 3 pages)
-                .glance
-              .input-group
-                input#pitch-deck(type='text', name='entry.1606385102', required, disabled)
-                label#pitch-deck-btn Pitch Deck (.ppt, .pptx, .pdf. &leq; 20 slides)
-                .glance
+                textarea#what-do-you-want(required)
+                label What do you want to get out of your membership?
+
+            .thanks
+              h3 Thanks for joining! We look forward to spending time with you.
+              img(src="./images/epic-logo.png")
+
+          .primary-window.page#branch-2
+            i.back-btn Back
+            .forcefield
+              h2 EPIC Team Application
+              h3 I want to...
+              .input-group.checkboxes
+                input#run-hackathon(type='checkbox', required)
+                label Run a hackathon (WildHacks)
+                
+                input#run-business-pitch-competition(type='checkbox', required)
+                label Run a Business Pitch Competition (NUVC)
+                
+                input#code(type='checkbox', required)
+                label Code (Tech)
+                
+                input#build-brand(type='checkbox', required)
+                label Build a Brand (Branding)
+                
+                input#teach-entrepreneurship(type='checkbox', required)
+                label Teach Entrepreneurship (Launch)
+                
+                input#inspire-entrepreneurs(type='checkbox', required)
+                label Inspire Budding Entrepreneurs (Venture)
+                
+                input#expand-epic-reach(type='checkbox', required)
+                label Expand EPIC's Reach (BizDev)
+
+          +essayQuestion('story', "What's your story? Tell us about yourself.", 'ex: what are you passionate about? What was your journey to NU?')
+          +essayQuestion('why-interested', 'Why are you interested in joining EPIC?', 'What do you hope to learn? What skills do you hope to gain?')
+          +essayQuestion('why-passionate-entrep', 'Why are you passionate about entrepreneurship?', 'Feel free to tell us about any entrepreneurial experience you have.')
+          +essayQuestion('how-contribute', 'What will you contribute to the specific team you are interested in?', 'How do you see yourself fitting in?')
+          +essayQuestion('other-involvements', 'What else are you involved in?', 'ex: Work-Study, other student orgs, study abroad, etc.')
+          +essayQuestion('anything-else', 'Anything else you would like us to consider?', 'ex: share a fun fact!')
             .thanks
               h3 Thanks for applying! We'll be in touch.
-              img(src="./images/nuvc-logo.png")
+              img(src="./images/epic-logo.png")
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
     script.
@@ -203,16 +162,16 @@ html
       loader: "static.olark.com/jsclient/loader0.js",name:"olark",methods:["configure","extend","declare","identify"]});
       /* custom configuration goes here (www.olark.com/documentation) */
       olark.identify('2927-692-10-4152');/*]]>*/
+  
     noscript
       a(href="https://www.olark.com/site/2927-692-10-4152/contact", title="Contact us", target="_blank") Questions? Feedback?
       | powered by
       a(href="http://www.olark.com?welcome", title="Olark live chat software") Olark live chat software
     // end olark code
 
-    // vendor.js is currently empty
     // build:js scripts/vendor.js
-    script(type='text/javascript', src='bower_components/store/dist/store2.min.js')
     // bower:js
+    script(type='text/javascript', src='bower_components/store/dist/store2.min.js')
     // endbower
     // endbuild
 

@@ -44,11 +44,6 @@ var formula_animator = (function () {
 
     timings = _self.calculateTimings(timings);
 
-    if (to instanceof Function)
-      timings = post, post = pre, pre = to, to = from.nextElementSibling;
-    else if (pre instanceof Function && !post)
-      post = pre, pre = null;
-
     if (!to || to.className.indexOf('page') === -1)
       return;
 

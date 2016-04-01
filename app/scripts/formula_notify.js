@@ -1,9 +1,7 @@
 var formula_notify = (function () {
   var _self = {};
 
-  _self.notifyWindow = document.createElement('div');
-
-  extend(_self.notifyWindow);
+  _self.notifyWindow = extend(document.createElement('div'));
 
   _self.notifyWindow.addClass('formula-notify-window');
 

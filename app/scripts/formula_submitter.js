@@ -63,7 +63,7 @@ function formula_form_setup_google_submit (form) {
   // NOTE(jordan): Stop the page from reloading
   // NOTE(jordan): lul no
   [].forEach.call(qq('input[type="radio"]'), function (radio) {
-    radio.name = 'entry.1704788677'
+    radio.name = ''
   })
 
   var disabled = qq('[disabled]')

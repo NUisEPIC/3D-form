@@ -79,7 +79,7 @@ function formula_setup_inputs (inputs, formula_next_page) {
   var pages = qq('.page');
 
   [].forEach.call(pages, function (page) {
-    var inputs = [].slice.call(page.getElementsByTagName('input'));
+    var inputs    = [].slice.call(page.getElementsByTagName('input'));
     var textareas = [].slice.call(page.getElementsByTagName('textarea'));
     inputs = inputs.concat(textareas);
 
@@ -196,13 +196,7 @@ window.onload = function() {
 
   closeWarningBtn.onclick = closeWarning;
 
-  var executiveSummaryBtn = document.getElementById('executive-summary-btn')
-    , pitchDeckBtn        = document.getElementById('pitch-deck-btn')
-
   filepicker.setKey('AwcwduAoSOC9x7Qoi9y4Az');
-
-  makeFileInput(executiveSummaryBtn, ['.pdf', '.doc', '.docx'])
-  makeFileInput(pitchDeckBtn, ['.ppt', '.pptx', '.pdf'])
 
   function makeFileInput (targetEl, extensions) {
     targetEl.onclick = function () {
