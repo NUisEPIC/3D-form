@@ -43,6 +43,7 @@ html(lang='en')
   
         form
           .primary-window.page.current
+            i.back-btn.hidden Back
             .forcefield
               h2 Welcome to the EPIC 2016 Spring Application!
               .input-group
@@ -95,10 +96,6 @@ html(lang='en')
                 textarea#what-do-you-want
                 label What do you want to get out of your membership?
 
-            .thanks
-              h3 Thanks for joining! We look forward to spending time with you.
-              img(src="./images/epic-logo.png")
-
           .primary-window.page#branch-2
             i.back-btn Back
             .forcefield
@@ -138,6 +135,15 @@ html(lang='en')
               .input-group
                 textarea(id='anything-else')
                 label (ex: share a fun fact!)
+          .primary-window.page#overview
+            i.back-btn Back
+            .forcefield
+              h2 Application Overview
+              p.collapse (Click on an underlined question to go back to it)
+              .overview-window
+                dl
+              .submit-btn
+                | Submit
             .thanks
               h3 Thanks for applying! We'll be in touch.
               img(src="./images/epic-logo.png")

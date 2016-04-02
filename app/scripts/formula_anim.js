@@ -74,9 +74,6 @@ var formula_animator = (function () {
   }
 
   _self.nextPage = function (current_page, next_page, cb) {
-    if (next_page instanceof Function)
-      cb = next_page, next_page = null;
-
     page_shuffle(current_page, next_page, {post: cb});
   }
 

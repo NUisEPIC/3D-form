@@ -104,8 +104,87 @@ function formula_setup_inputs (inputs, formula_next_page) {
   });
 }
 
+var overview_page = extend(qq('.page#overview')[0])
+  , overview_window  = extend(qq('.overview-window dl')[0])
+
+var pages = extend(qq('.page'))
+
+var submitBtn = extend(qq('.submit-btn')[0])
+
+submitBtn.onclick = formula_submit
+
+function returnToOverviewBtn (page) {
+  return function () {
+    var backBtn = extend(page.querySelector('.back-btn'))
+      , oldOnClick = backBtn.onclick
+
+    var hidden = ~backBtn.className.indexOf('hidden')
+
+    if (hidden)
+      backBtn.removeClass('hidden')
+
+    backBtn.textContent = 'Back to overview'
+
+    backBtn.onclick = function () {
+      formula_animator.nextPage(page, overview_page)
+      backBtn.onclick = oldOnClick
+      backBtn.textContent = 'Back'
+      if (hidden) backBtn.addClass('hidden')
+    }
+  }
+}
+
+function load_overview (inputs) {
+  return function () {
+    overview_page.querySelector('.back-btn').onclick = function () {
+      var applyingFor  = store.get('formula_progress')['applying-for']
+      if (applyingFor !== 'EPIC Teams')
+        formula_animator.previousPage(overview_page, document.getElementById('branch-1'))
+    }
+
+    var data = formula_get_data(inputs)
+
+    Object.keys(data).forEach(function (q, idx) {
+      var a = data[q]
+      var page = inputs[idx].parentElement.parentElement.parentElement
+
+      if (q !== 'last_cache_time' && a != undefined && a.length > 0) {
+        var existing = document.querySelector('.' + q)
+
+        if (existing) {
+          var dt = overview_page.querySelector('.' + q)
+            , dd = dt.nextElementSibling
+
+          dd.textContent = a
+        } else {
+          var dt = document.createElement('dt')
+            , dd = document.createElement('dd')
+
+          dt.className = q
+
+          q = q.split('-').map(function (word) {
+            return word[0].toUpperCase() + word.substr(1)
+          }).join(' ')
+
+          dt.textContent = q
+          dd.textContent = a
+
+          dt.onclick = function () {
+            debugger
+            formula_animator.nextPage(overview_page, page, returnToOverviewBtn(page))
+          }
+
+          overview_window.appendChild(dt)
+          overview_window.appendChild(dd)
+        }
+      }
+    })
+  }
+}
+
 window.onload = function() {
-  var formula_inputs = qq('.formula input, .formula textarea');
+  var current_page = extend(qq('.page.current')[0])
+    , formula_inputs = qq('.formula input, .formula textarea');
 
   var nextBtn = qq('.next-btn')[0];
 
@@ -114,7 +193,7 @@ window.onload = function() {
     var endpage = ~current_page.className.indexOf('end')
 
     if (endpage) {
-      formula_submit();
+      formula_animator.nextPage(current_page, overview_page, load_overview(formula_inputs))
     } else if (next_page) {
       var next_page = extend(next_page)
         , next_page_inputs = next_page.getElementsByTagName('input')
@@ -123,7 +202,7 @@ window.onload = function() {
                            .concat([].slice.call(next_page_textareas));
       formula_animator.nextPage(current_page, next_page, function () {
         formula_validate(next_page_inputs);
-        next_page_inputs[0].focus();
+        next_page_inputs[0].focus()
       });
     } else {
       alert("Looks like something isn't quite right. Try going back and checking that all the textboxes are filled it, and all answers have little green check marks next to them.");
@@ -159,8 +238,6 @@ window.onload = function() {
           formula_validate(prev_page_inputs);
         });
       }
-    } else {
-      alert("There's nothing to go back to! This is the beginning!");
     }
   })
 
