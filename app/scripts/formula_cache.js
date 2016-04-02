@@ -1,3 +1,5 @@
+var formula_cache = {}
+
 function formula_get_data (inputs, init) {
   var data = {}, cache = {};
   if (store) { // NOTE(jordan): if store.js is available, use it

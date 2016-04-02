@@ -48,7 +48,6 @@ var formula_validators = formula_default_validators;
 function formula_validate_input (i) {
   var inputIsValid = false;
 
-  // NOTE(jordan): clean up after those dirty, dirty users ;)
   var value = i.value.trim()
     , type  = i.type
     , id    = i.id;

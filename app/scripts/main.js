@@ -15,10 +15,6 @@ function adjustPadding () {
       , lastChild = siblings[groupSize - 1]
       , nearestInput = siblings[0];
 
-    if (nearestInput.type
-        && ['text', 'email', 'tel'].indexOf(nearestInput.type) === -1)
-      return;
-
     if (/pill-left|glance/g.test(p.classList)) {
       padLeft += p.offsetWidth;
     }
@@ -32,9 +28,6 @@ function adjustPadding () {
     }
 
     if (p === lastChild) {
-      console.log("STOP");
-      console.log(nearestInput);
-
       nearestInput.style.paddingLeft  = padLeft + "px";
       nearestInput.style.paddingRight = padRight + "px";
       nearestInput.style.width        = width + "px";
@@ -118,7 +111,11 @@ window.onload = function() {
 
   function formula_next_page (current_page, next_page) {
     // NOTE(jordan): I don't know why this happens
-    if (next_page) {
+    var endpage = ~current_page.className.indexOf('end')
+
+    if (endpage) {
+      formula_submit();
+    } else if (next_page) {
       var next_page = extend(next_page)
         , next_page_inputs = next_page.getElementsByTagName('input')
         , next_page_textareas = next_page.getElementsByTagName('textarea');
@@ -128,8 +125,6 @@ window.onload = function() {
         formula_validate(next_page_inputs);
         next_page_inputs[0].focus();
       });
-    } else if (formula_inputs_valid(formula_inputs)) {
-      formula_submit();
     } else {
       alert("Looks like something isn't quite right. Try going back and checking that all the textboxes are filled it, and all answers have little green check marks next to them.");
     }
@@ -137,8 +132,14 @@ window.onload = function() {
 
   nextBtn.onclick = function () {
     var current_page = extend(qq('.page.current')[0])
-      , next_page    = current_page.nextElementSibling;
-    formula_next_page(current_page, next_page);
+      , next_page    = current_page.nextElementSibling
+      , branch       = current_page.id === 'branch'
+      , applyingFor  = store.get('formula_progress')['applying-for']
+
+    if (branch && applyingFor === 'EPIC Teams')
+      formula_next_page(current_page, next_page.nextElementSibling)
+    else
+      formula_next_page(current_page, next_page)
   }
 
   var backBtns = qq('.back-btn');
@@ -160,21 +161,6 @@ window.onload = function() {
       }
     } else {
       alert("There's nothing to go back to! This is the beginning!");
-    }
-  })
-
-  var noMoreTeamMembersBtn = qq('.no-more-applicants-btn')
-    , afterApplicantsPage  = qq('#after-applicants')[0]
-    , afterApplicantsPageInputs = afterApplicantsPage.getElementsByTagName('input')
-
-  ;[].forEach.call(noMoreTeamMembersBtn, function (btn) {
-    var btn_page = extend(btn.parentElement)
-
-    btn.onclick = function () {
-      formula_animator.nextPage(btn_page, afterApplicantsPage, function () {
-        afterApplicantsPageInputs[0].focus()
-        formula_validate(afterApplicantsPageInputs)
-      })
     }
   })
 
