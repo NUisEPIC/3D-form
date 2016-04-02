@@ -47,12 +47,12 @@ html(lang='en')
             .forcefield
               h2 Welcome to the EPIC 2016 Spring Application!
               .input-group
-                input#name(type='text', required)
+                input#name(type='text', name='entry.413629025', required)
                 label Name (First and Last)
                 .glance
               
               .input-group
-                input#email(type='text', required)
+                input#email(type='text', name='entry.812054617', required)
                 label School Email
                 .glance
                 .pill-right
@@ -63,17 +63,17 @@ html(lang='en')
             .forcefield
               h3 Basic Information
               .input-group
-                input#year(type='text', required)
+                input#year(type='text', name='entry.1397012563', required)
                 label Year (e.g.; 2017)
                 .glance
               
               .input-group  
-                input#major(type='text', required)
+                input#major(type='text', name='entry.487914706', required)
                 label Major
                 .glance
               
               .input-group
-                input#phone(type='tel', required)
+                input#phone(type='tel', name='entry.2000667167', required)
                 label Phone Number
                 .glance
 
@@ -93,7 +93,7 @@ html(lang='en')
             .forcefield
               h2 EPIC General Membership Application
               .input-group
-                textarea#what-do-you-want
+                textarea#what-do-you-want(name='entry.1077672723')
                 label What do you want to get out of your membership?
 
           .primary-window.page#branch-2
@@ -102,38 +102,38 @@ html(lang='en')
               h2 EPIC Team Application
               h3 I want to...
               .input-group.checkboxes
-                input#run-hackathon(type='checkbox')
+                input#run-hackathon(type='checkbox', name='entry.1240821560')
                 label Run a hackathon (WildHacks)
                 
-                input#run-business-pitch-competition(type='checkbox')
+                input#run-business-pitch-competition(type='checkbox', name='entry.1329798230')
                 label Run a Business Pitch Competition (NUVC)
                 
-                input#code(type='checkbox')
+                input#code(type='checkbox', name='entry.1915405744')
                 label Code (Tech)
                 
-                input#build-brand(type='checkbox')
+                input#build-brand(type='checkbox', name='entry.1753135358')
                 label Build a Brand (Branding)
                 
-                input#teach-entrepreneurship(type='checkbox')
+                input#teach-entrepreneurship(type='checkbox', name='entry.672268442')
                 label Teach Entrepreneurship (Launch)
                 
-                input#inspire-entrepreneurs(type='checkbox')
+                input#inspire-entrepreneurs(type='checkbox', name='entry.852707877')
                 label Inspire Budding Entrepreneurs (Venture)
                 
-                input#expand-epic-reach(type='checkbox')
+                input#expand-epic-reach(type='checkbox', name='entry.30571858')
                 label Expand EPIC's Reach (BizDev)
 
-          +essayQuestion('story', "What's your story? Tell us about yourself.", 'ex: what are you passionate about? What was your journey to NU?')
-          +essayQuestion('why-interested', 'Why are you interested in joining EPIC?', 'What do you hope to learn? What skills do you hope to gain?')
-          +essayQuestion('why-passionate-entrep', 'Why are you passionate about entrepreneurship?', 'Feel free to tell us about any entrepreneurial experience you have.')
-          +essayQuestion('how-contribute', 'What will you contribute to the specific team you are interested in?', 'How do you see yourself fitting in?')
-          +essayQuestion('other-involvements', 'What else are you involved in?', 'ex: Work-Study, other student orgs, study abroad, etc.')
+          +essayQuestion('story', "What's your story? Tell us about yourself.", 'ex: what are you passionate about? What was your journey to NU?')(name='entry.699012596')
+          +essayQuestion('why-interested', 'Why are you interested in joining EPIC?', 'What do you hope to learn? What skills do you hope to gain?')(name='entry.1336553256')
+          +essayQuestion('why-passionate-entrep', 'Why are you passionate about entrepreneurship?', 'Feel free to tell us about any entrepreneurial experience you have.')(name='entry.325730259')
+          +essayQuestion('how-contribute', 'What will you contribute to the specific team you are interested in?', 'How do you see yourself fitting in?')(name='entry.1192036255')
+          +essayQuestion('other-involvements', 'What else are you involved in?', 'ex: Work-Study, other student orgs, study abroad, etc.')(name='entry.2084706747')
           .primary-window.page.end
             i.back-btn Back
             .forcefield
               h2 Anything else you would like us to consider?
               .input-group
-                textarea(id='anything-else')
+                textarea(id='anything-else', name='entry.63945366')
                 label (ex: share a fun fact!)
           .primary-window.page#overview
             i.back-btn Back

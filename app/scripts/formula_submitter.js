@@ -1,6 +1,6 @@
 var formula_one = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/application' : 'https://formula-one.herokuapp.com/nuvc/application';
 
-var formula_google_endpoint = 'https://docs.google.com/forms/d/1uLqotx5bmCla2xumwkPVK3iN4yBFkHXgh0_p0c4iOHs/formResponse';
+var formula_google_endpoint = 'https://docs.google.com/forms/d/1BhFBMzb9NEDou7woX9wcKE5544JnMgpnd4S8jUeU1Hc/formResponse';
 
 // NOTE(jordan): this is currently unused
 // TODO(jordan): dynamically set input[name] to google_form_mappings
@@ -63,7 +63,7 @@ function formula_form_setup_google_submit (form) {
   // NOTE(jordan): Stop the page from reloading
   // NOTE(jordan): lul no
   [].forEach.call(qq('input[type="radio"]'), function (radio) {
-    radio.name = ''
+    radio.name = 'entry.1707419176'
   })
 
   var disabled = qq('[disabled]')
