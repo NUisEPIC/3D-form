@@ -98,6 +98,8 @@ function formula_submit () {
   console.log(data);
   console.log(JSON.stringify(data));
 
+  store.set('formula_progress', data)
+
   formula_one_send_data(data);
   // NOTE(jordan): use the callback here in case later we want to
   // do anything after successful submission, like resetting the form.
