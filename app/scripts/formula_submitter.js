@@ -55,7 +55,8 @@ function formula_value_with_pills (i) {
     v = v + r_text;
   }
 
-  return v.trim();
+  // NOTE(jordan): set input value to value with pills for google form
+  return (i.value = v.trim());
 }
 
 function formula_form_setup_google_submit (form) {
