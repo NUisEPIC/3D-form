@@ -192,6 +192,9 @@ iframe[name*='dupe-frame']
 
     cursor pointer
 
+    @media all and (max-height: 800px)
+      top (header-height / 2)px + 30px
+
     .inner-btn
       display table-cell
       vertical-align middle
@@ -219,6 +222,9 @@ iframe[name*='dupe-frame']
       right -20px
       transform rotateY(7deg) translateZ(-8px)
       -moz-transform rotateY(7deg) translateZ(-8px) translateX(-3px) translateY(-6px)
+
+      @media all and (max-height: 800px)
+        top (header-height / 2)px + 23px
 
       &:hover
         right -23px
@@ -303,12 +309,10 @@ iframe[name*='dupe-frame']
       height formula-height - 130px
 
     .next-btn
-      top 100px
       height formula-height - 130px
 
     &.persp
       .next-btn
-        top 98px
         height formula-height - 127px
 
     .glance
