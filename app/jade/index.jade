@@ -38,17 +38,17 @@ html
           input(id='name-applicant-#{number}', type='text', name!=names[0], required!=req)
           label Name (First and Last) *
           .glance
-          
+
         .input-group
           input(id='email-applicant-#{number}', type='email', name!=names[1], required!=req)
           label Email Address *
           .glance
-          
+
         .input-group
           input(id='company-position-applicant-#{number}', type='text', name!=names[2], required!=req)
           label Position in the Company *
           .glance
-          
+
     .primary-window.page
       i.back-btn Back
       .forcefield
@@ -57,12 +57,12 @@ html
           input(id='nu-affiliation-applicant-#{number}', type='text', name!=names[3], required!=req)
           label Northwestern Affiliation *
           .glance
-          
+
         .input-group
           input(id='graduation-year-applicant-#{number}', type='text', name!=names[4])
           label Year of Graduation (if any)
           .glance
-          
+
         .input-group
           input(id='phone-number-applicant-#{number}', type='tel', name!=names[5], required!=req)
           label Phone Number (xxx) yyy-zzzz *
@@ -120,16 +120,16 @@ html
               .input-group
                 input(type='radio', name='track', value='business products + internet', required)
                 label Business Products + Internet
-                
+
                 input(type='radio', name='track', value='consumer products + internet', required)
                 label Consumer Products + Internet
-                
+
                 input(type='radio', name='track', value='healthcare + medical innovation', required)
                 label Healthcare + Medical Innovation
-                
+
                 input(type='radio', name='track', value='green energy + sustainability', required)
                 label Green Energy + Sustainability
-                
+
                 input(type='radio', name='track', value='social enterprise + nonprofit', required)
                 label Social Enterprise + NonProfit
           +applicantInformation(1, [
@@ -187,6 +187,11 @@ html
                 .glance
             .thanks
               h3 Thanks for applying! We'll be in touch.
+              h3
+                b NOTE
+                | You should receive a confirmation email within 12 hours from the NUVC email account
+                | (nuvc@nuisepic.com), and if you do not, please email <b>us</b> and let us know, because
+                | we may not have received your application.
               img(src="./images/nuvc-logo.png")
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID.
