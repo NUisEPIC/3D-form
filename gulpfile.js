@@ -1,5 +1,6 @@
 var gulp = require('gulp')
   , del  = require('del')
+  , browserSync = require('browser-sync')
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -10,29 +11,27 @@ gulp.task('styles', function () {
         .pipe($.stylus())
         .pipe($.autoprefixer('last 4 versions'))
         .pipe($.sourcemaps.write())
-        .pipe(gulp.dest('.tmp/styles'))
-        .pipe($.size());
+        .pipe(gulp.dest('dist'))
+        .pipe($.size())
+        .pipe(browserSync.stream())
 });
 
 gulp.task('jade', function () {
   return gulp.src(['app/jade/**/*.jade'])
              .pipe($.pug({pretty: true}))
-             .pipe(gulp.dest('app'));
+             .pipe($.useref())
+             .pipe(gulp.dest('.tmp'))
+             .pipe($.size())
 });
 
 
 gulp.task('scripts', function () {
     return gulp.src('app/scripts/**/*.js')
+        .pipe($.sourcemaps.init())
         .pipe($.uglify())
+        .pipe($.sourcemaps.write())
         .pipe($.size())
         .pipe(gulp.dest('dist'));
-});
-
-gulp.task('html', ['jade', 'styles', 'scripts'], function () {
-    return gulp.src('app/*.html')
-        .pipe($.useref())
-        .pipe(gulp.dest('dist'))
-        .pipe($.size());
 });
 
 gulp.task('images', function () {
@@ -52,50 +51,36 @@ gulp.task('extras', function () {
 });
 
 gulp.task('clean', function () {
-    return del(['.tmp', 'dist'])
+    return del(['app/**/*.html', 'dist'])
 });
 
-gulp.task('build', ['html', 'images', 'extras']);
+gulp.task('build', ['jade', 'images', 'extras']);
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
 });
 
-gulp.task('connect', function () {
-    var connect = require('connect');
-    var app = connect()
-        .use(require('connect-livereload')({ port: 35729 }))
-        .use(connect.static('app'))
-        .use(connect.static('.tmp'))
-        .use(connect.directory('app'));
-
-    require('http').createServer(app)
-        .listen(9000)
-        .on('listening', function () {
-            console.log('Started connect web server on http://localhost:9000');
-        });
+gulp.task('serve', ['jade', 'styles', 'scripts', 'images'], function () {
+  browserSync.init({
+    server: {
+      baseDir: [ './dist', './.tmp' ]
+    }
+  })
 });
 
-gulp.task('serve', ['connect', 'styles'], function () {
-    require('opn')('http://localhost:9000');
-});
-
-gulp.task('watch', ['serve', 'jade'], function () {
-    var server = $.livereload();
-
+gulp.task('watch', ['serve'], function () {
     // watch for changes
 
     gulp.watch([
-        '.tmp/styles/**/*.css',
         'app/scripts/**/*.js',
         'app/images/**/*',
         'app/jade/**/*.jade'
-    ]).on('change', function (file) {
-        server.changed(file.path);
-    });
+    ])
 
     gulp.watch('app/styles/**/*.styl', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('app/jade/**/*.jade', ['jade']);
+    gulp.watch('app/*.html').on('change', browserSync.reload)
+    gulp.watch('dist/**/*.js').on('change', browserSync.reload)
 });

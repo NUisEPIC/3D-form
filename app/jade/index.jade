@@ -162,21 +162,15 @@ html
       a(href="http://www.olark.com?welcome", title="Olark live chat software") Olark live chat software
     // end olark code
 
-    // vendor.js is currently empty
-    // build:js scripts/vendor.js
-    script(type='text/javascript', src='bower_components/store/dist/store2.min.js')
-    // bower:js
-    // endbower
-    // endbuild
-
     script(type="text/javascript", src="//api.filepicker.io/v1/filepicker.js" async)
 
     // build:js scripts/main.js
-    script(src='scripts/extensions.js' async)
-    script(src='scripts/formula_anim.js' async)
-    script(src='scripts/formula_notify.js' async)
-    script(src='scripts/formula_cache.js' async)
-    script(src='scripts/formula_validator.js' async)
-    script(src='scripts/formula_submitter.js' async)
-    script(src='scripts/main.js' async)
+    script(type='text/javascript', src='../../node_modules/store/store.min.js')
+    script(src='../scripts/extensions.js', async)
+    script(src='../scripts/formula_anim.js', async)
+    script(src='../scripts/formula_notify.js', async)
+    script(src='../scripts/formula_cache.js', async)
+    script(src='../scripts/formula_validator.js', async)
+    script(src='../scripts/formula_submitter.js', async)
+    script(src='../scripts/main.js', async)
     // endbuild
