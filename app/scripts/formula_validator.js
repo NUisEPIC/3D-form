@@ -103,10 +103,12 @@ function formula_page_is_invalid () {
   formula_animator.unTilt();
 }
 
-function formula_validate (inputs, delay, valid, invalid) {
-  if (this.go) (clearTimeout(this.go), delete this.go);
+var validate_timer;
 
-  this.go = setTimeout(function () {
+function formula_validate (inputs, delay, valid, invalid) {
+  if (validate_timer) clearTimeout(validate_timer);
+
+  validate_timer = setTimeout(function () {
     valid    = valid   || formula_page_is_valid;
     invalid  = invalid || formula_page_is_invalid;
 
