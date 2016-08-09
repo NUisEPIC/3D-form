@@ -116,6 +116,20 @@ window.onload = function() {
 
   var nextBtn = qq('.next-btn')[0];
 
+  // Create a progress bar and add it to the page
+  var options = {
+  	id: 'top-progress-bar',
+  	color: '#E00000',
+  	height: '4px',
+  	duration: 0.4,
+  }
+
+  var progressBar = new ToProgress(options);
+
+  // TODO(Murphy): Implement a calculation for this based on number
+  // slides on the application.
+  var progressBarPercent = 8.3333;  // Percentage to increase/decrease progress bar on going to next/previous slide
+
   function formula_next_page (current_page, next_page) {
     // NOTE(jordan): I don't know why this happens
     if (next_page) {
@@ -129,6 +143,7 @@ window.onload = function() {
         next_page_inputs[0].focus();
       });
     } else if (formula_inputs_valid(formula_inputs)) {
+      progressBar.reset();
       formula_submit();
     } else {
       alert("Looks like something isn't quite right. Try going back and checking that all the textboxes are filled it, and all answers have little green check marks next to them.");
@@ -138,6 +153,7 @@ window.onload = function() {
   nextBtn.onclick = function () {
     var current_page = extend(qq('.page.current')[0])
       , next_page    = current_page.nextElementSibling;
+    progressBar.increase(progressBarPercent)
     formula_next_page(current_page, next_page);
   }
 
@@ -153,6 +169,7 @@ window.onload = function() {
       prev_page_inputs = [].slice.call(prev_page_inputs)
                            .concat([].slice.call(prev_page_textareas));
       btn.onclick = function (e) {
+      	progressBar.decrease(progressBarPercent)
         formula_animator.previousPage(btn_page, prev_page, function () {
           prev_page_inputs[0].focus();
           formula_validate(prev_page_inputs);
