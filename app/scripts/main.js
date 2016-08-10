@@ -118,6 +118,12 @@ window.onload = function() {
 
   var formulaOutline = document.getElementById('formula-outline');
   var windows= qq('.primary-window');
+  var windowHeaders = document.getElementsByTagName('h2');
+
+  // Convert to an array so we can use indexOf()
+  windows = Array.prototype.slice.call(windows);
+  windowHeaders = Array.prototype.slice.call(windowHeaders);
+
 
   // Create a progress bar and add it to the page
   var options = {
@@ -130,9 +136,6 @@ window.onload = function() {
   var progressBar = new ToProgress(options);
   var progressBarPercent = 100/windows.length;  // Percentage to increase/decrease progress bar on going to next/previous window
 
-  var windowHeaders = document.getElementsByTagName('h2');
-  windowHeaders = Array.prototype.slice.call(windowHeaders);  // Convert windowHeaders to an array so we can use indexOf()
-
   // Loop through and add each window header to the outline
   for (var i = 0; i < windows.length; i++) {
   	windowHeaders[i] = windowHeaders[i].innerText;  // Remove <h2> tag from each item in windowHeaders
@@ -142,11 +145,17 @@ window.onload = function() {
 
   	// When clicking on a list item, move to the respective page of the application
   	newItem.onclick = function() {
-  		var current_page = qq('.current')[0];
-  		var desired_page = windows[windowHeaders.indexOf(this.innerText)]
-  		if (current_page != desired_page) {
+  		var currentPage = qq('.current')[0];
+  		var currentPageIndex = windows.indexOf(currentPage);
+        var desiredPageIndex = windowHeaders.indexOf(this.innerText);
+  		var desiredPage = windows[desiredPageIndex];
+  		if (currentPageIndex != desiredPageIndex) {
   			progressBar.setProgress(windowHeaders.indexOf(this.innerText) * progressBarPercent);
- 			formula_next_page(current_page, desired_page);
+  			// Animate differently based on whether the desired page is before or after the current page
+  			if (currentPageIndex > desiredPageIndex)
+ 				formula_animator.previousPage(currentPage, desiredPage);
+ 			else
+ 				formula_next_page(currentPage, desiredPage)
   		}
   	}
 
