@@ -116,6 +116,9 @@ window.onload = function() {
 
   var nextBtn = qq('.next-btn')[0];
 
+  var formulaOutline = document.getElementById('formula-outline');
+  var windows= qq('.primary-window');
+
   // Create a progress bar and add it to the page
   var options = {
   	id: 'top-progress-bar',
@@ -125,10 +128,31 @@ window.onload = function() {
   }
 
   var progressBar = new ToProgress(options);
+  var progressBarPercent = 100/windows.length;  // Percentage to increase/decrease progress bar on going to next/previous window
 
-  // TODO(Murphy): Implement a calculation for this based on number
-  // slides on the application.
-  var progressBarPercent = 8.3333;  // Percentage to increase/decrease progress bar on going to next/previous slide
+  var windowHeaders = document.getElementsByTagName('h2');
+  windowHeaders = Array.prototype.slice.call(windowHeaders);  // Convert windowHeaders to an array so we can use indexOf()
+
+  // Loop through and add each window header to the outline
+  for (var i = 0; i < windows.length; i++) {
+  	windowHeaders[i] = windowHeaders[i].innerText;  // Remove <h2> tag from each item in windowHeaders
+
+  	var newItem = document.createElement('li');
+  	newItem.appendChild(document.createTextNode(windowHeaders[i]));
+
+  	// When clicking on a list item, move to the respective page of the application
+  	newItem.onclick = function() {
+  		var current_page = qq('.current')[0];
+  		var desired_page = windows[windowHeaders.indexOf(this.innerText)]
+  		if (current_page != desired_page) {
+  			progressBar.setProgress(windowHeaders.indexOf(this.innerText) * progressBarPercent);
+ 			formula_next_page(current_page, desired_page);
+  		}
+  	}
+
+  	formulaOutline.appendChild(newItem);
+  }
+
 
   function formula_next_page (current_page, next_page) {
     // NOTE(jordan): I don't know why this happens

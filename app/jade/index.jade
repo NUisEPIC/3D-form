@@ -20,7 +20,7 @@ html
         block
 
   body
-    #formula-container
+    ul#formula-container
       .mobile-warning
         p Hey! It looks like you're using a mobile phone, which is awesome.
         p But we spent a lot of time making this application look juuuust right for desktop, and it'll probably be a little squishy on your phone.
@@ -29,6 +29,7 @@ html
           a(href='#', do='close-warning') tap here
           | .
         p Otherwise, come back on your computer later, ok? ;)
+      #formula-outline
       iframe(name='dupe-frame')
       .formula
         .header
