@@ -16,8 +16,8 @@ gulp.task('styles', function () {
         .pipe(browserSync.stream())
 });
 
-gulp.task('jade', function () {
-  return gulp.src(['app/jade/**/*.jade'])
+gulp.task('pug', function () {
+  return gulp.src(['app/pug/**/*.pug'])
              .pipe($.pug({pretty: true}))
              .pipe($.useref())
              .pipe(gulp.dest('.tmp'))
@@ -54,13 +54,13 @@ gulp.task('clean', function () {
     return del(['app/**/*.html', 'dist'])
 });
 
-gulp.task('build', ['jade', 'images', 'extras']);
+gulp.task('build', ['pug', 'images', 'extras']);
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
 });
 
-gulp.task('serve', ['jade', 'styles', 'scripts', 'images'], function () {
+gulp.task('serve', ['pug', 'styles', 'scripts', 'images'], function () {
   browserSync.init({
     server: {
       baseDir: [ './dist', './.tmp' ]
@@ -74,13 +74,13 @@ gulp.task('watch', ['serve'], function () {
     gulp.watch([
         'app/scripts/**/*.js',
         'app/images/**/*',
-        'app/jade/**/*.jade'
+        'app/pug/**/*.pug'
     ])
 
     gulp.watch('app/styles/**/*.styl', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
-    gulp.watch('app/jade/**/*.jade', ['jade']);
+    gulp.watch('app/pug/**/*.pug', ['pug']);
     gulp.watch('app/*.html').on('change', browserSync.reload)
     gulp.watch('dist/**/*.js').on('change', browserSync.reload)
 });
