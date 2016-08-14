@@ -1,32 +1,32 @@
-var formula_notify = (function () {
-  var _self = {};
+var formulaNotify = (function () {
+  var Self = {}
 
-  _self.notifyWindow = document.createElement('div');
+  Self.notifyWindow = document.createElement('div')
 
-  extend(_self.notifyWindow);
+  extend(Self.notifyWindow)
 
-  _self.notifyWindow.addClass('formula-notify-window');
+  Self.notifyWindow.addClass('formula-notify-window')
 
-  _self.notifyWindow.isAppended = false;
+  Self.notifyWindow.isAppended = false
 
-  _self.notify = function (msg, duration) {
-    if (! _self.notifyWindow.isAppended) {
-      document.body.appendChild(_self.notifyWindow);
+  Self.notify = function (msg, duration) {
+    if (! Self.notifyWindow.isAppended) {
+      document.body.appendChild(Self.notifyWindow)
     }
 
-    _self.notifyWindow.textContent = msg;
+    Self.notifyWindow.textContent = msg
 
-    _self.notifyWindow.style.display = 'block';
+    Self.notifyWindow.style.display = 'block'
     setTimeout(function () {
-      _self.notifyWindow.style.opacity = 1;
+      Self.notifyWindow.style.opacity = 1
       setTimeout(function () {
-        _self.notifyWindow.style.opacity = 0;
+        Self.notifyWindow.style.opacity = 0
         setTimeout(function () {
-          _self.notifyWindow.style.display = 'none';
-        }, 200);
+          Self.notifyWindow.style.display = 'none'
+        }, 200)
       }, duration || 2000)
-    }, 200);
-  };
+    }, 200)
+  }
 
-  return _self;
-})();
+  return Self
+})()
