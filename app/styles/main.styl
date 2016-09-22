@@ -121,65 +121,24 @@ section.sidebar
     display table-cell
     vertical-align middle
 
+    h2
+      text-align left
+
   .next-btn
+    width 100%
+    text-align center
+
     position absolute
-    height formula-height - 4px
-
-    top (header-height / 2)px
-    right 0
-
-    border-top-right-radius 4px
-    border-bottom-right-radius 4px
+    bottom 0
 
     background white
-    z-index -1
-
-    transition all ease 0.5s,
-               opacity ease 0.1s
-    display table
-    transform rotateY(-4deg) translateZ(-8px)
+    z-index 2
 
     -moz-perspective 300px
 
     cursor pointer
 
-    .inner-btn
-      display table-cell
-      vertical-align middle
-
-      span
-        // NOTE(jordan): This width defines the width of all next-btn
-        width 50px
-        display block
-        transform-origin center center
-        right 2px
-        transform rotate(-90deg)
-
-  &.persp
-    form
-      // NOTE(jordan): Must do all overarching translates
-      // on form now, lest it overlap with next-btn
-      left -30px
-    .primary-window.page
-      transform rotateY(-1deg) translateZ(-8px)
-      box-shadow inset 0 30px rgba(0,0,0,0.015),
-                 inset 0 25px rgba(0,0,0,0.02),
-                 inset 0 10px rgba(0,0,0,0.025)
-
-    .next-btn
-      height formula-height + 6px
-      top (header-height / 2)px - 3px
-      right -20px
-      transform rotateY(7deg) translateZ(-8px)
-      -moz-transform rotateY(7deg) translateZ(-8px) translateX(-3px) translateY(-6px)
-
-      &:hover
-        right -23px
-
   &.shuffle
-    .next-btn
-      -webkit-transform translateZ(-10px)
-
     .page
       left -300px
       -webkit-transform translateZ(-2px)
@@ -206,9 +165,6 @@ section.sidebar
       animation 3s punch-ticket
       & *
         opacity 0
-
-    .next-btn
-      display none
 
     .thanks
       display block

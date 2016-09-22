@@ -10,6 +10,7 @@ function adjustPadding () {
       , groupSize = siblings.length
       , lastChild = siblings[groupSize - 1]
       , nearestInput = siblings[0]
+      , nearestLabel = nearestInput.nextElementSibling
 
     if (nearestInput.type
         && ['text', 'email', 'tel'].indexOf(nearestInput.type) === -1)
@@ -35,12 +36,6 @@ function adjustPadding () {
       padLeft = padRight = basePad
     }
   })
-}
-
-function closeWarning (clickEvent) {
-  var p = clickEvent.target.parentElement.parentElement
-  extend(p)
-  p.addClass('dismissed')
 }
 
 function formulaSetupInputs (inputs, formulaNextPage) {
@@ -129,6 +124,12 @@ window.onload = function () {
   }
 
   var progressBar = new ToProgress(options)
+  var progressBarPercent = 100/windows.length;  // Percentage to increase/decrease progress bar on going to next/previous window
+
+  // Loop through and add each window header to the outline
+  for (var i = 0; i < windows.length; i++) {
+  	windowHeaders[i] = windowHeaders[i].innerText;  // Remove <h2> tag from each item in windowHeaders
+
   	var newItem = document.createElement('li')
   	newItem.appendChild(document.createTextNode(windowHeaders[i]))
 
@@ -212,43 +213,6 @@ window.onload = function () {
 
   // NOTE(jordan): gross gross gross gross gross
   adjustPadding()
+
   window.onresize = adjustPadding
-}
-function adjustPadding () {
-  var inputGroupElements = qq('.input-group input~*, .input-group textarea~*')
-    , basePad = 15
-    , width = 0
-    , padLeft = basePad
-    , padRight = basePad
-
-  ;[].forEach.call(inputGroupElements, function(p) {
-    var siblings  = p.parentElement.children
-      , groupSize = siblings.length
-      , lastChild = siblings[groupSize - 1]
-      , nearestInput = siblings[0]
-
-    if (nearestInput.type
-  filepicker.setKey('AV96DZseeSYOldbUvmYwGz')
-
-  resumeBtn.onclick = function () {
-    filepicker.pick({
-      mimetypes: ['text/plain',
-                  'text/richtext',
-                  'application/pdf',
-                  'text/pdf'],
-      container: 'window',
-      services: ['COMPUTER', 'GMAIL', 'BOX'
-                 , 'DROPBOX', 'GOOGLEdRIVE'
-                 , 'SKYDRIVE', 'EVERNOTE'
-                 , 'CLOUDDRIVE'],
-    },
-    function(InkBlob) {
-      var currentPageInputs = qq('.page.current input')
-      resumeBtn.nextElementSibling.value = JSON.stringify(InkBlob)
-      formulaValidate(currentPageInputs)
-    },
-    function(PFError) {
-      console.log(PFError.toString())
-    })
-  }
 }

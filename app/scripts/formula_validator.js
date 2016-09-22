@@ -96,11 +96,11 @@ function formulaInputsValid (inputs) {
 function formulaPageIsValid (inputs) {
   // NOTE(jordan): reset timeout every time this is called
   formulaCacheData(inputs)
-  formulaAnimator.tilt()
+  //formulaAnimator.tilt()
 }
 
 function formulaPageIsInvalid () {
-  formulaAnimator.unTilt()
+  //formulaAnimator.unTilt()
 }
 
 var validateTimer

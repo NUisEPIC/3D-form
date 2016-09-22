@@ -73,11 +73,13 @@ html
             .forcefield
               h2 I am applying to (select as many as apply):
               .input-group.checkboxes
-                input#apply-for-launch(type='checkbox', required)
-                label Participate in Launch
+                .checkbox
+                  input#apply-for-launch(type='checkbox', required)
+                  label Participate in Launch
 
-                input#apply-for-epic(type='checkbox', required)
-                label Join EPIC Teams
+                .checkbox
+                  input#apply-for-epic(type='checkbox', required)
+                  label Join EPIC Teams
           .primary-window.page
             i.back-btn Back
             .forcefield
@@ -99,12 +101,15 @@ html
             .forcefield
               h2 I am a...
               .input-group.checkboxes
-                input#hacker(type='checkbox', name='entry.2003569147', required)
-                label Hacker
-                input#designer(type='checkbox', name='entry.1080060025', required)
-                label Designer
-                input#builder(type='checkbox', name='entry.711584580', required)
-                label Builder
+                .checkbox
+                  input#hacker(type='checkbox', name='entry.2003569147', required)
+                  label Hacker
+                .checkbox
+                  input#designer(type='checkbox', name='entry.1080060025', required)
+                  label Designer
+                .checkbox
+                  input#builder(type='checkbox', name='entry.711584580', required)
+                  label Builder
               .input-group
                 textarea#explain-skills(name='entry.549867061', required)
                 label Explain your selections
