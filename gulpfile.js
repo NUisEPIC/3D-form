@@ -24,12 +24,12 @@ gulp.task('pug', function () {
              .pipe($.size())
 });
 
+gulp.task('clean:scripts', function () {
+  return del([ 'dist/scripts'])
+})
 
-gulp.task('scripts', function () {
+gulp.task('scripts', [ 'clean:scripts' ],  function () {
     return gulp.src('app/scripts/**/*.js')
-        .pipe($.sourcemaps.init())
-        .pipe($.uglify())
-        .pipe($.sourcemaps.write())
         .pipe($.size())
         .pipe(gulp.dest('dist'));
 });

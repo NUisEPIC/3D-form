@@ -3,82 +3,57 @@
 @import 'formula-inputs'
 
 // formula
-
-.mobile-warning
-  position fixed
-  z-index 9999
-  margin 20px 10%
-  width 80%
-  background #fafafa
-  display none
-  border-radius 4px
-  box-shadow 0 0 10px 10px rgba(0,0,0,0.1)
-  p
-    padding 0 30px
-    font-size 18px
-
-iframe[name*='dupe-frame']
-  display none
-
-@media all and (max-width: 700px)
-  .mobile-warning
-    display block
-    transition all ease 1s
-    overflow: hidden
-    max-height 100%
-    &.dismissed
-      max-height 0
-
 #formula-container
   width 100%
   height 100%
-  overflow hidden
   perspective 300px
   perspective-origin center center
 
-#formula-outline
-  display inline-block
-  margin-right 10%
-  font-size 18px
-  color white
+  *
+    box-sizing border-box
 
-.formula
-  display inline-block
-  margin 0 auto
-  width 75%
-  position relative
-  max-width 700px
-  transition all ease 1s
-  max-height 100%
+section.sidebar
+  width 250px
+  height 100%
+  position absolute
+  z-index 9
+  background white
 
-  form
-    position relative
-    transition all ease 0.5s
-
-    -moz-perspective 300px
-
+  #formula-outline
+    display inline-block
+    width 100%
+    font-size 18px
+    list-style-type none
+    padding 0 1em 0 3em
+    text-indent -1.5em
 
   .header
     background-image url(../images/epic-logo.png)
-    background-size contain
+    background-size 120%
+    background-position 50% 50%
     background-repeat no-repeat
-    width 300px
-    height 300px
-    display block
-    margin 0 auto
-    z-index 2
+    width 250px
+    height 250px
     position relative
-    // safari
-    transform none
-    -webkit-transform translateZ(5px)
+
+.formula
+  width calc(100% - 250px)
+  position absolute
+  left 250px
+  transition all ease 1s
+  height 100%
+
+  form
+    transition all ease 0.5s
+    height 100%
+
+    -moz-perspective 300px
 
   .primary-window
-    border-radius 4px
-    box-shadow 0 0 15px rgba(0,0,0,0.2)
     position absolute
 
     width 100%
-    height formula-height
+    height 100%
     display inline-table
     background radial-gradient(circle, #f2f2f2 0%, #ebebeb 100%)
     transition transform ease 0.5s,
@@ -90,7 +65,6 @@ iframe[name*='dupe-frame']
     -moz-perspective 300px
 
     overflow hidden
-    top -150px
     left 0
 
     &.page
@@ -203,7 +177,6 @@ iframe[name*='dupe-frame']
         right -23px
 
   &.shuffle
-
     .next-btn
       -webkit-transform translateZ(-10px)
 
@@ -229,7 +202,6 @@ iframe[name*='dupe-frame']
         -webkit-transform translateZ(-1px) rotateY(1deg)
 
   &.punched
-
     .primary-window
       animation 3s punch-ticket
       & *
@@ -252,7 +224,6 @@ iframe[name*='dupe-frame']
         transition none
         transform rotateY(180deg)
 
-
       .thanks
         opacity 1
         transform rotateY(180deg) translateX(700px)
@@ -260,52 +231,6 @@ iframe[name*='dupe-frame']
           transform rotateY(180deg) translateX(650px)
         & *
           opacity 1
-
-@media all and (max-height: 800px)
-  // stuff
-  html
-    font-size 18px
-
-  .formula
-    max-width 650px
-
-    .header
-      width 225px
-      height 225px
-      top -10px
-
-    .forcefield
-      padding ff-padding-top - 10px ff-padding-right ff-padding-bottom ff-padding-left
-
-    .primary-window
-      top -125px
-      height formula-height - 130px
-
-    .next-btn
-      top 100px
-      height formula-height - 130px
-
-    &.persp
-      .next-btn
-        top 98px
-        height formula-height - 127px
-
-    .glance
-      height field-height - 3px
-      &:after
-        top 2px
-
-    *[class*="pill-"]
-      height field-height - 3px
-
-    textarea
-      height 230px
-      &#explain-skills
-        height 68px
-
-    .primary-window .thanks
-      img
-        height 260px
 
 .formula-notify-window
   position fixed

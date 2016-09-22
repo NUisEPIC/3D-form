@@ -129,12 +129,6 @@ window.onload = function () {
   }
 
   var progressBar = new ToProgress(options)
-  var progressBarPercent = 100/windows.length;  // Percentage to increase/decrease progress bar on going to next/previous window
-
-  // Loop through and add each window header to the outline
-  for (var i = 0; i < windows.length; i++) {
-  	windowHeaders[i] = windowHeaders[i].innerText;  // Remove <h2> tag from each item in windowHeaders
-
   	var newItem = document.createElement('li')
   	newItem.appendChild(document.createTextNode(windowHeaders[i]))
 
@@ -218,16 +212,22 @@ window.onload = function () {
 
   // NOTE(jordan): gross gross gross gross gross
   adjustPadding()
-
   window.onresize = adjustPadding
+}
+function adjustPadding () {
+  var inputGroupElements = qq('.input-group input~*, .input-group textarea~*')
+    , basePad = 15
+    , width = 0
+    , padLeft = basePad
+    , padRight = basePad
 
-  // NOTE(jordan): make mobile warning dismissable
-  var closeWarningBtn = qq('a[do*="close-warning"]')[0]
+  ;[].forEach.call(inputGroupElements, function(p) {
+    var siblings  = p.parentElement.children
+      , groupSize = siblings.length
+      , lastChild = siblings[groupSize - 1]
+      , nearestInput = siblings[0]
 
-  closeWarningBtn.onclick = closeWarning
-
-  var resumeBtn = document.getElementById('resume-btn')
-
+    if (nearestInput.type
   filepicker.setKey('AV96DZseeSYOldbUvmYwGz')
 
   resumeBtn.onclick = function () {

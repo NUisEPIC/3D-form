@@ -21,26 +21,13 @@ html
 
   body
     #formula-container
-      .mobile-warning
-        p Hey! It looks like you're using a mobile phone, which is awesome.
-        p But we spent a lot of time making this application look juuuust right for desktop, and it'll probably be a little squishy on your phone.
-        p (But it should still work!)
-        p If that's OK with you, you really want the squishy, less exciting version, then&nbsp;
-          a(href='#', do='close-warning') tap here
-          | .
-        p Otherwise, come back on your computer later, ok? ;)
-
       // Outline pane. Will be populated by JavaScript.
-      ul#formula-outline
-
-      // NOTE(jordan): dupe-frame: for to dupe the form into submitting to a Google spreadsheet
-      // without refreshing the page.
-      iframe(name='dupe-frame')
+      section.sidebar
+        .header
+        ul#formula-outline
 
       // NOTE(jordan): Begin the actual content!
       .formula
-        .header
-
         // NOTE(jordan): Hidden at start.
         .next-btn
           .inner-btn
