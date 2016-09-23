@@ -28,7 +28,7 @@ var formulaDefaultValidators = {
     return /\d{4}/.test(v) && parseInt(v) >= 2015
   },
   checkbox: function (i, v) {
-    var checkBoxGroup = i.parentElement.children
+    var checkBoxGroup = [].slice.call(i.parentElement.parentElement.children).map(c => c.querySelector('input'))
     var valid = false
     ;[].forEach.call(checkBoxGroup, function (c) {
       if (c.checked) valid = true
