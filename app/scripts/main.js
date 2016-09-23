@@ -19,7 +19,6 @@ function adjustPadding () {
 
     if (/pill-left|glance/g.test(p.className)) {
       padLeft += p.offsetWidth
-      width += p.offsetWidth
     }
 
     if (/pill-right/g.test(p.className)) {
@@ -31,8 +30,8 @@ function adjustPadding () {
     }
 
     if (p === lastChild) {
-      nearestInput.style.paddingLeft  = padLeft + "px"
-      nearestInput.style.paddingRight = padRight + "px"
+      nearestInput.style.paddingLeft  = nearestLabel.style.paddingLeft = padLeft + "px"
+      nearestInput.style.paddingRight = nearestLabel.style.paddingRight = padRight + "px"
       nearestInput.style.width        = width + "px"
 
       padLeft = padRight = basePad
