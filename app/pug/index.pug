@@ -38,19 +38,15 @@ html
             .forcefield
               h2 Welcome to the Official EPIC Application!
               .input-group
-                input#name(type='text', name='entry.354342888', required)
+                input#name(type='text', required)
                 label Name (First and Last)
                 .glance
               .input-group
-                input#email(type='email', name='entry.436547589', required)
+                input#email(type='email', required)
                 label School Email
                 .glance
                 .pill-right
                   span .edu
-              .input-group
-                input#hearsay(type='text', name='entry.1486322634', required)
-                label How did you hear about our application?
-                .glance
               .next-btn.formula-button
                 .inner-btn
                   span Next
@@ -59,15 +55,15 @@ html
             .forcefield
               h2 Some Basic Info
               .input-group
-                input#year(type='text', name='entry.1494609428', required)
+                input#year(type='text', required)
                 label Class Year (eg: 2017)
                 .glance
               .input-group
-                input#major(type='text', name='entry.252100536', required)
+                input#major(type='text', required)
                 label Major
                 .glance
               .input-group
-                input#phone(type='tel', name='entry.1881012293', required)
+                input#phone(type='tel', required)
                 label Phone Number: (xxx) yyy zzzz
                 .glance
               .next-btn.formula-button
@@ -76,66 +72,35 @@ html
           .primary-window.page
             i.back-btn Back
             .forcefield
-              h2 I am applying to (select as many as apply):
+              h2 Where do you see yourself in EPIC? Select as many as apply.
               .input-group.checkboxes
+                .checkbox
+                  input#apply-for-epic-membership(type='checkbox', required)
+                  label EPIC General Membership
+
+                .checkbox
+                  input#apply-for-epic-team(type='checkbox', required)
+                  label EPIC Team
+
                 .checkbox
                   input#apply-for-launch(type='checkbox', required)
-                  label Participate in Launch
+                  label EPIC Launch Cohort
 
                 .checkbox
-                  input#apply-for-epic(type='checkbox', required)
-                  label Join EPIC Teams
-              .next-btn.formula-button
-                .inner-btn
-                  span Next
-          .primary-window.page
-            i.back-btn Back
-            .forcefield
-              h2 I want to...
-              .input-group.checkboxes
-                input#build-a-startup(type='checkbox', required)
-                label Build a Startup
-
-                input#run-a-hackathon(type='checkbox', required)
-                label Run a Hackathon
-
-                input#learn-to-code(type='checkbox', required)
-                label Learn to Code
-
-                input#teach-entrepreneurship(type='checkbox', required)
-                label Teach Entrepreneurship
-              .next-btn.formula-button
-                .inner-btn
-                  span Next
-          .primary-window.page
-            i.back-btn Back
-            .forcefield
-              h2 I am a...
-              .input-group.checkboxes
-                .checkbox
-                  input#hacker(type='checkbox', name='entry.2003569147', required)
-                  label Hacker
-                .checkbox
-                  input#designer(type='checkbox', name='entry.1080060025', required)
-                  label Designer
-                .checkbox
-                  input#builder(type='checkbox', name='entry.711584580', required)
-                  label Builder
-              .input-group
-                textarea#explain-skills(name='entry.549867061', required)
-                label Explain your selections
+                  input#apply-for-sprout(type='checkbox', required)
+                  label EPIC Sprout Participant
               .next-btn.formula-button
                 .inner-btn
                   span Next
 
           // NOTE(jordan): Long-form response section.
-          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'Ex: What are you passionate about? What was your journey to NU?')(name='entry.1482811689')
-          +essayQuestion('why-epic-matters', 'Why does EPIC matter to Northwestern?', 'How is it different from other organizations?')(name='entry.1038701340')
-          +essayQuestion('why-interested', 'Why are you interested in joining EPIC?', 'What do you hope to learn? What skills do you hope to gain?')(name='entry.1277416023')
-          +essayQuestion('how-contribute', 'How will you contribute to your team?', 'Whichever it may be. How will you foster inter-team cooperation?')(name='entry.1133447629')
-          +essayQuestion('other-involvements', 'What else are you involved in?', 'e.g.; Work-study, ISBE, DOJO, etc.')(name='entry.93355119')
-          +essayQuestion('elevator-pitch', 'Why are you the best person for EPIC?', '5 Minutes! Elevator Pitch! Go!')(name='entry.555173403')
-          +essayQuestion('anything-else', 'Anything else you would like us to consider?', 'Maybe share some fun (or serious) facts. :)')(name='entry.1658748676')
+          +essayQuestion('what-want', 'What do you want to get out of your membership?', 'Ex: Potatoes')
+          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'Ex: What are you passionate about? What was your journey to NU?')
+          +essayQuestion('hope-learn', 'What do you hope to learn, or what skills do you hope to gain from joining EPIC?', 'How is it different from other organizations?')
+          +essayQuestion('why-interested', 'Why are you passionate about entrepreneurship?', 'Feel free to tell us about any entrepreneurial experience you have.')
+          +essayQuestion('how-contribute', 'What will you contribute to the specific team you are interested in?', 'How do you see yourself fitting in?')
+          +essayQuestion('other-involvements', 'What else are you involved in?', 'e.g. work-study, other student orgs, study abroad, etc.')
+          +essayQuestion('anything-else', 'Do you have any work that you’re proud of?', 'Feel free to attach a portfolio, a link to your personal website, a writing sample, etc.')
 
             // NOTE(jordan): Displayed after form submission animation completes.
             .thanks
