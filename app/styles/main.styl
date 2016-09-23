@@ -9,6 +9,8 @@
   perspective 300px
   perspective-origin center center
 
+  overflow hidden
+
   *
     box-sizing border-box
 
@@ -22,10 +24,12 @@ section.sidebar
   #formula-outline
     display inline-block
     width 100%
+    height calc(100% - 250px - 1em)
     font-size 18px
     list-style-type none
     padding 0 1em 0 3em
     text-indent -1.5em
+    overflow-y auto
 
   .header
     background-image url(../images/epic-logo.png)
@@ -51,6 +55,8 @@ section.sidebar
 
   .primary-window
     position absolute
+
+    overflow-y auto
 
     width 100%
     height 100%
