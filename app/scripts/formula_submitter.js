@@ -1,6 +1,4 @@
-var formulaOne = location.origin.indexOf('localhost') > -1 ? 'http://localhost:3000/recruitment/application' : 'https://formula-one.herokuapp.com/recruitment/application'
-
-var formulaGoogleEndpoint = 'https://docs.google.com/forms/d/15cZJhCpDrF9caF6-96BDtaUoxB1emT5uhW0snOnnGzE/formResponse'
+var formulaOne = 'https://nuisepic.com/api/recruitment/application'
 
 // NOTE(jordan): this is currently unused
 // TODO(jordan): dynamically set input[name] to googleFormMappings
