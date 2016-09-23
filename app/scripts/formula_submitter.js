@@ -56,16 +56,6 @@ function formulaValueWithPills (i) {
   return v.trim()
 }
 
-function formulaFormSetupGoogleSubmit (form) {
-  form.action = formulaGoogleEndpoint
-  form.target = 'dupe-frame'
-  form.onsubmit = function (e) {
-    // NOTE(jordan): Stop the page from reloading
-    e.preventDefault()
-    e.stopPropagation()
-  }
-}
-
 function formulaSubmit () {
   var formulaForm   = qq('.formula form')[0]
     , formulaInputs = qq('.formula form input, .formula form textarea')
@@ -83,10 +73,5 @@ function formulaSubmit () {
   console.log(JSON.stringify(data))
 
   formulaOneSendData(data)
-  // NOTE(jordan): use the callback here in case later we want to
-  // do anything after successful submission, like resetting the form.
-  formulaFormSetupGoogleSubmit(formulaForm)
-  formulaForm.submit()
-
   formulaAnimator.punchTicket()
 }
