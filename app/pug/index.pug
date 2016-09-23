@@ -16,6 +16,9 @@ html
         .input-group
           textarea(id=id, required, name!=attributes.name)
           label= label
+        .next-btn.formula-button
+          .inner-btn
+            span Next
       if block
         block
 
@@ -29,10 +32,6 @@ html
       // NOTE(jordan): Begin the actual content!
       .formula
         // NOTE(jordan): Hidden at start.
-        .next-btn
-          .inner-btn
-            span Next
-
         // NOTE(jordan): Begin actual form.
         form
           .primary-window.page.current
@@ -52,6 +51,9 @@ html
                 input#hearsay(type='text', name='entry.1486322634', required)
                 label How did you hear about our application?
                 .glance
+              .next-btn.formula-button
+                .inner-btn
+                  span Next
           .primary-window.page
             i.back-btn Back
             .forcefield
@@ -68,6 +70,9 @@ html
                 input#phone(type='tel', name='entry.1881012293', required)
                 label Phone Number: (xxx) yyy zzzz
                 .glance
+              .next-btn.formula-button
+                .inner-btn
+                  span Next
           .primary-window.page
             i.back-btn Back
             .forcefield
@@ -80,6 +85,9 @@ html
                 .checkbox
                   input#apply-for-epic(type='checkbox', required)
                   label Join EPIC Teams
+              .next-btn.formula-button
+                .inner-btn
+                  span Next
           .primary-window.page
             i.back-btn Back
             .forcefield
@@ -96,6 +104,9 @@ html
 
                 input#teach-entrepreneurship(type='checkbox', required)
                 label Teach Entrepreneurship
+              .next-btn.formula-button
+                .inner-btn
+                  span Next
           .primary-window.page
             i.back-btn Back
             .forcefield
@@ -113,6 +124,9 @@ html
               .input-group
                 textarea#explain-skills(name='entry.549867061', required)
                 label Explain your selections
+              .next-btn.formula-button
+                .inner-btn
+                  span Next
 
           // NOTE(jordan): Long-form response section.
           +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'Ex: What are you passionate about? What was your journey to NU?')(name='entry.1482811689')

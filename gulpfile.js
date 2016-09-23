@@ -11,27 +11,34 @@ gulp.task('styles', function () {
         .pipe($.stylus())
         .pipe($.autoprefixer('last 4 versions'))
         .pipe($.sourcemaps.write())
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('.tmp'))
         .pipe($.size())
         .pipe(browserSync.stream())
 });
 
+gulp.task('build:styles', [ 'styles' ], function () {
+  return gulp.src('.tmp/styles')
+             .pipe(gulp.dest('dist/styles'))
+})
+
 gulp.task('pug', function () {
   return gulp.src(['app/pug/**/*.pug'])
              .pipe($.pug({pretty: true}))
-             .pipe($.useref())
              .pipe(gulp.dest('.tmp'))
              .pipe($.size())
 });
 
-gulp.task('clean:scripts', function () {
-  return del([ 'dist/scripts'])
+gulp.task('build:pug', [ 'pug' ], function () {
+  return gulp.src('.tmp/*.html')
+             .pipe($.useref())
+             .pipe(gulp.dest('dist'))
 })
 
-gulp.task('scripts', [ 'clean:scripts' ],  function () {
+gulp.task('scripts',  function () {
     return gulp.src('app/scripts/**/*.js')
         .pipe($.size())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist/scripts'))
+        .pipe(browserSync.stream())
 });
 
 gulp.task('images', function () {
@@ -47,40 +54,29 @@ gulp.task('images', function () {
 
 gulp.task('extras', function () {
     return gulp.src('app/*.*', { dot: true })
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('.tmp'));
 });
 
 gulp.task('clean', function () {
-    return del(['app/**/*.html', 'dist'])
-});
-
-gulp.task('build', ['pug', 'images', 'extras']);
-
-gulp.task('default', ['clean'], function () {
-    gulp.start('build');
+    return del(['.tmp', 'dist'])
 });
 
 gulp.task('serve', ['pug', 'styles', 'scripts', 'images'], function () {
   browserSync.init({
     server: {
-      baseDir: [ './dist', './.tmp' ]
+      baseDir: [ './app', './.tmp' ],
+      routes: {
+        '/node_modules': './node_modules'
+      }
     }
   })
 });
 
 gulp.task('watch', ['serve'], function () {
     // watch for changes
-
-    gulp.watch([
-        'app/scripts/**/*.js',
-        'app/images/**/*',
-        'app/pug/**/*.pug'
-    ])
-
     gulp.watch('app/styles/**/*.styl', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('app/pug/**/*.pug', ['pug']);
-    gulp.watch('app/*.html').on('change', browserSync.reload)
-    gulp.watch('dist/**/*.js').on('change', browserSync.reload)
+    gulp.watch('.tmp/*.html').on('change', browserSync.reload)
 });

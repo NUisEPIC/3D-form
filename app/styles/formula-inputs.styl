@@ -17,6 +17,7 @@
     width 50%
 
     input[type='checkbox']
+      opacity 0
       position absolute
       left 0
       width 100%
@@ -60,7 +61,7 @@
   input
     max-height field-height
 
-  input[type='text'], input[type='email'], input[type='tel'], textarea, button
+  input[type='text'], input[type='email'], input[type='tel'], textarea, button, .formula-button
     width 100% // will be overwritten.
     padding 10px 5% // will be overwritten.
     margin 0
@@ -117,14 +118,20 @@
       color rgb(10, 225, 10)
       text-shadow 0 0 7px rgb(255,255,255)
 
+  .formula-button
+    transition all 0.5s ease
+
+  .formula-button:hover
+    box-shadow -1px 1px 2px rgba(0,0,0,0.07),
+                1px 1px 2px rgba(0,0,0,0.07)
+    margin-bottom 1px
+    margin-top -1px
+
   textarea
     height 300px
     padding 10px 15px
     font-size 80%
     resize none
-
-    &#explain-skills
-      height 150px
 
     &~label
       position absolute

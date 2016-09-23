@@ -1,7 +1,8 @@
 function adjustPadding () {
   var inputGroupElements = qq('.input-group input~*, .input-group textarea~*')
     , basePad = 15
-    , width = 0
+    , baseWidth = 0
+    , width = baseWidth
     , padLeft = basePad
     , padRight = basePad
 
@@ -16,16 +17,17 @@ function adjustPadding () {
         && ['text', 'email', 'tel'].indexOf(nearestInput.type) === -1)
       return
 
-    if (/pill-left|glance/g.test(p.classList)) {
+    if (/pill-left|glance/g.test(p.className)) {
       padLeft += p.offsetWidth
+      width += p.offsetWidth
     }
 
-    if (/pill-right/g.test(p.classList)) {
+    if (/pill-right/g.test(p.className)) {
       padRight += p.offsetWidth
     }
 
     if (p.nodeName === 'LABEL') {
-      width = p.offsetWidth
+      width += p.offsetWidth
     }
 
     if (p === lastChild) {
@@ -34,6 +36,7 @@ function adjustPadding () {
       nearestInput.style.width        = width + "px"
 
       padLeft = padRight = basePad
+      width = baseWidth
     }
   })
 }
@@ -207,7 +210,7 @@ window.onload = function () {
 
   formulaGetData(formulaInputs)
 
-  var currentPageInputs = qq('.page.current input')
+  var currentPageInputs = qq('.page.current input, .page.current textarea')
 
   formulaValidate(currentPageInputs)
 
