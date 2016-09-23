@@ -175,12 +175,14 @@ window.onload = function () {
     }
   }
 
-  nextBtn.onclick = function () {
-    var currentPage = extend(qq('.page.current')[0])
-      , nextPage    = currentPage.nextElementSibling
-    progressBar.increase(progressBarPercent)
-    formulaNextPage(currentPage, nextPage)
-  }
+  qq('.next-btn').forEach((n) => {
+    n.onclick = function () {
+      var currentPage = extend(qq('.page.current')[0])
+        , nextPage    = currentPage.nextElementSibling
+      progressBar.increase(progressBarPercent)
+      formulaNextPage(currentPage, nextPage)
+    }
+  })
 
   var backBtns = qq('.back-btn')
 
