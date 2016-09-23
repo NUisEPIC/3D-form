@@ -95,12 +95,35 @@ html
 
           // NOTE(jordan): Long-form response section.
           +essayQuestion('what-want', 'What do you want to get out of your membership?', 'Ex: Potatoes')
-          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'Ex: What are you passionate about? What was your journey to NU?')
+          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'What are you passionate about? What was your journey to NU?')
           +essayQuestion('hope-learn', 'What do you hope to learn, or what skills do you hope to gain from joining EPIC?', 'How is it different from other organizations?')
-          +essayQuestion('why-interested', 'Why are you passionate about entrepreneurship?', 'Feel free to tell us about any entrepreneurial experience you have.')
+          +essayQuestion('why-interested', 'Why are you passionate about entrepreneurship?', 'Feel free to tell us about any entrepreneurial experience.')
           +essayQuestion('how-contribute', 'What will you contribute to the specific team you are interested in?', 'How do you see yourself fitting in?')
           +essayQuestion('other-involvements', 'What else are you involved in?', 'e.g. work-study, other student orgs, study abroad, etc.')
-          +essayQuestion('anything-else', 'Do you have any work that you’re proud of?', 'Feel free to attach a portfolio, a link to your personal website, a writing sample, etc.')
+          .primary-window.page
+            .forcefield
+              h2 Do you have any work you're proud of?
+              .input-group
+                input#work1(type='text')
+                label Link us!
+                .glance
+                .pill-left
+                  span http://
+              .input-group
+                input#work2(type='text')
+                label Got more? Link it!
+                .glance
+                .pill-left
+                  span http://
+              .input-group
+                input#work3(type='text')
+                label Another? What an overachiever!
+                .glance
+                .pill-left
+                  span http://
+              .next-btn.formula-button
+                .inner-btn
+                  span Submit
 
             // NOTE(jordan): Displayed after form submission animation completes.
             .thanks
