@@ -1,15 +1,11 @@
 var formulaOne = 'https://nuisepic.com/api/recruitment/application'
 
-// NOTE(jordan): this is currently unused
-// TODO(jordan): dynamically set input[name] to googleFormMappings
-//               if input[name] is not already set.
-
 function basicXhrLogging (x) {
   if (x.status == 200) {
-    console.log('Awesomesauce')
+    console.log('Good.')
     console.log(x.responseText)
   } else {
-    console.log('Not so awesomesauce. :(')
+    console.log('Not so good. :(')
     console.log(x.status)
     console.log(x.responseText)
   }
