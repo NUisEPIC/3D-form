@@ -40,6 +40,8 @@ function adjustPadding () {
   })
 }
 
+var pages = [].slice.call(qq('.page'))
+
 function formulaSetupInputs (inputs, formulaNextPage) {
   console.log(inputs)
 
@@ -67,8 +69,6 @@ function formulaSetupInputs (inputs, formulaNextPage) {
 
     if (i.value.length > 0) i.addClass('focus')
   })
-
-  var pages = qq('.page')
 
   ;[].forEach.call(pages, function (page) {
     var inputs = [].slice.call(page.getElementsByTagName('input'))
@@ -139,10 +139,10 @@ window.onload = function () {
   	newItem.onclick = function() {
   		var currentPage = qq('.current')[0]
   		var currentPageIndex = windows.indexOf(currentPage)
-        var desiredPageIndex = windowHeaders.indexOf(this.innerText)
+      var desiredPageIndex = windowHeaders.indexOf(this.innerText)
   		var desiredPage = windows[desiredPageIndex]
   		if (currentPageIndex != desiredPageIndex) {
-  			progressBar.setProgress(windowHeaders.indexOf(this.innerText) * progressBarPercent)
+  			progressBar.setProgress((windowHeaders.indexOf(this.innerText) + 1) * progressBarPercent)
   			// Animate differently based on whether the desired page is before or after the current page
   			if (currentPageIndex > desiredPageIndex)
  				formulaAnimator.previousPage(currentPage, desiredPage)
@@ -150,6 +150,8 @@ window.onload = function () {
  				formulaNextPage(currentPage, desiredPage)
   		}
   	}
+
+    if (i > 0) newItem.style.display = 'none'
 
   	formulaOutline.appendChild(newItem)
   }
@@ -161,9 +163,11 @@ window.onload = function () {
       var nextPage = extend(nextPage)
         , nextPageInputs = nextPage.getElementsByTagName('input')
         , nextPageTextareas = nextPage.getElementsByTagName('textarea')
+        , nextPageIndex = pages.indexOf(nextPage)
       nextPageInputs = [].slice.call(nextPageInputs)
                            .concat([].slice.call(nextPageTextareas))
       formulaAnimator.nextPage(currentPage, nextPage, function () {
+        formulaOutline.children[nextPageIndex].style.display = ''
         formulaValidate(nextPageInputs)
         nextPageInputs[0].focus()
       })
@@ -171,11 +175,11 @@ window.onload = function () {
       progressBar.reset()
       formulaSubmit()
     } else {
-      alert("Looks like something isn't quite right. Try going back and checking that all the textboxes are filled it, and all answers have little green check marks next to them.")
+      formulaNotify.notify("Part of your application is missing or invalid. Please double check.", 3000)
     }
   }
 
-  qq('.next-btn').forEach((n) => {
+  [].forEach.call(qq('.next-btn'), (n) => {
     n.onclick = function () {
       var currentPage = extend(qq('.page.current')[0])
         , nextPage    = currentPage.nextElementSibling

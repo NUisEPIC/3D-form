@@ -53,8 +53,7 @@ function formulaValueWithPills (i) {
 }
 
 function formulaSubmit () {
-  var formulaForm   = qq('.formula form')[0]
-    , formulaInputs = qq('.formula form input, .formula form textarea')
+  var formulaInputs = qq('.formula form input, .formula form textarea')
 
   var data = formulaGetData(formulaInputs)
   ;[].forEach.call(formulaInputs, function (i) {
