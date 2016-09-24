@@ -80,7 +80,9 @@ function formulaSetupInputs (inputs, formulaNextPage) {
     }
 
     var inputClick = function () {
-      if (this.type == 'checkbox') formulaCacheSet(this)
+      if (this.type == 'checkbox') {
+        formulaCacheSet(this)
+      }
       validatePage()
     }
 
@@ -159,6 +161,11 @@ window.onload = function () {
 
   function formulaNextPage (currentPage, nextPage) {
     // NOTE(jordan): I don't know why this happens
+    let visiblePages = [].filter.call(pages, p => !~p.className.indexOf('skip'))
+        , visibleInputs = []
+    ;[].forEach.call(visiblePages, p => visibleInputs.push(p.querySelector('input, textarea')))
+    visibleInputs = visibleInputs.filter(i => i !== null)
+
     if (nextPage) {
       var nextPage = extend(nextPage)
         , nextPageInputs = nextPage.getElementsByTagName('input')
@@ -169,9 +176,10 @@ window.onload = function () {
       formulaAnimator.nextPage(currentPage, nextPage, function () {
         formulaOutline.children[nextPageIndex].style.display = ''
         formulaValidate(nextPageInputs)
-        nextPageInputs[0].focus()
+        if (nextPageInputs.length) nextPageInputs[0].focus()
       })
-    } else if (formulaInputsValid(formulaInputs)) {
+    } else if (formulaInputsValid(visibleInputs)) {
+      debugger
       progressBar.reset()
       formulaSubmit()
     } else {
@@ -179,31 +187,93 @@ window.onload = function () {
     }
   }
 
-  [].forEach.call(qq('.next-btn'), (n) => {
-    n.onclick = function () {
-      var currentPage = extend(qq('.page.current')[0])
-        , nextPage    = currentPage.nextElementSibling
-      progressBar.increase(progressBarPercent)
-      formulaNextPage(currentPage, nextPage)
+  nextBtn.onclick = function () {
+    var currentPage = extend(qq('.page.current')[0])
+      , nextPage    = currentPage.nextElementSibling
+
+    if (currentPage.id === 'branches') {
+      const data = formulaGetData(qq('.formula input, .formula textarea'))
+      if (data['apply-for-epic-membership']) {
+        const genmemQuestions = qq('.page.general-membership')
+        ;[].forEach.call(genmemQuestions, (q) => {
+          q = extend(q)
+          q.removeClass('skip')
+        })
+      } else {
+        const genmemQuestions = qq('.page.general-membership')
+        ;[].forEach.call(genmemQuestions, (q) => {
+          q = extend(q)
+          q.addClass('skip')
+        })
+      }
+      if (data['apply-for-epic-team']) {
+        const epicTeamsQuestions = qq('.page.epic-teams')
+        ;[].forEach.call(epicTeamsQuestions, (q) => {
+          q = extend(q)
+          q.removeClass('skip')
+        })
+      } else {
+        const epicTeamsQuestions = qq('.page.epic-teams')
+        ;[].forEach.call(epicTeamsQuestions, (q) => {
+          q = extend(q)
+          q.addClass('skip')
+        })
+      }
+      if (data['apply-for-launch']) {
+        const launchQuestions = qq('.page.launch-cohort')
+        ;[].forEach.call(launchQuestions, (q) => {
+          q = extend(q)
+          q.removeClass('skip')
+        })
+      } else {
+        const launchQuestions = qq('.page.epic-membership')
+        ;[].forEach.call(launchQuestions, (q) => {
+          q = extend(q)
+          q.addClass('skip')
+        })
+      }
     }
-  })
+
+    var skips = 0
+
+    if (nextPage) {
+      while (nextPage.className.indexOf('skip') !== -1) {
+        nextPage = nextPage.nextElementSibling
+        skips++
+      }
+
+      if (nextPage.id === 'overview') {
+        nextBtn.innerText = 'Submit'
+      }
+    }
+
+    progressBar.increase(progressBarPercent*(1 + skips))
+    formulaNextPage(currentPage, nextPage)
+  }
 
   var backBtns = qq('.back-btn')
 
   ;[].forEach.call(backBtns, function(btn) {
     var btnPage  = extend(btn.parentElement)
       , prevPage = btnPage.previousElementSibling
+      , skips = 0
     if (prevPage) {
       var prevPage = extend(prevPage)
-        , prevPageInputs = prevPage.getElementsByTagName('input')
-        , prevPageTextareas = prevPage.getElementsByTagName('textarea')
-      prevPageInputs = [].slice.call(prevPageInputs)
-                           .concat([].slice.call(prevPageTextareas))
       btn.onclick = function (e) {
-      	progressBar.decrease(progressBarPercent)
-        formulaAnimator.previousPage(btnPage, prevPage, function () {
-          prevPageInputs[0].focus()
-          formulaValidate(prevPageInputs)
+        var target = prevPage
+        while (target.className.indexOf('skip') !== -1) {
+          target = target.previousElementSibling
+          skips++
+        }
+        var targetPageInputs = target.getElementsByTagName('input')
+          , targetPageTextareas = target.getElementsByTagName('textarea')
+        targetPageInputs = [].slice.call(targetPageInputs)
+                           .concat([].slice.call(targetPageTextareas))
+        nextBtn.innerText = 'Next'
+      	progressBar.decrease(progressBarPercent*(1 + skips))
+        formulaAnimator.previousPage(btnPage, target, function () {
+          targetPageInputs[0].focus()
+          formulaValidate(targetPageInputs)
         })
       }
     } else {

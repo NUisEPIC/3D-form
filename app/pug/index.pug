@@ -33,6 +33,10 @@ html
       .formula
         // NOTE(jordan): Hidden at start.
         // NOTE(jordan): Begin actual form.
+        .next-btn.formula-button
+          .inner-btn
+            span Next
+
         form
           .primary-window.page.current
             .forcefield
@@ -47,9 +51,6 @@ html
                 .glance
                 .pill-right
                   span .edu
-              .next-btn.formula-button
-                .inner-btn
-                  span Next
           .primary-window.page
             i.back-btn Back
             .forcefield
@@ -66,15 +67,12 @@ html
                 input#phone(type='tel', required)
                 label Phone Number: (xxx) yyy zzzz
                 .glance
-              .next-btn.formula-button
-                .inner-btn
-                  span Next
-          .primary-window.page
+          .primary-window.page#branches
             i.back-btn Back
             .forcefield
               h2 Where do you see yourself in EPIC? Select as many as apply.
               .input-group.checkboxes
-                .checkbox
+                .checkbox.exclusive
                   input#apply-for-epic-membership(type='checkbox', required)
                   label EPIC General Membership
 
@@ -89,18 +87,59 @@ html
                 .checkbox
                   input#apply-for-sprout(type='checkbox', required)
                   label EPIC Sprout Participant
-              .next-btn.formula-button
-                .inner-btn
-                  span Next
 
           // NOTE(jordan): Long-form response section.
-          +essayQuestion('what-want', 'What do you want to get out of your membership?', 'Ex: Potatoes')
-          +essayQuestion('story', 'What\'s your story? Tell us about yourself.', 'What are you passionate about? What was your journey to NU?')
-          +essayQuestion('hope-learn', 'What do you hope to learn, or what skills do you hope to gain from joining EPIC?', 'How is it different from other organizations?')
-          +essayQuestion('why-interested', 'Why are you passionate about entrepreneurship?', 'Feel free to tell us about any entrepreneurial experience.')
-          +essayQuestion('how-contribute', 'What will you contribute to the specific team you are interested in?', 'How do you see yourself fitting in?')
-          +essayQuestion('other-involvements', 'What else are you involved in?', 'e.g. work-study, other student orgs, study abroad, etc.')
-          .primary-window.page
+          .primary-window.page.general-membership.skip
+            i.back-btn Back
+            .forcefield
+              h2 What do you want to get out of your membership?
+              .input-group
+                textarea#what-want-general-membership(required)
+                label What would you like to learn, or gain, as a General Member?
+          .primary-window.page.epic-teams.launch-cohort
+            i.back-btn Back
+            .forcefield
+              h2 What's your story? Tell us about yourself.
+              .input-group
+                textarea#story(required)
+                label What are you passionate about? What was your journey to NU?
+          .primary-window.page.epic-teams.launch-cohort
+            i.back-btn Back
+            .forcefield
+              h2 What do you hope to learn, or what skills do you hope to gain from joining EPIC?
+              .input-group
+                textarea#hope-learn(required)
+                label How is it different from other organizations?
+          .primary-window.page.epic-teams.launch-cohort
+            i.back-btn Back
+            .forcefield
+              h2 Why are you passionate about entrepreneurship?
+              .input-group
+                textarea#why-interested(required)
+                label Feel free to tell us about any entrepreneurial experience.
+          .primary-window.page.epic-teams.launch-cohort
+            i.back-btn Back
+            .forcefield
+              h2 What will you contribute to the specific team you are interested in?
+              .input-group
+                textarea#how-contribute(required)
+                label How do you see yourself fitting in?
+          .primary-window.page.epic-teams.launch-cohort
+            i.back-btn Back
+            .forcefield
+              h2 What else are you involved in?
+              .input-group
+                textarea#other-involvements(required)
+                label e.g. work-study, other student orgs, study abroad, etc.
+          .primary-window.page.launch-cohort.skip
+            i.back-btn Back
+            .forcefield
+              h2 What do you want to get out of Launch?
+              .input-group
+                textarea#what-want-launch(required)
+                label e.g. work-study, other student orgs, study abroad, etc.
+          .primary-window.page.launch-cohort.epic-teams
+            i.back-btn Back
             .forcefield
               h2 Do you have any work you're proud of?
               .input-group
@@ -115,9 +154,11 @@ html
                 input#work3(type='text')
                 label Another? What an overachiever!
                 .glance
-              .next-btn.formula-button
-                .inner-btn
-                  span Submit
+          .primary-window.page#overview
+            i.back-btn Back
+            .forcefield
+              h2 Overview
+              // I don't really know what to put here right now
 
             // NOTE(jordan): Displayed after form submission animation completes.
             .thanks
