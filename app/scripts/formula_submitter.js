@@ -64,6 +64,9 @@ function formulaSubmit () {
     }
   })
 
+  data.firstName = data.name.split(' ')[0]
+  data.lastName = data.name.split(' ').slice(1).join(' ')
+
   console.log(data)
   console.log(JSON.stringify(data))
 
