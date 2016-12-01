@@ -154,10 +154,10 @@ window.onload = function () {
 
   // Create a progress bar and add it to the page
   var options = {
-  	id: 'top-progress-bar',
-  	color: '#E00000',
-  	height: '4px',
-  	duration: 0.4,
+    id: 'top-progress-bar',
+    color: '#E00000',
+    height: '4px',
+    duration: 0.4,
   }
 
   var progressBar = new ToProgress(options)
@@ -165,35 +165,35 @@ window.onload = function () {
 
   // Loop through and add each window header to the outline
   for (var i = 0; i < windows.length; i++) {
-  	windowHeaders[i] = windowHeaders[i].innerText;  // Remove <h2> tag from each item in windowHeaders
+    windowHeaders[i] = windowHeaders[i].innerText;  // Remove <h2> tag from each item in windowHeaders
 
-  	var newItem = document.createElement('li')
-  	newItem.appendChild(document.createTextNode(windowHeaders[i]))
+    var newItem = document.createElement('li')
+    newItem.appendChild(document.createTextNode(windowHeaders[i]))
 
-  	// When clicking on a list item, move to the respective page of the application
-  	newItem.onclick = function() {
-  		var currentPage = qq('.current')[0]
-  		var currentPageIndex = windows.indexOf(currentPage)
+    // When clicking on a list item, move to the respective page of the application
+    newItem.onclick = function() {
+      var currentPage = qq('.current')[0]
+      var currentPageIndex = windows.indexOf(currentPage)
       var desiredPageIndex = windowHeaders.indexOf(this.innerText)
-  		var desiredPage = windows[desiredPageIndex]
-  		if (currentPageIndex != desiredPageIndex) {
-  			progressBar.setProgress((windowHeaders.indexOf(this.innerText) + 1) * progressBarPercent)
-  			// Animate differently based on whether the desired page is before or after the current page
-  			if (desiredPage.id === 'overview') {
+      var desiredPage = windows[desiredPageIndex]
+      if (currentPageIndex != desiredPageIndex) {
+        progressBar.setProgress((windowHeaders.indexOf(this.innerText) + 1) * progressBarPercent)
+        // Animate differently based on whether the desired page is before or after the current page
+        if (desiredPage.id === 'overview') {
           populateOverview(desiredPage)
         }
-  			if (currentPageIndex > desiredPageIndex) {
- 				formulaAnimator.previousPage(currentPage, desiredPage)
+        if (currentPageIndex > desiredPageIndex) {
+        formulaAnimator.previousPage(currentPage, desiredPage)
                           nextBtn.innerText = 'Next'
                         }
- 			else
- 				formulaNextPage(currentPage, desiredPage)
-  		}
-  	}
+      else
+        formulaNextPage(currentPage, desiredPage)
+      }
+    }
 
     if (i > 0) newItem.style.display = 'none'
 
-  	formulaOutline.appendChild(newItem)
+    formulaOutline.appendChild(newItem)
   }
 
 
@@ -327,7 +327,7 @@ window.onload = function () {
         targetPageInputs = [].slice.call(targetPageInputs)
                            .concat([].slice.call(targetPageTextareas))
         nextBtn.innerText = 'Next'
-      	progressBar.decrease(progressBarPercent*(1 + skips))
+        progressBar.decrease(progressBarPercent*(1 + skips))
         formulaAnimator.previousPage(btnPage, target, function () {
           targetPageInputs[0].focus()
           formulaValidate(targetPageInputs)
