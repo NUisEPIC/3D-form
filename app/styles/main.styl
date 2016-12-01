@@ -176,11 +176,12 @@ section.sidebar
         opacity 0
 
     .thanks
+      left 0
       display block
-      transform rotateY(180deg) translateX(700px)
+      transform rotateY(180deg)
 
       @media all and (max-height 800px)
-        transform rotateY(180deg) translateX(650px)
+        transform rotateY(180deg)
 
     // because firefox is a bitch.
     &.end
@@ -191,9 +192,9 @@ section.sidebar
 
       .thanks
         opacity 1
-        transform rotateY(180deg) translateX(700px)
+        transform rotateY(180deg)
         @media all and (max-height 800px)
-          transform rotateY(180deg) translateX(650px)
+          transform rotateY(180deg)
         & *
           opacity 1
 
