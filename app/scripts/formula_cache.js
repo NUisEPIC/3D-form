@@ -10,7 +10,7 @@ function formulaGetData (inputs) {
     if ( i.type == 'checkbox' ) {
       data[key] = i.checked = cachedValue
     }
-    else if (cachedValue && !i.value.trim()) {
+    else if (!___loaded && cachedValue && !i.value.trim()) {
       // NOTE(jordan): if we have a cached version when the input
       // is blank, load the cached version into the form.
       data[key] = i.value = cachedValue, i.onchange()

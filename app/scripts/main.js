@@ -1,3 +1,5 @@
+var ___loaded = false
+
 function adjustPadding () {
   var inputGroupElements = qq('.input-group input~*, .input-group textarea~*')
     , basePad = 15
@@ -293,4 +295,7 @@ window.onload = function () {
   adjustPadding()
 
   window.onresize = adjustPadding
+
+  ___loaded = true
 }
+
