@@ -149,23 +149,23 @@ section.sidebar
 
   &.shuffle
     .page
-      left -300px
+      left calc(-50% - 125px)
       -webkit-transform translateZ(-2px)
 
     .page.next
       opacity 1
-      left 450px
+      left calc(50% - 125px)
       transform rotateY(1deg)
       -webkit-transform translateZ(-1px) rotateY(1deg)
 
     &.reverse
       .page
-        left 450px
+        left calc(50% - 125px)
         -webkit-transform rotateY(-1deg) translateZ(-3px)
 
       .page.next
         opacity 1
-        left -300px
+        left calc(-50% - 125px)
         transform rotateY(-1deg)
         -webkit-transform translateZ(-1px) rotateY(1deg)
 
