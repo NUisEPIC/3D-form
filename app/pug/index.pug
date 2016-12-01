@@ -8,20 +8,6 @@ html
 
     link(rel='stylesheet', href='main.css')
 
-  mixin essayQuestion(id, header, label)
-    .primary-window.page
-      i.back-btn Back
-      .forcefield
-        h2= header
-        .input-group
-          textarea(id=id, required, name!=attributes.name)
-          label= label
-        .next-btn.formula-button
-          .inner-btn
-            span Next
-      if block
-        block
-
   body
     #formula-container
       // Outline pane. Will be populated by JavaScript.
@@ -73,7 +59,7 @@ html
               h2 Where do you see yourself in EPIC? Select as many as apply.
               .input-group.checkboxes
                 .checkbox.exclusive
-                  input#apply-for-epic-membership(type='checkbox', required)
+                  input#apply-for-general-membership(type='checkbox', required)
                   label EPIC General Membership
 
                 .checkbox
@@ -94,51 +80,44 @@ html
             .forcefield
               h2 What do you want to get out of your membership?
               .input-group
-                textarea#what-want-general-membership(required)
+                textarea#what-do-you-want-to-get-out-of-general-membership(required)
                 label What would you like to learn, or gain, as a General Member?
-          .primary-window.page.epic-teams.launch-cohort
+          .primary-window.page.epic-teams
             i.back-btn Back
             .forcefield
               h2 What's your story? Tell us about yourself.
               .input-group
-                textarea#story(required)
+                textarea#what-is-your-story(required)
                 label What are you passionate about? What was your journey to NU?
-          .primary-window.page.epic-teams.launch-cohort
+          .primary-window.page.epic-teams
             i.back-btn Back
             .forcefield
               h2 What do you hope to learn, or what skills do you hope to gain from joining EPIC?
               .input-group
-                textarea#hope-learn(required)
-                label How is it different from other organizations?
-          .primary-window.page.epic-teams.launch-cohort
+                textarea#what-do-you-hope-to-learn(required)
+                label Be as general or specific as you like.
+          .primary-window.page.epic-teams
             i.back-btn Back
             .forcefield
               h2 Why are you passionate about entrepreneurship?
               .input-group
-                textarea#why-interested(required)
+                textarea#why-are-you-passionate-about-entrepreneurship(required)
                 label Feel free to tell us about any entrepreneurial experience.
-          .primary-window.page.epic-teams.launch-cohort
-            i.back-btn Back
-            .forcefield
-              h2 What will you contribute to the specific team you are interested in?
-              .input-group
-                textarea#how-contribute(required)
-                label How do you see yourself fitting in?
-          .primary-window.page.epic-teams.launch-cohort
+          .primary-window.page.epic-teams
             i.back-btn Back
             .forcefield
               h2 What else are you involved in?
               .input-group
-                textarea#other-involvements(required)
+                textarea#what-else-are-you-involved-in(required)
                 label e.g. work-study, other student orgs, study abroad, etc.
           .primary-window.page.launch-cohort.skip
             i.back-btn Back
             .forcefield
               h2 What do you want to get out of Launch?
               .input-group
-                textarea#what-want-launch(required)
-                label e.g. work-study, other student orgs, study abroad, etc.
-          .primary-window.page.launch-cohort.epic-teams
+                textarea#what-do-you-want-to-get-out-of-launch(required)
+                label What would make the experience awesome for you?
+          .primary-window.page.epic-teams
             i.back-btn Back
             .forcefield
               h2 Do you have any work you're proud of?
@@ -158,12 +137,14 @@ html
             i.back-btn Back
             .forcefield
               h2 Overview
-              // I don't really know what to put here right now
+              .overview-container
 
             // NOTE(jordan): Displayed after form submission animation completes.
             .thanks
               h3 Thanks for applying! We'll be in touch. :D
-              img(src='./images/fyeah2.png')
+              h5 If you do not receive a confirmation email from contact@nuisepic.com to the email
+                | address you used in your application within the next 5 minutes, please email us and
+                | let us know.
 
     // NOTE(jordan): Embeds.
     include ./embed/google-analytics
@@ -172,13 +153,13 @@ html
     script(type='text/javascript', src='//api.filepicker.io/v1/filepicker.js' async)
 
     // build:js scripts/main.js
-    script(type='text/javascript', src='../../node_modules/store/store.min.js')
-    script(src='../scripts/ToProgress.min.js', async)
-    script(src='../scripts/extensions.js', async)
-    script(src='../scripts/formula_anim.js', async)
-    script(src='../scripts/formula_notify.js', async)
-    script(src='../scripts/formula_cache.js', async)
-    script(src='../scripts/formula_validator.js', async)
-    script(src='../scripts/formula_submitter.js', async)
-    script(src='../scripts/main.js', async)
+    script(type='text/javascript', src='../node_modules/store/store.min.js')
+    script(src='./scripts/ToProgress.min.js', async)
+    script(src='./scripts/extensions.js', async)
+    script(src='./scripts/formula_anim.js', async)
+    script(src='./scripts/formula_notify.js', async)
+    script(src='./scripts/formula_cache.js', async)
+    script(src='./scripts/formula_validator.js', async)
+    script(src='./scripts/formula_submitter.js', async)
+    script(src='./scripts/main.js', async)
     // endbuild
