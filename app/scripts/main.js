@@ -107,6 +107,37 @@ function formulaSetupInputs (inputs, formulaNextPage) {
   })
 }
 
+function populateOverview (nextPage) {
+  let visiblePages = [].filter.call(pages, p => !~p.className.indexOf('skip'))
+      , visibleInputs = []
+  ;[].forEach.call(visiblePages, p => {
+    var inputs = [].slice.call(p.querySelectorAll('input, textarea'))
+    if (inputs !== null) visibleInputs = visibleInputs.concat(inputs)
+  })
+
+  var data = formulaGetData(visibleInputs)
+
+  var pretty = document.createElement('dl')
+  for (let k of Object.keys(data)) {
+    if (k === 'lastCacheTime') continue
+    var term = k.split('-').map(w => w.charAt(0).toUpperCase() + w.substr(1)).join(' ')
+    var termEl = document.createElement('dt')
+    termEl.innerText = term
+    var def = data[k]
+    var defEl = document.createElement('dd')
+    defEl.innerText = def
+
+    if (term && def) {
+      pretty.appendChild(termEl)
+      pretty.appendChild(defEl)
+    }
+  }
+
+  var overviewContent = nextPage.querySelector('.overview-container')
+  overviewContent.innerHTML = ''
+  overviewContent.appendChild(pretty)
+}
+
 window.onload = function () {
   var formulaInputs = qq('.formula input, .formula textarea')
 
@@ -148,8 +179,13 @@ window.onload = function () {
   		if (currentPageIndex != desiredPageIndex) {
   			progressBar.setProgress((windowHeaders.indexOf(this.innerText) + 1) * progressBarPercent)
   			// Animate differently based on whether the desired page is before or after the current page
-  			if (currentPageIndex > desiredPageIndex)
+  			if (desiredPage.id === 'overview') {
+          populateOverview(desiredPage)
+        }
+  			if (currentPageIndex > desiredPageIndex) {
  				formulaAnimator.previousPage(currentPage, desiredPage)
+                          nextBtn.innerText = 'Next'
+                        }
  			else
  				formulaNextPage(currentPage, desiredPage)
   		}
@@ -169,6 +205,9 @@ window.onload = function () {
     visibleInputs = visibleInputs.filter(i => i !== null)
 
     if (nextPage) {
+      if (nextPage.id === 'overview') {
+        nextBtn.innerText = 'Submit'
+      }
       var nextPage = extend(nextPage)
         , nextPageInputs = nextPage.getElementsByTagName('input')
         , nextPageTextareas = nextPage.getElementsByTagName('textarea')
@@ -181,7 +220,6 @@ window.onload = function () {
         if (nextPageInputs.length) nextPageInputs[0].focus()
       })
     } else if (formulaInputsValid(visibleInputs)) {
-      debugger
       progressBar.reset()
       formulaSubmit()
     } else {
@@ -195,7 +233,7 @@ window.onload = function () {
 
     if (currentPage.id === 'branches') {
       const data = formulaGetData(qq('.formula input, .formula textarea'))
-      if (data['apply-for-epic-membership']) {
+      if (data['apply-for-general-membership']) {
         const genmemQuestions = qq('.page.general-membership')
         ;[].forEach.call(genmemQuestions, (q) => {
           q = extend(q)
@@ -206,9 +244,12 @@ window.onload = function () {
         ;[].forEach.call(genmemQuestions, (q) => {
           q = extend(q)
           q.addClass('skip')
+          var qIndex = pages.indexOf(q)
+          if (qIndex > -1) formulaOutline.children[qIndex]
+                                         .style.display = 'none'
         })
       }
-      if (data['apply-for-epic-team']) {
+      if (data['apply-for-epic-team'] || data['apply-for-sprout'] || data['apply-for-launch']) {
         const epicTeamsQuestions = qq('.page.epic-teams')
         ;[].forEach.call(epicTeamsQuestions, (q) => {
           q = extend(q)
@@ -219,6 +260,9 @@ window.onload = function () {
         ;[].forEach.call(epicTeamsQuestions, (q) => {
           q = extend(q)
           q.addClass('skip')
+          var qIndex = pages.indexOf(q)
+          if (qIndex > -1) formulaOutline.children[qIndex]
+                                         .style.display = 'none'
         })
       }
       if (data['apply-for-launch']) {
@@ -228,11 +272,22 @@ window.onload = function () {
           q.removeClass('skip')
         })
       } else {
-        const launchQuestions = qq('.page.epic-membership')
+        const launchQuestions = qq('.page.launch-cohort')
         ;[].forEach.call(launchQuestions, (q) => {
           q = extend(q)
           q.addClass('skip')
+          var qIndex = pages.indexOf(q)
+          if (qIndex > -1) formulaOutline.children[qIndex]
+                                         .style.display = 'none'
         })
+      }
+
+      if (!data['apply-for-general-membership']
+          && !data['apply-for-launch']
+          && !data['apply-for-sprout']
+          && !data['apply-for-epic-team']) {
+        formulaNotify.notify('You cannot move on unless you apply to one or more EPIC programs!', 2000)
+        return
       }
     }
 
@@ -245,7 +300,7 @@ window.onload = function () {
       }
 
       if (nextPage.id === 'overview') {
-        nextBtn.innerText = 'Submit'
+        populateOverview(nextPage)
       }
     }
 
