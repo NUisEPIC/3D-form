@@ -21,47 +21,11 @@ function formulaOneSendData(d) {
   x.send(JSON.stringify(d))
 }
 
-function formulaGetPills (i) {
-  var parent = i.parentElement
-    , lPill = parent.getElementsByClassName('pill-left')[0]
-    , rPill = parent.getElementsByClassName('pill-right')[0]
-    , pills  = [lPill, rPill]
-
-  function isFalsy (v) { return !v }
-
-  return pills.every(isFalsy) ? false : pills
-}
-
-function formulaValueWithPills (i) {
-  var pills = formulaGetPills(i)
-    , v      = i.value.trim()
-
-  if (!pills)
-    return v
-
-  var lText = pills[0] && pills[0].children[0].textContent
-    , rText = pills[1] && pills[1].children[0].textContent
-
-  if (lText && v.indexOf(lText) != 0) {
-    v = lText + v
-  }
-  if (rText && v.indexOf(rText) != v.length - rText.length) {
-    v = v + rText
-  }
-
-  return v.trim()
-}
-
 function formulaSubmit () {
   var formulaInputs = qq('.formula form input, .formula form textarea')
 
   var data = formulaGetData(formulaInputs)
   ;[].forEach.call(formulaInputs, function (i) {
-    if (formulaGetPills(i)) {
-      var key   = ( i.id || i.type )
-      var cval  = data[key]
-      data[key] = formulaValueWithPills(i)
-    }
   })
 
   data.firstName = data.name.split(' ')[0]

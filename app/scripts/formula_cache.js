@@ -1,3 +1,34 @@
+function formulaGetPills (i) {
+  var parent = i.parentElement
+    , lPill = parent.getElementsByClassName('pill-left')[0]
+    , rPill = parent.getElementsByClassName('pill-right')[0]
+    , pills  = [lPill, rPill]
+
+  function isFalsy (v) { return !v }
+
+  return pills.every(isFalsy) ? false : pills
+}
+
+function formulaValueWithPills (i) {
+  var pills = formulaGetPills(i)
+    , v      = i.value.trim()
+
+  if (!pills)
+    return v
+
+  var lText = pills[0] && pills[0].children[0].textContent
+    , rText = pills[1] && pills[1].children[0].textContent
+
+  if (lText && v.indexOf(lText) != 0) {
+    v = lText + v
+  }
+  if (rText && v.indexOf(rText) != v.length - rText.length) {
+    v = v + rText
+  }
+
+  return v.trim()
+}
+
 function formulaGetData (inputs) {
   var data = {}, cache = {}
   if (store) { // NOTE(jordan): if store.js is available, use it
@@ -15,7 +46,11 @@ function formulaGetData (inputs) {
       // is blank, load the cached version into the form.
       data[key] = i.value = cachedValue, i.onchange()
     } else {
-      data[key] = i.value
+      if (formulaGetPills(i)) {
+        data[key] = formulaValueWithPills(i)
+      } else {
+        data[key] = i.value
+      }
     }
   })
   return data
